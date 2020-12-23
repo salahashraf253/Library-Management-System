@@ -1,4 +1,5 @@
 package library.database;
+import javax.swing.*;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -7,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public final class Libdb {
+    private final static Logger LOGGER = LogManager.getLogger(Libdb.class.getName());
 
     private static Libdb handler = null;
 
@@ -19,6 +21,7 @@ public final class Libdb {
         setupBookTable();
         setupMEMBERTable();
     }
+
 
     private static void createConnection() {
         try {
@@ -43,7 +46,6 @@ public final class Libdb {
                         +"title varchar  (200),\n"
                         +"author varchar  (200),\n"
                         +"publisher varchar  (200),\n"
-                        +"category varchar  (200),\n"
                         +"avail  boolen  defult true"
                         +")");
             }
@@ -55,6 +57,7 @@ public final class Libdb {
         }
         finally{
         }
+
     }
     void  setupMEMBERTable() {
         String TABLE_NAME = "Member";
@@ -81,7 +84,22 @@ public final class Libdb {
         finally{
         }
     }
-     public boolean execAction(String qu) {
+    public ResultSet execQuery(String query) {
+        ResultSet result;
+        try {
+            stmt = conn.createStatement();
+            result = stmt.executeQuery(query);
+        }
+        catch (SQLException ex) {
+            System.out.println("Exception at execQuery:dataHandler" + ex.getLocalizedMessage());
+            return null;
+        }
+        finally {
+        }
+        return result;
+    }
+
+    public boolean execAction(String qu) {
         try {
             stmt = conn.createStatement();
             stmt.execute(qu);
@@ -95,5 +113,4 @@ public final class Libdb {
         finally {
         }
     }
-
 }
