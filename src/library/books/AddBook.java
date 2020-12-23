@@ -3,12 +3,14 @@ package library.books;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import java.net.URL;
+import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import library.database.Libdb;
+import javafx.stage.Stage;
 
 
 public class  AddBook implements Initializable {
@@ -28,9 +30,10 @@ public class  AddBook implements Initializable {
     private StackPane rootPane;
     @FXML
     private AnchorPane mainContainer;
-
+    Libdb Libdb;
     public void initialize(URL url, ResourceBundle rb) {
-        databaseHandler = DatabaseHandler.getInstance();
+        Libdb =new Libdb();
+        check
     }
 
 
@@ -67,4 +70,29 @@ public class  AddBook implements Initializable {
         }
 
     }
-}
+    @FXML
+    private void cancel (ActionEvent event){
+        Stage stage = (Stage) rootPane.getScene().getWindow();
+        stage.close();
+    }
+    private void checkdata()
+
+    {
+        String qu = "SELECT title FROM BOOK";
+        ResultSet rs = Libdb.execQuery(qu);
+        try {
+            while (rs.next()) {
+                String titlex = rs.getString("title");
+                System.out.println(titlex);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AddBook.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    }
+
+
+
+
+
