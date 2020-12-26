@@ -106,7 +106,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Science">
+                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Art &amp; Music">
                            <GridPane.margin>
                               <Insets left="6.0" />
                            </GridPane.margin>
@@ -127,7 +127,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Science" GridPane.rowIndex="1">
+                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Math" GridPane.rowIndex="1">
                            <graphic>
                               <ImageView fitHeight="116.0" fitWidth="257.0" pickOnBounds="true">
                                  <image>
@@ -136,7 +136,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Science" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Education" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <graphic>
                               <ImageView fitHeight="116.0" fitWidth="257.0" pickOnBounds="true">
                                  <image>
@@ -145,7 +145,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Science" GridPane.rowIndex="2">
+                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Business" GridPane.rowIndex="2">
                            <graphic>
                               <ImageView fitHeight="116.0" fitWidth="257.0" pickOnBounds="true">
                                  <image>
@@ -154,7 +154,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Science" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Travel" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <graphic>
                               <ImageView fitHeight="116.0" fitWidth="257.0" pickOnBounds="true">
                                  <image>
@@ -163,7 +163,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Science" GridPane.columnIndex="2">
+                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Sports" GridPane.columnIndex="2">
                            <graphic>
                               <ImageView fitHeight="116.0" fitWidth="257.0" pickOnBounds="true">
                                  <image>
@@ -172,7 +172,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Science" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="History" GridPane.columnIndex="2" GridPane.rowIndex="1">
                            <graphic>
                               <ImageView fitHeight="116.0" fitWidth="257.0" pickOnBounds="true">
                                  <image>
@@ -181,7 +181,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Science" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Cooking" GridPane.columnIndex="2" GridPane.rowIndex="2">
                            <graphic>
                               <ImageView fitHeight="116.0" fitWidth="257.0" pickOnBounds="true">
                                  <image>
@@ -190,7 +190,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Science" GridPane.columnIndex="3">
+                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Kids" GridPane.columnIndex="3">
                            <graphic>
                               <ImageView fitHeight="116.0" fitWidth="257.0" pickOnBounds="true">
                                  <image>
@@ -199,7 +199,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Science" GridPane.rowIndex="3">
+                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Home &amp; Garden" GridPane.rowIndex="3">
                            <graphic>
                               <ImageView fitHeight="116.0" fitWidth="257.0" pickOnBounds="true">
                                  <image>
@@ -208,7 +208,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Science" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Medical" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <graphic>
                               <ImageView fitHeight="116.0" fitWidth="257.0" pickOnBounds="true">
                                  <image>
@@ -217,7 +217,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Science" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Health &amp; Fittness" GridPane.columnIndex="2" GridPane.rowIndex="3">
                            <graphic>
                               <ImageView fitHeight="116.0" fitWidth="257.0" pickOnBounds="true">
                                  <image>
@@ -226,7 +226,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Science" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Computer &amp; Tech" GridPane.columnIndex="3" GridPane.rowIndex="1">
                            <graphic>
                               <ImageView fitHeight="116.0" fitWidth="257.0" pickOnBounds="true">
                                  <image>
@@ -235,7 +235,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Science" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Programming" GridPane.columnIndex="3" GridPane.rowIndex="2">
                            <graphic>
                               <ImageView fitHeight="116.0" fitWidth="257.0" pickOnBounds="true">
                                  <image>
@@ -244,7 +244,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Science" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Sci-Fiction" GridPane.columnIndex="3" GridPane.rowIndex="3">
                            <graphic>
                               <ImageView fitHeight="116.0" fitWidth="257.0" pickOnBounds="true">
                                  <image>
@@ -253,7 +253,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton contentDisplay="TOP" layoutX="911.0" layoutY="12.0" prefHeight="155.0" prefWidth="286.0" text="Science" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                        <JFXButton contentDisplay="TOP" layoutX="911.0" layoutY="12.0" prefHeight="155.0" prefWidth="286.0" text="Romance" GridPane.columnIndex="4" GridPane.rowIndex="1">
                            <graphic>
                               <ImageView fitHeight="116.0" fitWidth="257.0" pickOnBounds="true">
                                  <image>
@@ -262,7 +262,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Science" GridPane.columnIndex="4">
+                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Novels" GridPane.columnIndex="4">
                            <graphic>
                               <ImageView fitHeight="116.0" fitWidth="257.0" pickOnBounds="true">
                                  <image>
@@ -271,7 +271,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Science" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Literature" GridPane.columnIndex="4" GridPane.rowIndex="2">
                            <graphic>
                               <ImageView fitHeight="116.0" fitWidth="257.0" pickOnBounds="true">
                                  <image>
@@ -280,7 +280,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton contentDisplay="TOP" layoutX="310.0" layoutY="12.0" prefHeight="155.0" prefWidth="286.0" text="Science" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                        <JFXButton contentDisplay="TOP" layoutX="310.0" layoutY="12.0" prefHeight="155.0" prefWidth="286.0" text="Comics" GridPane.columnIndex="4" GridPane.rowIndex="3">
                            <graphic>
                               <ImageView fitHeight="116.0" fitWidth="257.0" pickOnBounds="true">
                                  <image>

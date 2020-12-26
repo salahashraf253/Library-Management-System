@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <right>
+      <VBox prefHeight="630.0" prefWidth="157.0" BorderPane.alignment="CENTER">
+         <children>
+            <JFXButton contentDisplay="TOP" mnemonicParsing="false" prefHeight="100.0" prefWidth="155.0" style="-fx-background-color: #bdbdbd;" text="Add Member">
+               <graphic>
+                  <ImageView fitHeight="29.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Images/icons8-add-user-male-100.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </JFXButton>
+            <JFXButton contentDisplay="TOP" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="155.0" style="-fx-background-color: #bdbdbd;" text="Add Book">
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Images/icons8-add-book-90.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </JFXButton>
+            <JFXButton contentDisplay="TOP" layoutX="10.0" layoutY="98.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="155.0" style="-fx-background-color: #bdbdbd;" text="View Members">
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Images/icons8-list-96.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </JFXButton>
+            <JFXButton contentDisplay="TOP" layoutX="10.0" layoutY="186.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="155.0" style="-fx-background-color: #bdbdbd;" text="View Book">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="31.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../../Images/icons8-grid-view-96.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </JFXButton>
+            <JFXButton contentDisplay="TOP" layoutX="10.0" layoutY="274.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="155.0" style="-fx-background-color: #bdbdbd;" text="Settings">
+               <graphic>
+                  <ImageView fitHeight="33.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Images/icons8-settings-96.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </BorderPane.margin>
+      </VBox>
+   </right>
+   <top>
+      <ImageView fitHeight="70.0" fitWidth="1500.0" pickOnBounds="true" BorderPane.alignment="CENTER">
+         <image>
+            <Image url="@../../Images/Title_Bar.png" />
+         </image>
+      </ImageView>
+   </top>
+   <center>
+      <JFXTabPane id="tabPane" fx:id="tabPane" rotateGraphic="true" stylesheets="@main.css" BorderPane.alignment="CENTER">
+         <tabs>
+            <Tab style="-fx-background-color: #9F7C3F;" text="       Home        ">
+               <content>
+                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                     <content>
+                        <HBox prefHeight="166.0" prefWidth="279.0" style="-fx-border-color: #00000f;">
+                           <children>
+                              <ImageView fitHeight="135.0" fitWidth="96.0" pickOnBounds="true">
+                                 <HBox.margin>
+                                    <Insets left="10.0" right="10.0" top="10.0" />
+                                 </HBox.margin>
+                                 <image>
+                                    <Image url="@../../Images/art_bookcover.png" />
+                                 </image>
+                              </ImageView>
+                              <VBox prefHeight="112.0" prefWidth="150.0">
+                                 <children>
+                                    <Label text="Book Name">
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" top="20.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Label layoutX="10.0" layoutY="10.0" text="Author Name">
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Label layoutX="10.0" layoutY="27.0" text="Category">
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Label layoutX="10.0" layoutY="44.0" text="Price" textFill="#c60606">
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <JFXButton mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: #bdbdbd;" text="Edit" textAlignment="CENTER">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" top="10.0" />
+                                             </HBox.margin>
+                                          </JFXButton>
+                                          <JFXButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: #bdbdbd;" text="Remove">
+                                             <HBox.margin>
+                                                <Insets top="10.0" />
+                                             </HBox.margin>
+                                          </JFXButton>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </content>
+                  </ScrollPane>
+               </content>
+            </Tab>
+            <Tab style="-fx-background-color: #9F7C3F;" text="        Categories        ">
+               <content>
+                  <GridPane>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="461.199951171875" minWidth="10.0" prefWidth="200.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="461.199951171875" minWidth="10.0" prefWidth="200.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="823.6001129150391" minWidth="10.0" prefWidth="182.199951171875" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="823.6001129150391" minWidth="10.0" prefWidth="143.800048828125" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="823.6001129150391" minWidth="10.0" prefWidth="200.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+               </content>
+            </Tab>
+            <Tab style="-fx-background-color: #9F7C3F;" text="      Untitled Tab        ">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+            <Tab style="-fx-background-color: #9F7C3F;" text="       Account        ">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+         </tabs>
+         <effect>
+            <ColorAdjust />
+         </effect>
+      </JFXTabPane>
+   </center>
+</BorderPane>
