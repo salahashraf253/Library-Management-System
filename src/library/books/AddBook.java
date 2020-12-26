@@ -1,24 +1,23 @@
 package library.books;
-
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
-import javafx.event.ActionEvent;
-import javafx.fxml.Initializable;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import library.database.Libdb;
 import javafx.stage.Stage;
-
-
+//import library.assistant.alert.AlertMaker;
+//port library.assistant.data.model.Book;
+//import library.assistant.database.DataHelper;
+import library.database.Libdb;
 public class  AddBook implements Initializable {
     @FXML
     private JFXTextField title;
@@ -28,6 +27,8 @@ public class  AddBook implements Initializable {
     private JFXTextField author;
     @FXML
     private JFXTextField publisher;
+    @FXML
+    private  JFXTextField category;
     @FXML
     private JFXButton saveButton;
     @FXML
@@ -39,35 +40,39 @@ public class  AddBook implements Initializable {
     Libdb Libdb;
     public void initialize(URL url, ResourceBundle rb) {
         Libdb =new Libdb();
+
     }
 
-
+    //datbase
     private void addBook(ActionEvent event) {
         String bookID = id.getText();
         String bookAuthor = author.getText();
         String bookName = title.getText();
         String bookPublisher = publisher.getText();
-        if (bookID.isEmpty() || bookAuthor.isEmpty() || bookName.isEmpty()||bookPublisher.isEmpty()) {
+        String bookcategory=category.getText();
+        if (bookID.isEmpty() || bookAuthor.isEmpty() || bookName.isEmpty()||bookPublisher.isEmpty() || bookcategory.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
-            alert.setContentText("Please enter data in all fields");
+            alert.setContentText("Please Enter data in all fields");
             alert.showAndWait();
-            return;
-            String qu = "INSERT INTO BOOK VALUES(" +
-                    "'" + bookID + "'," +
-                    "'" + bookName + "'," +
-                    "'" + bookAuthor + "'," +
-                    "'" + bookPublisher + "'," +
-                    "" + true + "" + ')';
-            System.out.println(qu);
-            if(Libdb.execAction(qu)){
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setHeaderText(null);
-                alert.setContentText("SUCCESS");
-                alert.showAndWait();
-            }
-            else{
-                Alert alert = new Alert(Alert.AlertType.ERROR);
+            return;}
+        String qu="INSERT INTO BOOK VALUES("+
+                "'"+bookID+"',"+
+                "'"+bookName+"',"+
+                "'"+bookAuthor+"',"+
+                "'"+bookPublisher+"',"+
+                "'"+bookcategory+"',"+
+                ""+true+""+")";
+        System.out.println(qu);
+
+        if(Libdb.execAction(qu)){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText(null);
+            alert.setContentText("id");
+            alert.showAndWait();
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setContentText("Failed");
             alert.showAndWait();
@@ -81,7 +86,7 @@ public class  AddBook implements Initializable {
         stage.close();
     }
     private void checkdata()
-        {
+    {
         String qu = "SELECT title FROM BOOK";
         ResultSet rs = Libdb.execQuery(qu);
         try {
@@ -94,7 +99,6 @@ public class  AddBook implements Initializable {
         }
     }
 
-}
 }
 
 

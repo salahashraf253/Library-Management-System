@@ -48,7 +48,9 @@ public class Books {
     }
 
     public Boolean getAvailability() {
-        return isAvail;
+        //isAvail =
+        if()
+        return true;
     }
 
     public void setIsAvail(Boolean isAvail) {

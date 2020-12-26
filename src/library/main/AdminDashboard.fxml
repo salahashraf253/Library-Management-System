@@ -22,7 +22,24 @@
    <right>
       <VBox prefHeight="630.0" prefWidth="157.0" BorderPane.alignment="CENTER">
          <children>
-            <JFXButton contentDisplay="TOP" mnemonicParsing="false" prefHeight="100.0" prefWidth="155.0" style="-fx-background-color: #bdbdbd;" text="Add Member">
+            <Label alignment="CENTER" prefHeight="38.0" prefWidth="158.0" text="Quick Access">
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </Label>
+            <JFXButton contentDisplay="TOP" mnemonicParsing="false" prefHeight="100.0" prefWidth="155.0" style="-fx-background-color: #bdbdbd;" text="Add Admin">
+               <graphic>
+                  <ImageView fitHeight="29.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Images/icons8-add-user-male-100.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </JFXButton>
+            <JFXButton contentDisplay="TOP" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="155.0" style="-fx-background-color: #bdbdbd;" text="Add Member">
                <graphic>
                   <ImageView fitHeight="29.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -160,11 +177,11 @@
                <content>
                   <GridPane>
                      <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="461.199951171875" minWidth="10.0" prefWidth="200.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="461.199951171875" minWidth="10.0" prefWidth="200.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="823.6001129150391" minWidth="10.0" prefWidth="182.199951171875" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="823.6001129150391" minWidth="10.0" prefWidth="143.800048828125" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="823.6001129150391" minWidth="10.0" prefWidth="200.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="461.199951171875" minWidth="10.0" prefWidth="195.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="461.199951171875" minWidth="10.0" prefWidth="195.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="823.6001129150391" minWidth="10.0" prefWidth="195.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="823.6001129150391" minWidth="10.0" prefWidth="195.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="823.6001129150391" minWidth="10.0" prefWidth="195.0" />
                      </columnConstraints>
                      <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -172,15 +189,195 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
+                     <children>
+                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Art &amp; Music">
+                           <GridPane.margin>
+                              <Insets left="6.0" />
+                           </GridPane.margin>
+                           <graphic>
+                              <ImageView fitHeight="116.0" fitWidth="257.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../../Images/book.jpg" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Science" GridPane.columnIndex="1">
+                           <graphic>
+                              <ImageView fitHeight="116.0" fitWidth="257.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../../Images/book.jpg" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Math" GridPane.rowIndex="1">
+                           <graphic>
+                              <ImageView fitHeight="116.0" fitWidth="257.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../../Images/book.jpg" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Education" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <graphic>
+                              <ImageView fitHeight="116.0" fitWidth="257.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../../Images/book.jpg" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Business" GridPane.rowIndex="2">
+                           <graphic>
+                              <ImageView fitHeight="116.0" fitWidth="257.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../../Images/book.jpg" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Travel" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <graphic>
+                              <ImageView fitHeight="116.0" fitWidth="257.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../../Images/book.jpg" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Sports" GridPane.columnIndex="2">
+                           <graphic>
+                              <ImageView fitHeight="116.0" fitWidth="257.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../../Images/book.jpg" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="History" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                           <graphic>
+                              <ImageView fitHeight="116.0" fitWidth="257.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../../Images/book.jpg" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Cooking" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                           <graphic>
+                              <ImageView fitHeight="116.0" fitWidth="257.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../../Images/book.jpg" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Kids" GridPane.columnIndex="3">
+                           <graphic>
+                              <ImageView fitHeight="116.0" fitWidth="257.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../../Images/book.jpg" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Home &amp; Garden" GridPane.rowIndex="3">
+                           <graphic>
+                              <ImageView fitHeight="116.0" fitWidth="257.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../../Images/book.jpg" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Medical" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <graphic>
+                              <ImageView fitHeight="116.0" fitWidth="257.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../../Images/book.jpg" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Health &amp; Fittness" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                           <graphic>
+                              <ImageView fitHeight="116.0" fitWidth="257.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../../Images/book.jpg" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Computer &amp; Tech" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                           <graphic>
+                              <ImageView fitHeight="116.0" fitWidth="257.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../../Images/book.jpg" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Programming" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                           <graphic>
+                              <ImageView fitHeight="116.0" fitWidth="257.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../../Images/book.jpg" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Sci-Fiction" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                           <graphic>
+                              <ImageView fitHeight="116.0" fitWidth="257.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../../Images/book.jpg" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton contentDisplay="TOP" layoutX="911.0" layoutY="12.0" prefHeight="155.0" prefWidth="286.0" text="Romance" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                           <graphic>
+                              <ImageView fitHeight="116.0" fitWidth="257.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../../Images/book.jpg" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Novels" GridPane.columnIndex="4">
+                           <graphic>
+                              <ImageView fitHeight="116.0" fitWidth="257.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../../Images/book.jpg" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton contentDisplay="TOP" prefHeight="155.0" prefWidth="286.0" text="Literature" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                           <graphic>
+                              <ImageView fitHeight="116.0" fitWidth="257.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../../Images/book.jpg" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton contentDisplay="TOP" layoutX="310.0" layoutY="12.0" prefHeight="155.0" prefWidth="286.0" text="Comics" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                           <graphic>
+                              <ImageView fitHeight="116.0" fitWidth="257.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../../Images/book.jpg" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                     </children>
                   </GridPane>
                </content>
             </Tab>
-            <Tab style="-fx-background-color: #9F7C3F;" text="      Untitled Tab        ">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-               </content>
-            </Tab>
-            <Tab style="-fx-background-color: #9F7C3F;" text="       Account        ">
+            <Tab style="-fx-background-color: #9F7C3F;" text="       My Account        ">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                </content>

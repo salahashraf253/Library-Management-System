@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="library.books.RentDate"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="150.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.books.RentDate">
+   <children>
+      <JFXDatePicker layoutX="48.0" layoutY="40.0" prefHeight="28.0" prefWidth="203.0" />
+      <Label layoutX="80.0" layoutY="10.0" text="Enter Date to Return Book" />
+      <JFXButton layoutX="41.0" layoutY="104.0" prefHeight="26.0" prefWidth="98.0" style="-fx-background-color: #bdbdbd;" text="Cancel" />
+      <JFXButton layoutX="152.0" layoutY="104.0" prefHeight="26.0" prefWidth="98.0" style="-fx-background-color: #bdbdbd;" text="Submit" />
+   </children>
 </AnchorPane>
