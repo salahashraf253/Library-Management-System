@@ -49,7 +49,7 @@ public class Books {
 
     public Boolean getAvailability() {
         //isAvail =
-        if()
+
         return true;
     }
 
