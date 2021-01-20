@@ -1,21 +1,23 @@
 package library.users;
-import javafx.fxml.Initializable;
-import javafx.scene.image.ImageView;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import library.database.DatabaseHandler;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import javafx.fxml.FXML;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
-import library.database.Libdb;
 
 
 
 public class AddAdminController implements Initializable {
 
+    @FXML
+    private AnchorPane addAdminForm;
     @FXML
     private JFXTextField fullName;
     @FXML
@@ -35,7 +37,7 @@ public class AddAdminController implements Initializable {
     @FXML
     private ImageView photo;
 
-    Libdb Libdb;
+    DatabaseHandler DatabaseHandler;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -44,5 +46,9 @@ public class AddAdminController implements Initializable {
     public void setUploadPhotoBtn(JFXButton uploadPhotoBtn) {
         this.uploadPhotoBtn = uploadPhotoBtn;
     }
-
+    @FXML
+    private void cancel (ActionEvent event){
+        Stage stage = (Stage) addAdminForm.getScene().getWindow();
+        stage.close();
+    }
 }

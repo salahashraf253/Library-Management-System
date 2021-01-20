@@ -3,3 +3,10 @@
   -fx-background-color: #9F7C3F ;
 
  }
+.tab{
+ -fx-background-color: #9F7C3F;
+ -fx-background-size: 500px,30px;
+ -fx-border-color: white;
+ -fx-cell-size: 40,30,40,30;
+ -fx-padding: 10px;
+}

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1500.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.main.DashboardController">
+<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1500.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.main.DashboardController">
    <top>
       <ImageView fitHeight="70.0" fitWidth="1500.0" pickOnBounds="true" BorderPane.alignment="CENTER">
          <image>
@@ -17,7 +17,7 @@
       </ImageView>
    </top>
    <center>
-      <JFXTabPane id="tabPane" fx:id="tabPane" rotateGraphic="true" stylesheets="@main.css" BorderPane.alignment="CENTER">
+      <TabPane fx:id="tabPane" rotateGraphic="true" stylesheets="@main.css" BorderPane.alignment="CENTER" tabClosingPolicy="UNAVAILABLE">
          <tabs>
             <Tab fx:id="homeTab" text="       Home        ">
                <content>
@@ -466,6 +466,6 @@
          <effect>
             <ColorAdjust />
          </effect>
-      </JFXTabPane>
+      </TabPane>
    </center>
 </BorderPane>

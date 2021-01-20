@@ -1,29 +1,28 @@
 package library.database;
 
 import javax.swing.*;
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
+import java.sql.*;
 
-public final class Libdb {
+public final class DatabaseHandler {
 
-    private static Libdb handler = null;
+    private static DatabaseHandler handler = null;
 
     private static final String DB_URL = "jdbc:derby:database;create=true";
     private static Connection conn = null;
     private static Statement stmt = null;
 
-    public Libdb() {
+    private DatabaseHandler() {
         createConnection();
         setupBookTable();
         setupMEMBERTable();
     }
 
+    public static DatabaseHandler getInstance(){
+        if(handler==null) {
+            handler = new DatabaseHandler();
+        }
+        return handler;
+    }
 
     private static void createConnection() {
         try {
@@ -48,6 +47,7 @@ public final class Libdb {
                         +"title varchar  (200),\n"
                         +"author varchar  (200),\n"
                         +"publisher varchar  (200),\n"
+                        +"category varchar (50),\n"
                         +"avail  boolen  defult true"
                         +")");
             }

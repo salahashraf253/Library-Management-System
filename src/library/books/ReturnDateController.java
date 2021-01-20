@@ -2,21 +2,20 @@ package library.books;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-
-import java.net.URL;
-import java.time.LocalDate;
-import java.util.ResourceBundle;
-
-import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import library.database.Libdb;
+import library.database.DatabaseHandler;
 import library.users.Member;
+
+import java.net.URL;
+import java.time.LocalDate;
+import java.util.ResourceBundle;
 
 public class ReturnDateController implements Initializable {
 
@@ -29,7 +28,7 @@ public class ReturnDateController implements Initializable {
     @FXML
     private JFXButton cancelBtn;
 
-    Libdb L=new Libdb();
+    DatabaseHandler handler = DatabaseHandler.getInstance();
     Books book = new Books();
     Member m = new Member();
 

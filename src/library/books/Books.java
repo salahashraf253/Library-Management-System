@@ -3,9 +3,8 @@ package library.books;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
-import library.main.DashboardController;
 import library.users.Member;
-import library.database.Libdb;
+import library.database.DatabaseHandler;
 
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -17,7 +16,7 @@ public class Books {
     String author;
     String publisher;
     Boolean isAvail;
-    Libdb libdb = new Libdb();
+    DatabaseHandler handler = DatabaseHandler.getInstance();
     public Books(String id, String title, String author, String publisher, Boolean isAvail) {
         this.id = id;
         this.title = title;
@@ -77,7 +76,7 @@ public class Books {
 
 
        String QU="Insert INTO";
-        ResultSet R= libdb.execQuery(QU);
+        ResultSet R= handler.execQuery(QU);
 
 
     }

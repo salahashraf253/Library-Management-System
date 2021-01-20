@@ -1,18 +1,18 @@
 package library.users;
+import javafx.scene.control.Alert;
+import library.books.AddBookController;
+import library.books.Books;
+import library.database.DatabaseHandler;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javafx.scene.control.Alert;
-import library.books.AddBookController;
-import library.database.Libdb;
-import library.books.Books;
-
 
 
 public class Member extends User {
-    Libdb libdb=new Libdb();
+    DatabaseHandler handler = DatabaseHandler.getInstance();
     public Member(String Id, int phone, String name, String address, int password, String email, String type) {
         this.Id = Id;
         this.email = email;
@@ -45,7 +45,7 @@ public class Member extends User {
 
     void search(Member m) {
         String qu = "SELECT * FROM MEMBERS WHERE memberid=id";
-        ResultSet rs = libdb.execQuery(qu);
+        ResultSet rs = handler.execQuery(qu);
         try {
             while (rs.next()) {
                 String titlex = rs.getString("id");

@@ -1,8 +1,6 @@
 package library.main;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTabPane;
-import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +8,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import library.books.Books;
 import library.users.Member;
@@ -19,11 +19,11 @@ import java.io.IOException;
 
 public class DashboardController {
     @FXML
-    private JFXTabPane tabPane;
+    private TabPane tabPane;
     @FXML
     private Tab homeTab;
     @FXML
-    private JFXTextField searchBookTxt;
+    private TextField searchBookTxt;
     @FXML
     private JFXButton searchBookBtn;
     @FXML

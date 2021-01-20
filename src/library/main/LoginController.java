@@ -19,24 +19,21 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SignUpController implements Initializable {
+
+public class LoginController implements Initializable {
 
     @FXML
-    private AnchorPane signUp_pane;
+    private AnchorPane login_pane;
     @FXML
-    private TextField full_name;
+    private Button loginBtn;
     @FXML
-    private TextField address;
-    @FXML
-    private TextField mobile;
+    private Button signUpBtn;
     @FXML
     private TextField email;
     @FXML
     private PasswordField password;
-    @FXML
-    private Button signUpBtn;
-    @FXML
-    private Button loginBtn;
+    String adminEmail = "admin";
+    String adminPassword = "admin";
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -44,31 +41,35 @@ public class SignUpController implements Initializable {
     }
 
     @FXML
-    public void signUp(){
-        String userFullName = full_name.getText();
-        String userAddress = address.getText();
-        String userMobile = mobile.getText();
+    public void login(){
         String  userEmail = email.getText();
         String userPassword = password.getText();
 
-       if(userFullName.isEmpty() || userAddress.isEmpty() || userMobile.isEmpty()||userEmail.isEmpty() || userPassword.isEmpty()) {
-           Alert alert = new Alert(Alert.AlertType.WARNING);
-           alert.setHeaderText(null);
-           alert.setContentText("All fields cannot be empty!");
-           alert.showAndWait();
+        if(userEmail.isEmpty() || userPassword.isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText(null);
+            alert.setContentText("Invalid Email or Password");
+            alert.showAndWait();
+
         }
         else{
-           loadWindow("/library/main/Dashboard.fxml", "DashBoard");
-           closeWindow(signUp_pane);
+            if(userEmail.equals(adminEmail) && userPassword.equals(adminPassword)){
+                loadWindow("/library/main/AdminDashboard.fxml", "AdminDashBoard");
+            }
+            else{
+                loadWindow("/library/main/Dashboard.fxml", "DashBoard");
+            }
+            closeWindow(login_pane);
         }
 
     }
 
     @FXML
-    void goToLogin(ActionEvent event){
-        loadWindow("/library/main/Login.fxml", "Login");
-        closeWindow(signUp_pane);
+    void goToSignUp(ActionEvent event){
+        loadWindow("/library/main/SignUp.fxml", "SignUp");
+        closeWindow(login_pane);
     }
+
     void loadWindow(String loc, String title){
         try {
             Parent parent = FXMLLoader.load(getClass().getResource(loc));
@@ -85,7 +86,5 @@ public class SignUpController implements Initializable {
         Stage stage = (Stage) pane.getScene().getWindow();
         stage.close();
     }
-
-
 
 }

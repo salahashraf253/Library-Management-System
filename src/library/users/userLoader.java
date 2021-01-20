@@ -1,26 +1,27 @@
-package library.main;
-
+package library.users;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import library.database.DatabaseHandler;
+import javafx.stage.StageStyle;
 
-public class Main extends Application {
+
+public class userLoader extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("ViewMembers.fxml"));
         primaryStage.setTitle("Library Assistant");
         primaryStage.setScene(new Scene(root));
+        primaryStage.initStyle(StageStyle.DECORATED);
         primaryStage.show();
-
-        new Thread(DatabaseHandler::getInstance).start();
     }
+
 
     public static void main(String[] args) {
         launch(args);
     }
-}
 
+
+}

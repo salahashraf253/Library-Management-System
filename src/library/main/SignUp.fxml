@@ -1,102 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.main.SignUpController">
-   <children>
-      <ImageView fitHeight="600.0" fitWidth="900.0" layoutX="4.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <image>
-            <Image url="@../../Images/various-book-books.jpg" />
-         </image>
-      </ImageView>
-      <AnchorPane layoutX="277.0" layoutY="81.0" prefHeight="450.0" prefWidth="347.0" style="-fx-background-color: #EDE9E5; -fx-border-color: #9F7C3F; -fx-border-width: 6px;">
-         <children>
-            <Pane layoutX="12.0" layoutY="8.0" prefHeight="66.0" prefWidth="329.0">
-               <children>
-                  <Label layoutX="83.0" layoutY="14.0" prefHeight="38.0" prefWidth="268.0" text="Library Assistant">
-                     <font>
-                        <Font name="Copperplate Gothic Bold" size="24.0" />
-                     </font>
-                  </Label>
-                  <ImageView fitHeight="60.0" fitWidth="83.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../Images/book.jpg" />
-                     </image>
-                  </ImageView>
-               </children>
-            </Pane>
-            <Pane layoutX="13.0" layoutY="74.0" prefHeight="363.0" prefWidth="329.0">
-               <children>
-                  <TextField layoutX="42.0" layoutY="182.0" prefHeight="32.0" prefWidth="245.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: #9F7C3F;">
-                     <padding>
-                        <Insets left="24.0" />
-                     </padding>
-                  </TextField>
-                  <PasswordField layoutX="42.0" layoutY="225.0" prefHeight="32.0" prefWidth="245.0" promptText="Password" style="-fx-background-color: trasparent; -fx-border-color: #9F7C3F;">
-                     <padding>
-                        <Insets left="24.0" />
-                     </padding>
-                  </PasswordField>
-                  <Button alignment="CENTER" layoutX="123.0" layoutY="282.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="83.0" style="-fx-background-color: trasparent; -fx-border-color: #9F7C3F;" text="SignUp" textAlignment="CENTER">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Button>
-                  <ImageView fitHeight="25.0" fitWidth="28.0" layoutX="42.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../Images/icons8-mail-96.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="42.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../Images/icons8-forgot-password-96.png" />
-                     </image>
-                  </ImageView>
-                  <Label layoutX="96.0" layoutY="324.0" text="Have an Account? " />
-                  <Button layoutX="185.0" layoutY="320.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" style="-fx-background-color: transparent;" text="Login" textFill="#0000bc" />
-                  <TextField layoutX="42.0" layoutY="91.0" prefHeight="32.0" prefWidth="245.0" promptText="Address" style="-fx-background-color: transparent; -fx-border-color: #9F7C3F;">
-                     <padding>
-                        <Insets left="24.0" />
-                     </padding>
-                  </TextField>
-                  <TextField layoutX="42.0" layoutY="137.0" prefHeight="32.0" prefWidth="245.0" promptText="Mobile" style="-fx-background-color: transparent; -fx-border-color: #9F7C3F;">
-                     <padding>
-                        <Insets left="24.0" />
-                     </padding>
-                  </TextField>
-                  <TextField layoutX="42.0" layoutY="47.0" prefHeight="32.0" prefWidth="245.0" promptText="Full Name" style="-fx-background-color: transparent; -fx-border-color: #9F7C3F;">
-                     <padding>
-                        <Insets left="24.0" />
-                     </padding>
-                  </TextField>
-                  <ImageView fitHeight="25.0" fitWidth="28.0" layoutX="42.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../Images/icons8-mobile-phone-96.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="23.0" fitWidth="26.0" layoutX="43.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../Images/icons8-home-page-96.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="25.0" fitWidth="28.0" layoutX="42.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../Images/icons8-user-80.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </Pane>
-         </children>
-      </AnchorPane>
-   </children>
+<AnchorPane fx:id="signUp_pane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.main.SignUpController">
+   <ImageView fitHeight="600.0" fitWidth="900.0" layoutX="4.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Image url="@../../Images/various-book-books.jpg" />
+   </ImageView>
+   <AnchorPane layoutX="277.0" layoutY="81.0" prefHeight="450.0" prefWidth="347.0" style="-fx-background-color: #EDE9E5; -fx-border-color: #9F7C3F; -fx-border-width: 6px;">
+      <Pane layoutX="12.0" layoutY="8.0" prefHeight="66.0" prefWidth="329.0">
+         <Label layoutX="83.0" layoutY="14.0" prefHeight="38.0" prefWidth="268.0" text="Library Assistant">
+            <font>
+               <Font name="Copperplate Gothic Bold" size="24.0" />
+            </font>
+         </Label>
+         <ImageView fitHeight="60.0" fitWidth="83.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../../Images/book.jpg" />
+         </ImageView>
+      </Pane>
+      <Pane layoutX="13.0" layoutY="74.0" prefHeight="363.0" prefWidth="329.0">
+         <TextField fx:id="email" layoutX="42.0" layoutY="182.0" prefHeight="32.0" prefWidth="245.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: #9F7C3F;">
+            <padding>
+               <Insets left="24.0" />
+            </padding>
+         </TextField>
+         <PasswordField fx:id="password" layoutX="42.0" layoutY="225.0" prefHeight="32.0" prefWidth="245.0" promptText="Password" style="-fx-background-color: trasparent; -fx-border-color: #9F7C3F;">
+            <padding>
+               <Insets left="24.0" />
+            </padding>
+         </PasswordField>
+         <Button fx:id="signUpBtn" alignment="CENTER" layoutX="123.0" layoutY="282.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="83.0" style="-fx-background-color: trasparent; -fx-border-color: #9F7C3F;" text="SignUp" textAlignment="CENTER" onAction="#signUp">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Button>
+         <ImageView fitHeight="25.0" fitWidth="28.0" layoutX="42.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../../Images/icons8-mail-96.png" />
+         </ImageView>
+         <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="42.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../../Images/icons8-forgot-password-96.png" />
+         </ImageView>
+         <Label layoutX="96.0" layoutY="324.0" text="Have an Account? " />
+         <Button layoutX="185.0" layoutY="320.0" mnemonicParsing="false" onAction="#goToLogin" prefHeight="25.0" prefWidth="55.0" style="-fx-background-color: transparent;" text="Login" textFill="#0000bc" />
+         <TextField fx:id="address" layoutX="42.0" layoutY="91.0" prefHeight="32.0" prefWidth="245.0" promptText="Address" style="-fx-background-color: transparent; -fx-border-color: #9F7C3F;">
+            <padding>
+               <Insets left="24.0" />
+            </padding>
+         </TextField>
+         <TextField fx:id="mobile" layoutX="42.0" layoutY="137.0" prefHeight="32.0" prefWidth="245.0" promptText="Mobile" style="-fx-background-color: transparent; -fx-border-color: #9F7C3F;">
+            <padding>
+               <Insets left="24.0" />
+            </padding>
+         </TextField>
+         <TextField fx:id="full_name" layoutX="42.0" layoutY="47.0" prefHeight="32.0" prefWidth="245.0" promptText="Full Name" style="-fx-background-color: transparent; -fx-border-color: #9F7C3F;">
+            <padding>
+               <Insets left="24.0" />
+            </padding>
+         </TextField>
+         <ImageView fitHeight="25.0" fitWidth="28.0" layoutX="42.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../../Images/icons8-mobile-phone-96.png" />
+         </ImageView>
+         <ImageView fitHeight="23.0" fitWidth="26.0" layoutX="43.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../../Images/icons8-home-page-96.png" />
+         </ImageView>
+         <ImageView fitHeight="25.0" fitWidth="28.0" layoutX="42.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../../Images/icons8-user-80.png" />
+         </ImageView>
+      </Pane>
+   </AnchorPane>
 </AnchorPane>

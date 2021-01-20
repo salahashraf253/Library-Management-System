@@ -21,7 +21,7 @@
       <JFXTextField fx:id="mobile" layoutX="26.0" layoutY="148.0" prefHeight="25.0" prefWidth="197.0" promptText="Phone" />
       <JFXTextField fx:id="email" layoutX="26.0" layoutY="180.0" prefHeight="25.0" prefWidth="197.0" promptText="Email" />
       <JFXTextField fx:id="password" layoutX="26.0" layoutY="217.0" prefHeight="25.0" prefWidth="197.0" promptText="Password" />
-      <JFXButton fx:id="cancelBtn" layoutX="26.0" layoutY="262.0" prefHeight="25.0" prefWidth="156.0" style="-fx-background-color: #bdbdbd;" text="Cancel" />
+      <JFXButton fx:id="cancelBtn" layoutX="26.0" layoutY="262.0" prefHeight="25.0" prefWidth="156.0" style="-fx-background-color: #bdbdbd;" text="Cancel" onAction="#cancel"/>
       <JFXButton fx:id="addAdminBtn" layoutX="193.0" layoutY="262.0" prefHeight="25.0" prefWidth="156.0" style="-fx-background-color: #bdbdbd;" text="Add" />
       <Separator layoutY="34.0" prefHeight="3.0" prefWidth="370.0" />
       <ImageView fx:id="photo" fitHeight="79.0" fitWidth="81.0" layoutX="258.0" layoutY="88.0" pickOnBounds="true" preserveRatio="true">

@@ -4,16 +4,17 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.users.ViewMembersController">
+<AnchorPane fx:id="viewBooksPane" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.books.ViewBooksController">
    <children>
-      <TableView layoutX="-4.0" prefHeight="600.0" prefWidth="906.0">
+      <TableView fx:id="booksTable" prefHeight="700.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <columns>
-            <TableColumn prefWidth="115.99999690055847" text="Photo" />
-            <TableColumn minWidth="9.600006103515625" prefWidth="254.40000915527344" text="Book Title" />
-            <TableColumn minWidth="0.0" prefWidth="180.0" text="Author Name" />
-            <TableColumn prefWidth="147.99993896484375" text="Category" />
-            <TableColumn prefWidth="92.0001220703125" text="Price" />
-            <TableColumn prefWidth="116.0" text="Status" />
+            <TableColumn fx:id="photoCol" prefWidth="115.99999690055847" text="Photo" />
+            <TableColumn fx:id="titleCol" minWidth="9.600006103515625" prefWidth="254.40000915527344" text="Book Title" />
+            <TableColumn fx:id="authorCol" minWidth="0.0" prefWidth="180.0" text="Author Name" />
+            <TableColumn fx:id="publisherCol" prefWidth="200.0" text="Publisher" />
+            <TableColumn fx:id="categoryCol" prefWidth="147.99993896484375" text="Category" />
+            <TableColumn fx:id="priceCol" prefWidth="92.0001220703125" text="Price" />
+            <TableColumn fx:id="statusCol" prefWidth="116.0" text="Status" />
          </columns>
       </TableView>
    </children>
