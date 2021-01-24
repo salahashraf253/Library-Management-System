@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -22,6 +23,10 @@ import java.util.ResourceBundle;
 
 public class AdminDashboardController implements Initializable{
 
+    @FXML
+    private BorderPane root;
+    @FXML
+    private AnchorPane titlePane;
     @FXML
     private Tab adminHomeTab;
     @FXML
@@ -81,6 +86,12 @@ public class AdminDashboardController implements Initializable{
     }
 
     @FXML
+    void logout(){
+        closeWindow(root);
+        loadWindowDecorated("/library/main/Login.fxml", "Login");
+    }
+
+    @FXML
     private void addAdmin(){
         loadWindow("/library/users/AddAdmin.fxml", "Add New Admin");
     }
@@ -128,6 +139,10 @@ public class AdminDashboardController implements Initializable{
             //Logger.getLogger(AddAdminController.class.getName().log(Level.SEVERE, null, ex));
             e.printStackTrace();
         }
+    }
+    void closeWindow(BorderPane pane){
+        Stage stage = (Stage) pane.getScene().getWindow();
+        stage.close();
     }
 
 

@@ -32,8 +32,8 @@ public class LoginController implements Initializable {
     private TextField email;
     @FXML
     private PasswordField password;
-    String adminEmail = "admin";
-    String adminPassword = "admin";
+    String adminEmail = "a";
+    String adminPassword = "a";
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -54,10 +54,10 @@ public class LoginController implements Initializable {
         }
         else{
             if(userEmail.equals(adminEmail) && userPassword.equals(adminPassword)){
-                loadWindow("/library/main/AdminDashboard.fxml", "AdminDashBoard");
+                loadWindow("/library/main/AdminDashboard.fxml", "AdminDashBoard",true);
             }
             else{
-                loadWindow("/library/main/Dashboard.fxml", "DashBoard");
+                loadWindow("/library/main/Dashboard.fxml", "DashBoard", true);
             }
             closeWindow(login_pane);
         }
@@ -66,16 +66,17 @@ public class LoginController implements Initializable {
 
     @FXML
     void goToSignUp(ActionEvent event){
-        loadWindow("/library/main/SignUp.fxml", "SignUp");
+        loadWindow("/library/main/SignUp.fxml", "SignUp",false);
         closeWindow(login_pane);
     }
 
-    void loadWindow(String loc, String title){
+    void loadWindow(String loc, String title,Boolean max){
         try {
             Parent parent = FXMLLoader.load(getClass().getResource(loc));
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setTitle(title);
             stage.setScene(new Scene(parent));
+            stage.setMaximized(max);
             stage.show();
         } catch (IOException e) {
             //Logger.getLogger(AddAdminController.class.getName().log(Level.SEVERE, null, ex));

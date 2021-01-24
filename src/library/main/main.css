@@ -10,3 +10,9 @@
  -fx-cell-size: 40,30,40,30;
  -fx-padding: 10px;
 }
+#titlePane{
+ -fx-background-image: url('Title_Bar.png');
+ -fx-background-repeat: stretch;
+ -fx-background-size: 1540 70;
+ -fx-background-position: center;
+}

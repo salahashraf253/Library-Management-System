@@ -10,7 +10,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import library.books.Books;
 import library.users.Member;
 
@@ -18,6 +21,13 @@ import javax.swing.*;
 import java.io.IOException;
 
 public class DashboardController {
+
+    @FXML
+    private BorderPane root;
+    @FXML
+    private AnchorPane titlePane;
+    @FXML
+    private JFXButton logoutBtn;
     @FXML
     private TabPane tabPane;
     @FXML
@@ -52,6 +62,11 @@ public class DashboardController {
         stage.show();
     }
     @FXML
+    void logout(){
+        closeWindow(root);
+        loadWindow("/library/main/Login.fxml", "Login",false);
+    }
+    @FXML
     void rent (ActionEvent event) throws IOException {
         if(member.getMemberStatus()) {
             book.rentBook(member,book);
@@ -60,6 +75,23 @@ public class DashboardController {
         }
     }
 
+    void loadWindow(String loc, String title,Boolean max){
+        try {
+            Parent parent = FXMLLoader.load(getClass().getResource(loc));
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.setTitle(title);
+            stage.setScene(new Scene(parent));
+            stage.setMaximized(max);
+            stage.show();
+        } catch (IOException e) {
+            //Logger.getLogger(AddAdminController.class.getName().log(Level.SEVERE, null, ex));
+            e.printStackTrace();
+        }
+    }
+    void closeWindow(BorderPane pane){
+        Stage stage = (Stage) pane.getScene().getWindow();
+        stage.close();
+    }
 
     public JFXButton getRentBtn() {
         return rentBtn;

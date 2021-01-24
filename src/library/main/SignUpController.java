@@ -58,7 +58,7 @@ public class SignUpController implements Initializable {
            alert.showAndWait();
         }
         else{
-           loadWindow("/library/main/Dashboard.fxml", "DashBoard");
+           loadWindow("/library/main/Dashboard.fxml", "DashBoard",true);
            closeWindow(signUp_pane);
         }
 
@@ -66,15 +66,16 @@ public class SignUpController implements Initializable {
 
     @FXML
     void goToLogin(ActionEvent event){
-        loadWindow("/library/main/Login.fxml", "Login");
+        loadWindow("/library/main/Login.fxml", "Login",false);
         closeWindow(signUp_pane);
     }
-    void loadWindow(String loc, String title){
+    void loadWindow(String loc, String title,Boolean max){
         try {
             Parent parent = FXMLLoader.load(getClass().getResource(loc));
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.setTitle(title);
             stage.setScene(new Scene(parent));
+            stage.setMaximized(max);
             stage.show();
         } catch (IOException e) {
             //Logger.getLogger(AddAdminController.class.getName().log(Level.SEVERE, null, ex));
