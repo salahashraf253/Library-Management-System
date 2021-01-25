@@ -11,55 +11,55 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="login_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/15.0.1"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.main.LoginController">
-   <ImageView fitHeight="600.0" fitWidth="900.0" layoutX="-6.0" pickOnBounds="true" preserveRatio="true"
-              AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-              AnchorPane.topAnchor="0.0">
-      <Image url="@../../Images/various-book-books.jpg"/>
+<AnchorPane fx:id="login_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.main.LoginController">
+   <ImageView fitHeight="600.0" fitWidth="900.0" layoutX="-6.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Image url="@../../Images/various-book-books.jpg" />
    </ImageView>
-   <AnchorPane layoutX="279.0" layoutY="151.0" prefHeight="306.0" prefWidth="347.0"
-               style="-fx-background-color: #EDE9E5; -fx-border-color: #9F7C3F; -fx-border-width: 6px;">
+   <AnchorPane layoutX="279.0" layoutY="144.0" prefHeight="311.0" prefWidth="354.0" style="-fx-background-color: #EDE9E5; -fx-border-color: #9F7C3F; -fx-border-width: 6px;">
       <Pane layoutX="12.0" layoutY="8.0" prefHeight="66.0" prefWidth="329.0">
          <Label layoutX="83.0" layoutY="14.0" prefHeight="38.0" prefWidth="268.0" text="Library Assistant">
-            <Font name="Copperplate Gothic Bold" size="24.0"/>
+            <font>
+               <Font name="Copperplate Gothic Bold" size="24.0" />
+            </font>
          </Label>
          <ImageView fitHeight="60.0" fitWidth="83.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
-            <Image url="@../../Images/book.jpg"/>
+            <Image url="@../../Images/book.jpg" />
          </ImageView>
       </Pane>
       <Pane layoutX="11.0" layoutY="74.0" prefHeight="220.0" prefWidth="329.0">
-         <TextField fx:id="email" layoutX="42.0" layoutY="42.0" prefHeight="32.0" prefWidth="245.0" promptText="Email"
-                    style="-fx-background-color: transparent; -fx-border-color: #9F7C3F;">
+         <TextField fx:id="email" layoutX="42.0" layoutY="42.0" onKeyReleased="#enterPressedEmail" prefHeight="32.0" prefWidth="245.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: #9F7C3F;">
             <padding>
-               <Insets left="24.0"/>
+               <Insets left="24.0" />
             </padding>
          </TextField>
-         <PasswordField fx:id="password" layoutX="42.0" layoutY="90.0" prefHeight="32.0" prefWidth="245.0" promptText="Password"
-                        style="-fx-background-color: trasparent; -fx-border-color: #9F7C3F;">
+         <Label fx:id="email_lbl" layoutX="44.0" layoutY="74.0" text="* Email is required" textFill="RED" visible="false">
+            <font>
+               <Font size="10.0" />
+            </font>
+         </Label>
+         <PasswordField fx:id="password" layoutX="42.0" layoutY="93.0" onKeyPressed="#enterPressedPassword" prefHeight="32.0" prefWidth="245.0" promptText="Password" style="-fx-background-color: trasparent; -fx-border-color: #9F7C3F;">
             <padding>
-               <Insets left="24.0"/>
+               <Insets left="24.0" />
             </padding>
          </PasswordField>
-         <Button fx:id="loginBtn" alignment="CENTER" layoutX="123.0" layoutY="138.0" mnemonicParsing="false" prefHeight="32.0"
-                 prefWidth="83.0" style="-fx-background-color: trasparent; -fx-border-color: #9F7C3F;"
-                 text="Login" textAlignment="CENTER" onAction="#login">
+         <Label fx:id="password_lbl" layoutX="44.0" layoutY="124.0" text="* Password is required" textFill="RED" visible="false">
             <font>
-               <Font size="14.0"/>
+               <Font size="10.0" />
+            </font>
+         </Label>
+         <Button fx:id="loginBtn" alignment="CENTER" layoutX="123.0" layoutY="147.0" mnemonicParsing="false" onAction="#login" prefHeight="32.0" prefWidth="83.0" style="-fx-background-color: trasparent; -fx-border-color: #9F7C3F;" text="Login" textAlignment="CENTER">
+            <font>
+               <Font size="14.0" />
             </font>
          </Button>
-         <ImageView fitHeight="25.0" fitWidth="28.0" layoutX="42.0" layoutY="46.0" pickOnBounds="true"
-                    preserveRatio="true">
-            <Image url="@../../Images/icons8-user-80.png"/>
+         <ImageView fitHeight="25.0" fitWidth="28.0" layoutX="42.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../../Images/icons8-user-80.png" />
          </ImageView>
-         <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="42.0" layoutY="94.0" pickOnBounds="true"
-                    preserveRatio="true">
-            <Image url="@../../Images/icons8-forgot-password-96.png"/>
+         <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="42.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../../Images/icons8-forgot-password-96.png" />
          </ImageView>
-         <Label layoutX="75.0" layoutY="181.0" text="Don't Have an Account? "/>
-         <Button fx:id="signUpBtn" layoutX="199.0" layoutY="177.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0"
-                 style="-fx-background-color: transparent;" text="SignUp" textFill="#0000bc" onAction="#goToSignUp"/>
+         <Label layoutX="75.0" layoutY="189.0" text="Don't Have an Account? " />
+         <Button fx:id="signUpBtn" layoutX="199.0" layoutY="185.0" mnemonicParsing="false" onAction="#goToSignUp" prefHeight="25.0" prefWidth="55.0" style="-fx-background-color: transparent;" text="SignUp" textFill="#0000bc" />
       </Pane>
    </AnchorPane>
 </AnchorPane>

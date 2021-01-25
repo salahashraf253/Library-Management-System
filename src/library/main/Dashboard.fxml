@@ -26,7 +26,7 @@
    <top>
       <AnchorPane fx:id="titlePane" prefHeight="70.0" prefWidth="1540.0" BorderPane.alignment="CENTER">
          <children>
-            <JFXButton fx:id="logoutBtn" contentDisplay="RIGHT" layoutX="1183.0" layoutY="18.0" prefHeight="38.0" prefWidth="99.0" style="-fx-background-color: #fffff0;" text="Logout" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="16.5" onAction="#logout">
+            <JFXButton fx:id="logoutBtn" contentDisplay="RIGHT" layoutX="1183.0" layoutY="18.0" onAction="#logout" prefHeight="38.0" prefWidth="99.0" style="-fx-background-color: #edeae5;" text="Logout" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="16.5">
                <font>
                   <Font size="14.0" />
                </font>

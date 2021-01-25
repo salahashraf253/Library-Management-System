@@ -1,7 +1,6 @@
 package library.main;
 
 import com.jfoenix.controls.JFXButton;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -54,20 +53,13 @@ public class DashboardController {
     Books book = new Books();
     Member member = new Member();
 
-
-    public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Dashboard.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
     @FXML
     void logout(){
         closeWindow(root);
         loadWindow("/library/main/Login.fxml", "Login",false);
     }
     @FXML
-    void rent (ActionEvent event) throws IOException {
+    void rent() throws IOException {
         if(member.getMemberStatus()) {
             book.rentBook(member,book);
         } else {
@@ -95,9 +87,5 @@ public class DashboardController {
 
     public JFXButton getRentBtn() {
         return rentBtn;
-    }
-
-    public void setRentBtn(JFXButton rentBtn) {
-        this.rentBtn = rentBtn;
     }
 }

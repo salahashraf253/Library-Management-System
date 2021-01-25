@@ -1,15 +1,12 @@
 package library.main;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -26,13 +23,23 @@ public class SignUpController implements Initializable {
     @FXML
     private TextField full_name;
     @FXML
+    private Label name_lbl;
+    @FXML
     private TextField address;
+    @FXML
+    private Label address_lbl;
     @FXML
     private TextField mobile;
     @FXML
+    private Label mobile_lbl;
+    @FXML
     private TextField email;
     @FXML
+    private Label email_lbl;
+    @FXML
     private PasswordField password;
+    @FXML
+    private Label password_lbl;
     @FXML
     private Button signUpBtn;
     @FXML
@@ -43,6 +50,63 @@ public class SignUpController implements Initializable {
         DatabaseHandler handler = DatabaseHandler.getInstance();
     }
 
+    public void enterPressedTextField(TextField txt, TextField nxt, Label lbl){
+        txt.setOnKeyPressed(ke -> {
+            if (ke.getCode().equals(KeyCode.ENTER)|| ke.getCode().equals(KeyCode.DOWN))
+            {
+                if (txt.getText().isEmpty()){
+                    lbl.setVisible(true);
+                }
+                else{
+                    lbl.setVisible(false);
+                    nxt.requestFocus();
+                }
+            }
+        });
+    }
+    public void enterPressedTextField(TextField txt, PasswordField pass, Label lbl){
+        txt.setOnKeyPressed(ke -> {
+            if (ke.getCode().equals(KeyCode.ENTER)|| ke.getCode().equals(KeyCode.DOWN))
+            {
+                if (txt.getText().isEmpty()){
+                    lbl.setVisible(true);
+                }
+                else{
+                    lbl.setVisible(false);
+                    pass.requestFocus();
+                }
+            }
+        });
+    }
+
+    @FXML
+    public void enterPressedName(){
+        enterPressedTextField(full_name,address,name_lbl);
+    }
+    @FXML
+    public void enterPressedAddress(){
+        enterPressedTextField(address,mobile,address_lbl);
+    }
+    @FXML
+    public void enterPressedMobile(){
+        enterPressedTextField(mobile,email,mobile_lbl);
+    }
+    @FXML
+    public void enterPressedEmail(){
+        enterPressedTextField(email,password,email_lbl);
+    }
+    @FXML
+    public void enterPressedPassword(){
+        password.setOnKeyPressed(ke -> {
+                if (ke.getCode().equals(KeyCode.ENTER))
+                {
+                   signUp();
+                }
+        });
+    }
+
+
+
     @FXML
     public void signUp(){
         String userFullName = full_name.getText();
@@ -52,12 +116,23 @@ public class SignUpController implements Initializable {
         String userPassword = password.getText();
 
        if(userFullName.isEmpty() || userAddress.isEmpty() || userMobile.isEmpty()||userEmail.isEmpty() || userPassword.isEmpty()) {
-           Alert alert = new Alert(Alert.AlertType.WARNING);
-           alert.setHeaderText(null);
-           alert.setContentText("All fields cannot be empty!");
-           alert.showAndWait();
+           if (userFullName.isEmpty())
+               name_lbl.setVisible(true);
+           if (userAddress.isEmpty())
+               address.setVisible(true);
+           if (userMobile.isEmpty())
+               mobile.setVisible(true);
+           if (userEmail.isEmpty())
+               email_lbl.setVisible(true);
+           if (userPassword.isEmpty())
+               password_lbl.setVisible(true);
         }
         else{
+           name_lbl.setVisible(false);
+           address_lbl.setVisible(false);
+           mobile_lbl.setVisible(false);
+           email_lbl.setVisible(false);
+           password_lbl.setVisible(false);
            loadWindow("/library/main/Dashboard.fxml", "DashBoard",true);
            closeWindow(signUp_pane);
         }
@@ -65,7 +140,7 @@ public class SignUpController implements Initializable {
     }
 
     @FXML
-    void goToLogin(ActionEvent event){
+    void goToLogin(){
         loadWindow("/library/main/Login.fxml", "Login",false);
         closeWindow(signUp_pane);
     }

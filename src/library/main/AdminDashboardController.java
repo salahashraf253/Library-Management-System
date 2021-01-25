@@ -3,7 +3,6 @@ package library.main;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -96,23 +95,23 @@ public class AdminDashboardController implements Initializable{
         loadWindow("/library/users/AddAdmin.fxml", "Add New Admin");
     }
     @FXML
-    private void addMember(ActionEvent event){
+    private void addMember(){
       loadWindow("/library/users/AddMember.fxml", "Add New Member");
     }
     @FXML
-    private void addBook(ActionEvent event) {
+    private void addBook() {
     loadWindow("/library/books/AddBook.fxml" , "Add New Book");
     }
     @FXML
-    private void viewMembers(ActionEvent event) {
+    private void viewMembers() {
         loadWindowDecorated("/library/users/ViewMembers.fxml", "All Members");
     }
     @FXML
-    private void viewBooks(ActionEvent event) {
+    private void viewBooks() {
         loadWindowDecorated("/library/books/ViewBooks.fxml" , "All Books");
     }
     @FXML
-    private void settings(ActionEvent event) {
+    private void settings() {
         loadWindow("/library/main/Settings.fxml", "Settings");
     }
 
