@@ -28,15 +28,17 @@ public final class DatabaseHandler {
 
     private static void createConnection() {
         try {
-            Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
+            Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
             conn = DriverManager.getConnection(DB_URL);
         } catch (Exception e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Cant load database", "Database Error", JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
         }
     }
 
     void  setupBookTable() {
-        String TABLE_NAME = "Book";
+        String TABLE_NAME = "BOOK";
         try {
             stmt = conn.createStatement();
             DatabaseMetaData dbm = conn.getMetaData();
@@ -44,7 +46,7 @@ public final class DatabaseHandler {
             if (tables.next()) {
                 System.out.println("Table" + TABLE_NAME);
             } else {
-                stmt.execute("create Table" + TABLE_NAME + "("
+                stmt.execute("create TABLE" + TABLE_NAME + "("
                         +"ID varchar(200) primary key ,\n"
                         +"title varchar  (200),\n"
                         +"author varchar  (200),\n"
@@ -64,7 +66,7 @@ public final class DatabaseHandler {
 
     }
     void  setupMEMBERTable() {
-        String TABLE_NAME = "Member";
+        String TABLE_NAME = "MEMBER";
         try {
             stmt = conn.createStatement();
             DatabaseMetaData dbm = conn.getMetaData();
@@ -72,12 +74,13 @@ public final class DatabaseHandler {
             if (tables.next()) {
                 System.out.println("Table" + TABLE_NAME);
             } else {
-                stmt.execute("create Table" + TABLE_NAME + "("
+                stmt.execute("create TABLE" + TABLE_NAME + "("
                         +"fullname varchar  (200),\n"
                         +"address  varchar  (200),\n"
                         +"mobile  varchar  (200),\n"
                         +"email varchar(200) primary key ,\n"
                         +"password  varchar  (200),\n"
+                        +"status  boolean ,\n"
                         +")");
             }
         }
@@ -89,6 +92,7 @@ public final class DatabaseHandler {
         finally{
         }
     }
+
     public ResultSet execQuery(String query) {
         ResultSet result;
         try {
@@ -112,7 +116,7 @@ public final class DatabaseHandler {
         }
         catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error:" + ex.getMessage(), "Error Occurred", JOptionPane.ERROR_MESSAGE);
-            System.out.println("Exception at execQuery:dataHandler" + ex.getLocalizedMessage());
+            System.out.println("Exception at execAction:dataHandler" + ex.getLocalizedMessage());
             return false;
         }
         finally {
