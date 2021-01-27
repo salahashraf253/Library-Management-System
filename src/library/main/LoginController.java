@@ -70,6 +70,28 @@ public class LoginController implements Initializable {
         });
     }
 
+ /*   private void loginVarification(){
+        DatabaseHandler handler = DatabaseHandler.getInstance();
+
+        String qu="SELECT FROM MEMBER WHERE email = userEmail and pass = userPassword";
+        handler.execAction(qu);
+        if(handler.execAction(qu)){
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setHeaderText(null);
+            alert.setContentText("id");
+            alert.showAndWait();
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("Failed");
+            alert.showAndWait();
+
+        }
+
+
+    }*/
+
     @FXML
     public void login(){
         String  userEmail = email.getText();

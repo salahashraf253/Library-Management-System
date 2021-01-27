@@ -45,9 +45,11 @@ public class SignUpController implements Initializable {
     @FXML
     private Button loginBtn;
 
+    DatabaseHandler handler;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        DatabaseHandler handler = DatabaseHandler.getInstance();
+       handler = DatabaseHandler.getInstance();
     }
 
     public void enterPressedTextField(TextField txt, TextField nxt, Label lbl){
@@ -105,8 +107,6 @@ public class SignUpController implements Initializable {
         });
     }
 
-
-
     @FXML
     public void signUp(){
         String userFullName = full_name.getText();
@@ -126,18 +126,41 @@ public class SignUpController implements Initializable {
                email_lbl.setVisible(true);
            if (userPassword.isEmpty())
                password_lbl.setVisible(true);
-        }
+       }
         else{
            name_lbl.setVisible(false);
            address_lbl.setVisible(false);
            mobile_lbl.setVisible(false);
            email_lbl.setVisible(false);
            password_lbl.setVisible(false);
-           loadWindow("/library/main/Dashboard.fxml", "DashBoard",true);
-           closeWindow(signUp_pane);
-        }
 
+           String qu = "INSERT INTO MEMBER VALUES(" +
+                   "'" + userFullName + "'," +
+                   "'" + userAddress + "'," +
+                   "'" + userMobile + "'," +
+                   "'" + userEmail + "'," +
+                   "'" + userPassword + "'," +
+                   "" + true + "" + ")";
+           System.out.println(qu);
+           handler.execAction(qu);
+           if (handler.execAction(qu)) {
+               Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+               alert.setHeaderText(null);
+               alert.setContentText("id");
+               alert.showAndWait();
+
+               loadWindow("/library/main/Dashboard.fxml", "DashBoard",true);
+               closeWindow(signUp_pane);
+           }
+           else{
+               Alert alert = new Alert(Alert.AlertType.ERROR);
+               alert.setHeaderText(null);
+               alert.setContentText("Failed");
+               alert.showAndWait();
+           }
+        }
     }
+
 
     @FXML
     void goToLogin(){

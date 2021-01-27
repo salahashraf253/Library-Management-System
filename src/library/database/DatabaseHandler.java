@@ -2,8 +2,10 @@ package library.database;
 
 import javax.swing.*;
 import java.sql.*;
+import java.util.List;
 
 public final class DatabaseHandler {
+
 
     private static DatabaseHandler handler = null;
 
@@ -71,10 +73,11 @@ public final class DatabaseHandler {
                 System.out.println("Table" + TABLE_NAME);
             } else {
                 stmt.execute("create Table" + TABLE_NAME + "("
-                        +"ID varchar(200) primary key ,\n"
-                        +"username varchar  (200),\n"
+                        +"fullname varchar  (200),\n"
+                        +"address  varchar  (200),\n"
+                        +"mobile  varchar  (200),\n"
+                        +"email varchar(200) primary key ,\n"
                         +"password  varchar  (200),\n"
-
                         +")");
             }
         }
@@ -108,11 +111,25 @@ public final class DatabaseHandler {
             return true;
         }
         catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error:" + ex.getMessage(), "Error Occured", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error:" + ex.getMessage(), "Error Occurred", JOptionPane.ERROR_MESSAGE);
             System.out.println("Exception at execQuery:dataHandler" + ex.getLocalizedMessage());
             return false;
         }
         finally {
         }
+    }
+
+    private static void createTables(List<String> tableData) throws SQLException {
+        Statement statement = conn.createStatement();
+        statement.closeOnCompletion();
+        for (String command : tableData) {
+            System.out.println(command);
+            statement.addBatch(command);
+        }
+        statement.executeBatch();
+    }
+
+    public Connection getConnection() {
+        return conn;
     }
 }
