@@ -1,6 +1,7 @@
 <component name="libraryTable">
-  <library name="derby">
+  <library name="derbyclient">
     <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../db-derby-10.14.2.0-bin/lib/derbyclient.jar!/" />
       <root url="jar://$PROJECT_DIR$/../db-derby-10.14.2.0-bin/lib/derby.jar!/" />
     </CLASSES>
     <JAVADOC />

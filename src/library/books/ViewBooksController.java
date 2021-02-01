@@ -64,7 +64,7 @@ public class ViewBooksController implements Initializable {
     }
     private void loadData() {
         DatabaseHandler databaseHandler = DatabaseHandler.getInstance();
-        String qu = "SELECT title FROM BOOK";
+        String qu = "SELECT *  FROM Book";
         ResultSet rs = databaseHandler.execQuery(qu);
         try {
             while (rs.next()){

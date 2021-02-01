@@ -1,3 +1,5 @@
+
+
 package library.main;
 
 import javafx.fxml.FXML;
@@ -41,14 +43,12 @@ public class LoginController implements Initializable {
         DatabaseHandler handler = DatabaseHandler.getInstance();
     }
 
-    public void enterPressedTextField(TextField txt, PasswordField pass, Label lbl){
+    public void enterPressedTextField(TextField txt, PasswordField pass, Label lbl) {
         txt.setOnKeyPressed(ke -> {
-            if (ke.getCode().equals(KeyCode.ENTER)|| ke.getCode().equals(KeyCode.DOWN))
-            {
-                if (txt.getText().isEmpty()){
+            if (ke.getCode().equals(KeyCode.ENTER) || ke.getCode().equals(KeyCode.DOWN)) {
+                if (txt.getText().isEmpty()) {
                     lbl.setVisible(true);
-                }
-                else{
+                } else {
                     lbl.setVisible(false);
                     pass.requestFocus();
                 }
@@ -57,14 +57,14 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-    public void enterPressedEmail(){
-        enterPressedTextField(email,password,email_lbl);
+    public void enterPressedEmail() {
+        enterPressedTextField(email, password, email_lbl);
     }
+
     @FXML
-    public void enterPressedPassword(){
+    public void enterPressedPassword() {
         password.setOnKeyPressed(ke -> {
-            if (ke.getCode().equals(KeyCode.ENTER))
-            {
+            if (ke.getCode().equals(KeyCode.ENTER)) {
                 login();
             }
         });
@@ -72,7 +72,6 @@ public class LoginController implements Initializable {
 
  /*   private void loginVarification(){
         DatabaseHandler handler = DatabaseHandler.getInstance();
-
         String qu="SELECT FROM MEMBER WHERE email = userEmail and pass = userPassword";
         handler.execAction(qu);
         if(handler.execAction(qu)){
@@ -86,28 +85,24 @@ public class LoginController implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("Failed");
             alert.showAndWait();
-
         }
-
-
     }*/
 
     @FXML
-    public void login(){
-        String  userEmail = email.getText();
+    public void login() {
+        String userEmail = email.getText();
         String userPassword = password.getText();
-        if (userEmail.isEmpty() || userPassword.isEmpty()){
+        if (userEmail.isEmpty() || userPassword.isEmpty()) {
             if (userEmail.isEmpty())
                 email_lbl.setVisible(true);
             if (userPassword.isEmpty())
                 password_lbl.setVisible(true);
-        }
-        else{
+        } else {
             email_lbl.setVisible(false);
             password_lbl.setVisible(false);
 
-            if(userEmail.equals(adminEmail) && userPassword.equals(adminPassword))
-                loadWindow("/library/main/AdminDashboard.fxml", "AdminDashBoard",true);
+            if (userEmail.equals(adminEmail) && userPassword.equals(adminPassword))
+                loadWindow("/library/main/AdminDashboard.fxml", "AdminDashBoard", true);
             else
                 loadWindow("/library/main/Dashboard.fxml", "DashBoard", true);
 
@@ -116,12 +111,12 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-    void goToSignUp(){
-        loadWindow("/library/main/SignUp.fxml", "SignUp",false);
+    void goToSignUp() {
+        loadWindow("/library/main/SignUp.fxml", "SignUp", false);
         closeWindow(login_pane);
     }
 
-    void loadWindow(String loc, String title,Boolean max){
+    void loadWindow(String loc, String title, Boolean max) {
         try {
             Parent parent = FXMLLoader.load(getClass().getResource(loc));
             Stage stage = new Stage(StageStyle.DECORATED);
@@ -134,7 +129,8 @@ public class LoginController implements Initializable {
             e.printStackTrace();
         }
     }
-    void closeWindow(AnchorPane pane){
+
+    void closeWindow(AnchorPane pane) {
         Stage stage = (Stage) pane.getScene().getWindow();
         stage.close();
     }

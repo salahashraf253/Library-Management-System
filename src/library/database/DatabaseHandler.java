@@ -2,7 +2,9 @@ package library.database;
 
 import javax.swing.*;
 import java.sql.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public final class DatabaseHandler {
 
@@ -15,7 +17,7 @@ public final class DatabaseHandler {
 
     private DatabaseHandler() {
         createConnection();
-        setupBookTable();
+      //  setupBookTable();
         setupMEMBERTable();
     }
 
@@ -36,7 +38,22 @@ public final class DatabaseHandler {
             System.exit(0);
         }
     }
+    private static Set<String> getDBTables() throws SQLException {
+        Set<String> set = new HashSet<>();
+        DatabaseMetaData dbmeta = conn.getMetaData();
+        readDBTable(set, dbmeta, "TABLE", null);
+        return set;
+    }
 
+    private static void readDBTable(Set<String> set, DatabaseMetaData dbmeta, String searchCriteria, String schema) throws SQLException {
+        ResultSet rs = dbmeta.getTables(null, schema, null, new String[]{searchCriteria});
+        while (rs.next()) {
+            set.add(rs.getString("TABLE_NAME").toLowerCase());
+        }
+    }
+
+
+    /*
     void  setupBookTable() {
         String TABLE_NAME = "BOOK";
         try {
@@ -46,14 +63,14 @@ public final class DatabaseHandler {
             if (tables.next()) {
                 System.out.println("Table" + TABLE_NAME);
             } else {
-                stmt.execute("create TABLE" + TABLE_NAME + "("
-                        +"ID varchar(200) primary key ,\n"
-                        +"title varchar  (200),\n"
-                        +"author varchar  (200),\n"
-                        +"publisher varchar  (200),\n"
-                        +"category varchar (50),\n"
-                        +"avail  boolen  defult true"
-                        +")");
+                stmt.execute("create TABLE BOOK( "
+                        +"id varchar  (200) primary key ,"
+                        +"title varchar (200),"
+                        +"author varchar (200),"
+                        +"publisher varchar (200),"
+                        +"category varchar  (50),"
+                        +"avail  BOOLEAN   DEFAULT true"
+                       +")" );
             }
         }
         catch (SQLException e){
@@ -64,7 +81,7 @@ public final class DatabaseHandler {
         finally{
         }
 
-    }
+    }*/
     void  setupMEMBERTable() {
         String TABLE_NAME = "MEMBER";
         try {
@@ -74,13 +91,13 @@ public final class DatabaseHandler {
             if (tables.next()) {
                 System.out.println("Table" + TABLE_NAME);
             } else {
-                stmt.execute("create TABLE" + TABLE_NAME + "("
-                        +"fullname varchar  (200),\n"
-                        +"address  varchar  (200),\n"
-                        +"mobile  varchar  (200),\n"
-                        +"email varchar(200) primary key ,\n"
-                        +"password  varchar  (200),\n"
-                        +"status  boolean ,\n"
+                stmt.execute("create TABLE MEMBER("
+                        +"fullname varchar  (200),"
+                        +"address varchar  (200),"
+                        +"mobile varchar  (200),"
+                        +"email varchar(200) primary key,  "
+                        +"password varchar  (200),"
+                        +"status BOOLEAN DEFAULT TRUE "
                         +")");
             }
         }
@@ -135,5 +152,8 @@ public final class DatabaseHandler {
 
     public Connection getConnection() {
         return conn;
+    }
+    public static void main(String[] args) throws Exception {
+        DatabaseHandler.getInstance();
     }
 }

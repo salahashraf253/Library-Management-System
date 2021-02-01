@@ -14,6 +14,8 @@ import library.database.DatabaseHandler;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class SignUpController implements Initializable {
@@ -102,13 +104,18 @@ public class SignUpController implements Initializable {
         password.setOnKeyPressed(ke -> {
                 if (ke.getCode().equals(KeyCode.ENTER))
                 {
-                   signUp();
+                    try {
+                        signUp();
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
                 }
         });
     }
 
     @FXML
-    public void signUp(){
+    public void signUp() throws SQLException {
+
         String userFullName = full_name.getText();
         String userAddress = address.getText();
         String userMobile = mobile.getText();
@@ -133,20 +140,31 @@ public class SignUpController implements Initializable {
            mobile_lbl.setVisible(false);
            email_lbl.setVisible(false);
            password_lbl.setVisible(false);
-
-           String qu = "INSERT INTO MEMBER VALUES(" +
-                   "'" + userFullName + "'," +
+         //String qu2 ="  INSERT INTO MEMBER VALUES ('userFullName', 'userAddress' , 'userMobile', 'userEmail','userPassword','true' )";
+           String qu = "INSERT INTO MEMBER VALUES(  (?, ?, ?,?,?)";
+                  /* "'" + userFullName + "'," +
+                  "INSERT INTO BOOK(id,title,author,publisher,isAvail) VALUES(?,?,?,?,?)");
                    "'" + userAddress + "'," +
                    "'" + userMobile + "'," +
                    "'" + userEmail + "'," +
                    "'" + userPassword + "'," +
-                   "" + true + "" + ")";
+                  *///"" + true + "" + ")";
+           PreparedStatement stmt = DatabaseHandler.getInstance().getConnection().prepareStatement(qu);
+
+           // set param values
+           stmt.setString(1, userFullName);
+           stmt.setString(2, userAddress);
+           stmt.setString(3, userMobile);
+           stmt.setString(4, userEmail);
+           stmt.setString(5, userPassword);
+
+
            System.out.println(qu);
            handler.execAction(qu);
            if (handler.execAction(qu)) {
                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                alert.setHeaderText(null);
-               alert.setContentText("id");
+               alert.setContentText("email");
                alert.showAndWait();
 
                loadWindow("/library/main/Dashboard.fxml", "DashBoard",true);
@@ -175,6 +193,7 @@ public class SignUpController implements Initializable {
             stage.setScene(new Scene(parent));
             stage.setMaximized(max);
             stage.show();
+            stage.setMaximized(true);
         } catch (IOException e) {
             //Logger.getLogger(AddAdminController.class.getName().log(Level.SEVERE, null, ex));
             e.printStackTrace();

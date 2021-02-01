@@ -26,7 +26,7 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
 
         // Scene
-        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("SignUp.fxml"));
         stage.setTitle("Library Assistant");
         stage.initStyle(StageStyle.DECORATED);
         scene = new Scene(root);
