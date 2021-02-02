@@ -15,8 +15,12 @@ import library.database.DatabaseHandler;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SignUpController implements Initializable {
 
@@ -119,65 +123,67 @@ public class SignUpController implements Initializable {
         String userFullName = full_name.getText();
         String userAddress = address.getText();
         String userMobile = mobile.getText();
-        String  userEmail = email.getText();
+        String userEmail = email.getText();
         String userPassword = password.getText();
 
-       if(userFullName.isEmpty() || userAddress.isEmpty() || userMobile.isEmpty()||userEmail.isEmpty() || userPassword.isEmpty()) {
-           if (userFullName.isEmpty())
-               name_lbl.setVisible(true);
-           if (userAddress.isEmpty())
-               address.setVisible(true);
-           if (userMobile.isEmpty())
-               mobile.setVisible(true);
-           if (userEmail.isEmpty())
-               email_lbl.setVisible(true);
-           if (userPassword.isEmpty())
-               password_lbl.setVisible(true);
-       }
-        else{
-           name_lbl.setVisible(false);
-           address_lbl.setVisible(false);
-           mobile_lbl.setVisible(false);
-           email_lbl.setVisible(false);
-           password_lbl.setVisible(false);
-         //String qu2 ="  INSERT INTO MEMBER VALUES ('userFullName', 'userAddress' , 'userMobile', 'userEmail','userPassword','true' )";
-           String qu = "INSERT INTO MEMBER VALUES(  (?, ?, ?,?,?)";
-                  /* "'" + userFullName + "'," +
-                  "INSERT INTO BOOK(id,title,author,publisher,isAvail) VALUES(?,?,?,?,?)");
-                   "'" + userAddress + "'," +
-                   "'" + userMobile + "'," +
-                   "'" + userEmail + "'," +
-                   "'" + userPassword + "'," +
-                  *///"" + true + "" + ")";
-           PreparedStatement stmt = DatabaseHandler.getInstance().getConnection().prepareStatement(qu);
 
-           // set param values
-           stmt.setString(1, userFullName);
-           stmt.setString(2, userAddress);
-           stmt.setString(3, userMobile);
-           stmt.setString(4, userEmail);
-           stmt.setString(5, userPassword);
+        if (userFullName.isEmpty() || userAddress.isEmpty() || userMobile.isEmpty() || userEmail.isEmpty() || userPassword.isEmpty()||checkUserEmail(userEmail)) {
+            if (userFullName.isEmpty())
+                name_lbl.setVisible(true);
+            if (userAddress.isEmpty())
+                address.setVisible(true);
+            if (userMobile.isEmpty())
+                mobile.setVisible(true);
+            if (userEmail.isEmpty()&&checkUserEmail(userEmail))
+                email_lbl.setVisible(true);
+            if (userPassword.isEmpty())
+                password_lbl.setVisible(true);
+        }
+
+        else {
+
+            name_lbl.setVisible(false);
+            address_lbl.setVisible(false);
+            mobile_lbl.setVisible(false);
+            email_lbl.setVisible(false);
+            password_lbl.setVisible(false);
+        }
+            String qu2 = "INSERT INTO MEMBER VALUES(" +
+                    "'" + userFullName + "'," +
+                    "'" + userAddress + "'," +
+                    "'" + userMobile + "'," +
+                    "'" + userEmail + "'," +
+                    "'" + userPassword + "'," +
+                    "" + true + "" + ")";
+
+            PreparedStatement stmt = DatabaseHandler.getInstance().getConnection().prepareStatement(qu2);
+            stmt.executeUpdate();
+            System.out.println(qu2);
+            handler.execAction(qu2);
+
+                    if (handler.execAction(qu2)) {
+
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setHeaderText(null);
+                        alert.setContentText("email");
+                        alert.showAndWait();
+                        loadWindow("/library/main/Dashboard.fxml", "DashBoard", true);
+                        closeWindow(signUp_pane);
+                    }
 
 
-           System.out.println(qu);
-           handler.execAction(qu);
-           if (handler.execAction(qu)) {
-               Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-               alert.setHeaderText(null);
-               alert.setContentText("email");
-               alert.showAndWait();
 
-               loadWindow("/library/main/Dashboard.fxml", "DashBoard",true);
-               closeWindow(signUp_pane);
-           }
-           else{
+    else
+
+        {
                Alert alert = new Alert(Alert.AlertType.ERROR);
                alert.setHeaderText(null);
                alert.setContentText("Failed");
                alert.showAndWait();
+
            }
         }
-    }
+
 
 
     @FXML
@@ -203,6 +209,56 @@ public class SignUpController implements Initializable {
         Stage stage = (Stage) pane.getScene().getWindow();
         stage.close();
     }
+
+   /* public static boolean isMemberExists(String userEmail) {
+                try {
+                    String checkstmt = "SELECT * FROM MEMBER WHERE email=?";
+            PreparedStatement stmt = DatabaseHandler.getInstance().getConnection().prepareStatement(checkstmt);
+            stmt.setString(1, userEmail);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                int count = ((ResultSet) rs).getInt(1);
+                System.out.println(count);
+
+                return(count > 0);
+            }
+        } catch (SQLException ex) {
+            System.out.printf("already exsist");
+        }
+        return false;
+    }
+
+    */
+    public boolean checkUserEmail(String userEmail)
+    {
+        DatabaseHandler handler ;
+        PreparedStatement ps;
+        ResultSet rs;
+        boolean checkUser = false;
+        String query = "SELECT * FROM MEMBER WHERE email =?";
+
+        try {
+            ps = DatabaseHandler.getInstance().getConnection().prepareStatement(query);
+            ps.setString(1, userEmail);
+
+            rs = ps.executeQuery();
+
+            if(rs.next())
+            {
+                checkUser = true;
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setContentText("Failed");
+                alert.showAndWait();
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SignUpController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return checkUser;
+
+        }
+
 
 
 

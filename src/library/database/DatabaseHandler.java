@@ -1,11 +1,14 @@
 package library.database;
 
+
 import javax.swing.*;
 import java.sql.*;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
+//import org.apache.logging.log4j.Level;
+//import org.apache.logging.log4j.LogManager;
+//import org.apache.logging.log4j.Logger;
 public final class DatabaseHandler {
 
 
@@ -17,12 +20,12 @@ public final class DatabaseHandler {
 
     private DatabaseHandler() {
         createConnection();
-      //  setupBookTable();
+        //  setupBookTable();
         setupMEMBERTable();
     }
 
-    public static DatabaseHandler getInstance(){
-        if(handler==null) {
+    public static DatabaseHandler getInstance() {
+        if (handler == null) {
             handler = new DatabaseHandler();
         }
         return handler;
@@ -38,6 +41,7 @@ public final class DatabaseHandler {
             System.exit(0);
         }
     }
+
     private static Set<String> getDBTables() throws SQLException {
         Set<String> set = new HashSet<>();
         DatabaseMetaData dbmeta = conn.getMetaData();
@@ -82,7 +86,7 @@ public final class DatabaseHandler {
         }
 
     }*/
-    void  setupMEMBERTable() {
+    void setupMEMBERTable() {
         String TABLE_NAME = "MEMBER";
         try {
             stmt = conn.createStatement();
@@ -92,21 +96,20 @@ public final class DatabaseHandler {
                 System.out.println("Table" + TABLE_NAME);
             } else {
                 stmt.execute("create TABLE MEMBER("
-                        +"fullname varchar  (200),"
-                        +"address varchar  (200),"
-                        +"mobile varchar  (200),"
-                        +"email varchar(200) primary key,  "
-                        +"password varchar  (200),"
-                        +"status BOOLEAN DEFAULT TRUE "
-                        +")");
+                        + "fullname varchar  (200),"
+                        + "address varchar  (200),"
+                        + "mobile varchar  (200),"
+                        + "email varchar(200) primary key,  "
+                        + "password varchar  (200),"
+                        + "status BOOLEAN DEFAULT TRUE "
+                        + ")");
+
             }
-        }
-        catch (SQLException e){
-            System.err.println(e.getMessage()+"........SETUP DATABASE");
+        } catch (SQLException e) {
+            System.err.println(e.getMessage() + "........SETUP DATABASE");
 
 
-        }
-        finally{
+        } finally {
         }
     }
 
@@ -115,12 +118,10 @@ public final class DatabaseHandler {
         try {
             stmt = conn.createStatement();
             result = stmt.executeQuery(query);
-        }
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             System.out.println("Exception at execQuery:dataHandler" + ex.getLocalizedMessage());
             return null;
-        }
-        finally {
+        } finally {
         }
         return result;
     }
@@ -130,13 +131,11 @@ public final class DatabaseHandler {
             stmt = conn.createStatement();
             stmt.execute(qu);
             return true;
-        }
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error:" + ex.getMessage(), "Error Occurred", JOptionPane.ERROR_MESSAGE);
             System.out.println("Exception at execAction:dataHandler" + ex.getLocalizedMessage());
             return false;
-        }
-        finally {
+        } finally {
         }
     }
 
@@ -152,8 +151,5 @@ public final class DatabaseHandler {
 
     public Connection getConnection() {
         return conn;
-    }
-    public static void main(String[] args) throws Exception {
-        DatabaseHandler.getInstance();
     }
 }
