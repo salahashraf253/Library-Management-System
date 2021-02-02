@@ -17,6 +17,7 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 import java.util.logging.Handler;
 import java.util.logging.Level;
@@ -127,20 +128,18 @@ public class SignUpController implements Initializable {
         String userPassword = password.getText();
 
 
-        if (userFullName.isEmpty() || userAddress.isEmpty() || userMobile.isEmpty() || userEmail.isEmpty() || userPassword.isEmpty()||checkUserEmail(userEmail)) {
+        if (userFullName.isEmpty() || userAddress.isEmpty() || userMobile.isEmpty() || userEmail.isEmpty() || userPassword.isEmpty()){// || checkUserEmail(userEmail)) {
             if (userFullName.isEmpty())
                 name_lbl.setVisible(true);
             if (userAddress.isEmpty())
                 address.setVisible(true);
             if (userMobile.isEmpty())
                 mobile.setVisible(true);
-            if (userEmail.isEmpty()&&checkUserEmail(userEmail))
+            if (userEmail.isEmpty() )//&& checkUserEmail(userEmail))
                 email_lbl.setVisible(true);
             if (userPassword.isEmpty())
                 password_lbl.setVisible(true);
-        }
-
-        else {
+        } else {
 
             name_lbl.setVisible(false);
             address_lbl.setVisible(false);
@@ -148,6 +147,13 @@ public class SignUpController implements Initializable {
             email_lbl.setVisible(false);
             password_lbl.setVisible(false);
         }
+        Statement st = DatabaseHandler.getInstance().getConnection().createStatement();
+        ResultSet resultSet;
+        String check = "SELECT count(*) FROM MEMBER WHERE email = '" + userEmail + "' ";
+        resultSet = st.executeQuery(check);
+
+
+        if (!resultSet.next()) {
             String qu2 = "INSERT INTO MEMBER VALUES(" +
                     "'" + userFullName + "'," +
                     "'" + userAddress + "'," +
@@ -161,29 +167,23 @@ public class SignUpController implements Initializable {
             System.out.println(qu2);
             handler.execAction(qu2);
 
-                    if (handler.execAction(qu2)) {
+            if (handler.execAction(qu2)) {
 
-                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                        alert.setHeaderText(null);
-                        alert.setContentText("email");
-                        alert.showAndWait();
-                        loadWindow("/library/main/Dashboard.fxml", "DashBoard", true);
-                        closeWindow(signUp_pane);
-                    }
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setHeaderText(null);
+                alert.setContentText("email");
+                alert.showAndWait();
+                loadWindow("/library/main/Dashboard.fxml", "DashBoard", true);
+                closeWindow(signUp_pane);
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setContentText("Failed");
+                alert.showAndWait();
 
-
-
-    else
-
-        {
-               Alert alert = new Alert(Alert.AlertType.ERROR);
-               alert.setHeaderText(null);
-               alert.setContentText("Failed");
-               alert.showAndWait();
-
-           }
+            }
         }
-
+    }
 
 
     @FXML
