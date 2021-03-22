@@ -36,6 +36,8 @@ public class DashboardController {
     @FXML
     private JFXButton searchBookBtn;
     @FXML
+    private TextField searchMemberTxt;
+    @FXML
     private Label title;
     @FXML
     private Label author;
@@ -56,7 +58,7 @@ public class DashboardController {
     @FXML
     void logout(){
         closeWindow(root);
-        loadWindow("/library/main/Login.fxml", "Login",false);
+        loadWindowDecorated("/library/main/Login.fxml", "Login",false);
     }
     @FXML
     void rent() throws IOException {
@@ -66,8 +68,43 @@ public class DashboardController {
             JOptionPane.showMessageDialog(null,"You're Blocked. You can't rent any Book");
         }
     }
+    @FXML
+    public void searchBook(){
+        String title = searchBookTxt.getText();
+        book.search(title);
+    }
+    @FXML
+    public void searchMember(){
+        String name = searchMemberTxt.getText();
+        member.search(name);
+    }
+    @FXML
+    private void viewMembers() {
+        loadWindowDecorated("/library/users/ViewMembers.fxml","All Members",false);
+    }
+    @FXML
+    private void viewBooks() {
+        loadWindowDecorated("/library/books/ViewBooks.fxml" ,"All Books",false);
+    }
+    @FXML
+    private void settings() {
+        loadWindow("/library/main/Settings.fxml","Settings",false);
+    }
 
     void loadWindow(String loc, String title,Boolean max){
+        try {
+            Parent parent = FXMLLoader.load(getClass().getResource(loc));
+            Stage stage = new Stage(StageStyle.UNDECORATED);
+            stage.setTitle(title);
+            stage.setScene(new Scene(parent));
+            stage.setMaximized(max);
+            stage.show();
+        } catch (IOException e) {
+            //Logger.getLogger(AddAdminController.class.getName().log(Level.SEVERE, null, ex));
+            e.printStackTrace();
+        }
+    }
+    void loadWindowDecorated(String loc, String title,Boolean max){
         try {
             Parent parent = FXMLLoader.load(getClass().getResource(loc));
             Stage stage = new Stage(StageStyle.DECORATED);

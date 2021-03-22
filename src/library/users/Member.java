@@ -1,89 +1,89 @@
 package library.users;
-import javafx.scene.control.Alert;
+
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import library.books.AddBookController;
 import library.books.Books;
-import library.database.DatabaseHandler;
+import library.database.DatabaseConnection;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
-
 public class Member extends User {
-    DatabaseHandler handler = DatabaseHandler.getInstance();
-    public Member(String Id, int phone, String name, String address, int password, String email, String type) {
-        this.Id = Id;
-        this.email = email;
-        this.address = address;
-        this.name = name;
-        this.password = password;
-        this.phone = phone;
-        this.type = type;
+    boolean memberStatus;
+    DatabaseConnection connectNow = new DatabaseConnection();
+    Connection connectDB = connectNow.getConnection();
+
+    public Member(int id, String firstName, String lastName, String address, int phone, String email, String password, boolean isBlocked) {
+        super();
+        this.id = new SimpleIntegerProperty(id);
+        this.firstName = new SimpleStringProperty(firstName);
+        this.lastName = new SimpleStringProperty(lastName);
+        this.address = new SimpleStringProperty(address);
+        this.email = new SimpleStringProperty(email);
+        this.mobile = new SimpleIntegerProperty(phone);
+        this.password = new SimpleStringProperty(password);
+        this.isBlocked= new SimpleBooleanProperty(isBlocked);
     }
+    public Member(int id, String firstName, String lastName, String address, int mobile, String email) {
+        this.id = new SimpleIntegerProperty(id);
+        this.firstName = new SimpleStringProperty(firstName);
+        this.lastName = new SimpleStringProperty(lastName);
+        this.address = new SimpleStringProperty(address);
+        this.email = new SimpleStringProperty(email);
+        this.mobile = new SimpleIntegerProperty(mobile);
 
+    }
     public Member() {
-
     }
 
     public Boolean getMemberStatus(){
-     /*   String q = "SELECT status FROM Member where email=currentUserEmail";
-        ResultSet rs = libdb.execQuery(q);
-        // we want to check if member status is tru or false.........................
-        if(rs){
+        String status = "SELECT is_blocked FROM Member where id=?";
+        try {
+            PreparedStatement pst = connectDB.prepareStatement(status);
+           pst.setString(1, String.valueOf(currentId));
+           ResultSet rs = pst.executeQuery();
+           if (rs.next()){
+              memberStatus = rs.getBoolean("is_blocked");
+           }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if(memberStatus==true)
             return true;
-        }else{*/
+        else
             return false;
-
     }
+
     void add_book(Books B ,Member m){
         // add book from data base;
 
     }
 
 
-    void search(Member m) {
-        String qu = "SELECT * FROM MEMBERS WHERE memberid=id";
-        ResultSet rs = handler.execQuery(qu);
+    public void search(String name) {
+        String searchMember = "SELECT user_id FROM user_account WHERE first_name LIKE ? OR last_name LIKE ?";
         try {
+            PreparedStatement stmt = connectDB.prepareStatement(searchMember);
+            stmt.setString(1,"%"+name+"%");
+            stmt.setString(2,"%"+name+"%");
+            ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                String titlex = rs.getString("id");
-                System.out.println(titlex);
+                String userId = rs.getString("user_id");
+                System.out.println(userId);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(AddBookController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+            Logger.getLogger(AddBookController.class.getName()).log(Level.SEVERE, null, throwable);
         }
+
     }
 
 
     @Override
-    void search(java.lang.reflect.Member m) {
-
+    void rent(java.lang.reflect.Member m, Books B, String period) {
     }
-
-    @Override
-    void rent(java.lang.reflect.Member m, Books B, String beriod) {
-
-    }
-
-    @Override
-    void rent(Member m, Books b , String beriod) {
-        if(b.getBookAvailability()) {
-            m.add_book(b, m);
-            int date;
-            // add date of day to database
-            //add beriod of rent to database
-        }
-        else
-        {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setContentText("this book is un avilable");
-            alert.showAndWait();
-
-        }
-
-
-    }}
+}
 

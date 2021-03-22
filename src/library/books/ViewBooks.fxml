@@ -8,13 +8,14 @@
    <children>
       <TableView fx:id="booksTable" prefHeight="700.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <columns>
-            <TableColumn fx:id="photoCol" prefWidth="115.99999690055847" text="Photo" />
-            <TableColumn fx:id="titleCol" minWidth="9.600006103515625" prefWidth="254.40000915527344" text="Book Title" />
-            <TableColumn fx:id="authorCol" minWidth="0.0" prefWidth="180.0" text="Author Name" />
-            <TableColumn fx:id="publisherCol" prefWidth="200.0" text="Publisher" />
-            <TableColumn fx:id="categoryCol" prefWidth="147.99993896484375" text="Category" />
-            <TableColumn fx:id="priceCol" prefWidth="92.0001220703125" text="Price" />
-            <TableColumn fx:id="statusCol" prefWidth="116.0" text="Status" />
+            <TableColumn fx:id="photoCol" prefWidth="75.0" text="Cover" />
+            <TableColumn fx:id="titleCol" minWidth="9.600006103515625" prefWidth="223.1999969482422" text="Book Title" />
+            <TableColumn fx:id="idCol" minWidth="0.0" prefWidth="120.79998779296875" text="Book Id " />
+            <TableColumn fx:id="authorCol" minWidth="0.0" prefWidth="209.5999755859375" text="Author Name" />
+            <TableColumn fx:id="publisherCol" prefWidth="153.60003662109375" text="Publisher" />
+            <TableColumn fx:id="categoryCol" prefWidth="148.0" text="Category" />
+            <TableColumn fx:id="priceCol" prefWidth="84.0" text="Price" />
+            <TableColumn fx:id="statusCol" prefWidth="84.800048828125" text="Status" />
          </columns>
       </TableView>
    </children>

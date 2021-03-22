@@ -9,35 +9,51 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="signUp_pane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.main.SignUpController">
-   <ImageView fitHeight="600.0" fitWidth="900.0" layoutX="4.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<AnchorPane fx:id="signUp_pane" prefHeight="400.0" prefWidth="920.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.main.SignUpController">
+   <ImageView fitHeight="600.0" fitWidth="922.0" layoutX="4.0" layoutY="10.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-6.0" AnchorPane.topAnchor="0.0">
       <Image url="@../../Images/various-book-books.jpg" />
    </ImageView>
-   <AnchorPane layoutX="277.0" layoutY="81.0" prefHeight="450.0" prefWidth="347.0" style="-fx-background-color: #EDE9E5; -fx-border-color: #9F7C3F; -fx-border-width: 6px;">
-      <Pane layoutX="12.0" layoutY="8.0" prefHeight="66.0" prefWidth="329.0">
-         <Label layoutX="83.0" layoutY="14.0" prefHeight="38.0" prefWidth="268.0" text="Library Assistant">
+   <AnchorPane fx:id="signUp_form" layoutX="141.0" layoutY="74.0" prefHeight="466.0" prefWidth="646.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="141.0" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="74.0">
+      <Pane layoutX="8.0" layoutY="13.0" prefHeight="438.0" prefWidth="245.0">
+         <Label layoutX="39.0" layoutY="208.0" prefHeight="40.0" prefWidth="171.0" text="Library ">
             <font>
-               <Font name="Copperplate Gothic Bold" size="24.0" />
+               <Font name="Copperplate Gothic Bold" size="36.0" />
             </font>
          </Label>
-         <ImageView fitHeight="60.0" fitWidth="83.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+         <ImageView fitHeight="116.0" fitWidth="148.0" layoutX="45.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../../Images/book.jpg" />
          </ImageView>
+         <Label layoutX="19.0" layoutY="259.0" prefHeight="40.0" prefWidth="199.0" text="Assistant" wrapText="true">
+            <font>
+               <Font name="Copperplate Gothic Bold" size="36.0" />
+            </font>
+         </Label>
       </Pane>
-      <Pane layoutX="13.0" layoutY="80.0" prefHeight="364.0" prefWidth="330.0">
-         <TextField fx:id="full_name" layoutX="42.0" layoutY="43.0" onKeyPressed="#enterPressedName" prefHeight="32.0" prefWidth="245.0" promptText="Full Name" style="-fx-background-color: transparent; -fx-border-color: #9F7C3F;">
+      <Pane layoutX="260.0" layoutY="13.0" prefHeight="438.0" prefWidth="368.0">
+         <TextField fx:id="first_name" layoutX="42.0" layoutY="43.0" onKeyPressed="#enterPressedFirstName" prefHeight="32.0" prefWidth="140.0" promptText="First Name">
             <padding>
                <Insets left="24.0" />
             </padding>
          </TextField>
-         <Label fx:id="name_lbl" layoutX="44.0" layoutY="74.0" text="* Full Name is required" textFill="RED" visible="false">
+         <Label fx:id="first_name_lbl" layoutX="44.0" layoutY="74.0" text="* First Name is required" textFill="RED" visible="false">
             <font>
                <Font size="10.0" />
             </font>
          </Label>
-         <TextField fx:id="address" layoutX="42.0" layoutY="92.0" onKeyPressed="#enterPressedAddress" prefHeight="32.0" prefWidth="245.0" promptText="Address" style="-fx-background-color: transparent; -fx-border-color: #9F7C3F;">
+         <TextField fx:id="last_name" layoutX="187.0" layoutY="43.0" onKeyPressed="#enterPressedLastName" prefHeight="32.0" prefWidth="140.0" promptText="Last Name">
+            <padding>
+               <Insets left="5.0" />
+            </padding>
+         </TextField>
+         <Label fx:id="last_name_lbl" layoutX="190.0" layoutY="75.0" text="* Last Name is required" textFill="RED" visible="false">
+            <font>
+               <Font size="10.0" />
+            </font>
+         </Label>
+         <TextField fx:id="address" layoutX="42.0" layoutY="92.0" onKeyPressed="#enterPressedAddress" prefHeight="32.0" prefWidth="285.0" promptText="Address">
          <padding>
             <Insets left="24.0" />
          </padding>
@@ -47,7 +63,7 @@
                <Font size="10.0" />
             </font>
          </Label>
-         <TextField fx:id="mobile" layoutX="42.0" layoutY="140.0" onKeyPressed="#enterPressedMobile" prefHeight="32.0" prefWidth="245.0" promptText="Mobile" style="-fx-background-color: transparent; -fx-border-color: #9F7C3F;">
+         <TextField fx:id="mobile" layoutX="42.0" layoutY="140.0" onKeyPressed="#enterPressedMobile" prefHeight="32.0" prefWidth="285.0" promptText="Mobile">
             <padding>
                <Insets left="24.0" />
             </padding>
@@ -57,7 +73,7 @@
                <Font size="10.0" />
             </font>
          </Label>
-            <TextField fx:id="email" layoutX="42.0" layoutY="188.0" onKeyPressed="#enterPressedEmail" prefHeight="32.0" prefWidth="245.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: #9F7C3F;">
+            <TextField fx:id="email" layoutX="42.0" layoutY="188.0" onKeyPressed="#enterPressedEmail" prefHeight="32.0" prefWidth="285.0" promptText="Email">
                <padding>
                   <Insets left="24.0" />
                </padding>
@@ -67,7 +83,7 @@
                <Font size="10.0" />
             </font>
          </Label>
-            <PasswordField fx:id="password" layoutX="42.0" layoutY="236.0" onKeyPressed="#enterPressedPassword" prefHeight="32.0" prefWidth="245.0" promptText="Password" style="-fx-background-color: trasparent; -fx-border-color: #9F7C3F;">
+            <PasswordField fx:id="password" layoutX="42.0" layoutY="236.0" onKeyPressed="#enterPressedPassword" prefHeight="32.0" prefWidth="285.0" promptText="Password">
                <padding>
                   <Insets left="24.0" />
                </padding>
@@ -77,28 +93,44 @@
                <Font size="10.0" />
             </font>
          </Label>
+         <PasswordField fx:id="confirm_password" layoutX="42.0" layoutY="284.0" onKeyPressed="#enterPressedConfirmPassword" prefHeight="32.0" prefWidth="285.0" promptText="Confirm Password">
+            <padding>
+               <Insets left="24.0" />
+            </padding>
+         </PasswordField>
+         <Label fx:id="confirm_password_lbl" layoutX="43.0" layoutY="315.0" text="* Confirm Password is required" textFill="RED" visible="false">
+            <font>
+               <Font size="10.0" />
+            </font>
+         </Label>
             <ImageView fitHeight="25.0" fitWidth="28.0" layoutX="42.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
-               <Image url="@../../Images/icons8-user-80.png" />
+               <Image url="@../../Images/icons8-user-male-120.png" />
             </ImageView>
-            <ImageView fitHeight="23.0" fitWidth="26.0" layoutX="43.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
-               <Image url="@../../Images/icons8-home-page-96.png" />
+            <ImageView fitHeight="23.0" fitWidth="26.0" layoutX="42.0" layoutY="97.0" pickOnBounds="true">
+               <Image url="@../../Images/icons8-home-address-96%20(2).png" />
             </ImageView>
-            <ImageView fitHeight="25.0" fitWidth="28.0" layoutX="42.0" layoutY="144.0" pickOnBounds="true" preserveRatio="true">
-               <Image url="@../../Images/icons8-mobile-phone-96.png" />
+            <ImageView fitHeight="25.0" fitWidth="28.0" layoutX="41.0" layoutY="144.0" pickOnBounds="true">
+               <Image url="@../../Images/icons8-iphone-x-96%20(1).png" />
             </ImageView>
-            <ImageView fitHeight="25.0" fitWidth="28.0" layoutX="42.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true">
-               <Image url="@../../Images/icons8-mail-96.png" />
+            <ImageView fitHeight="25.0" fitWidth="23.0" layoutX="44.0" layoutY="192.0" pickOnBounds="true">
+               <Image url="@../../Images/icons8-email-64.png" />
             </ImageView>
-            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="42.0" layoutY="237.0" pickOnBounds="true" preserveRatio="true">
-               <Image url="@../../Images/icons8-forgot-password-96.png" />
+            <ImageView fitHeight="23.0" fitWidth="21.0" layoutX="44.0" layoutY="239.0" pickOnBounds="true">
+               <Image url="@../../Images/icons8-password-100.png" />
             </ImageView>
-            <Button fx:id="signUpBtn" alignment="CENTER" layoutX="123.0" layoutY="293.0" mnemonicParsing="false" onAction="#signUp" prefHeight="32.0" prefWidth="83.0" style="-fx-background-color: trasparent; -fx-border-color: #9F7C3F;" text="SignUp" textAlignment="CENTER">
+            <Button fx:id="signUpBtn" alignment="CENTER" layoutX="143.0" layoutY="346.0" mnemonicParsing="false" onAction="#signUp" prefHeight="32.0" prefWidth="83.0" text="SignUp" textAlignment="CENTER">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Label layoutX="96.0" layoutY="333.0" text="Have an Account? " />
-            <Button fx:id="loginBtn" layoutX="185.0" layoutY="329.0" mnemonicParsing="false" onAction="#goToLogin" prefHeight="25.0" prefWidth="55.0" style="-fx-background-color: transparent;" text="Login" textFill="#0000bc" />
+            <Label layoutX="116.0" layoutY="399.0" text="Have an Account? " />
+            <Button fx:id="gotoLoginBtn" layoutX="205.0" layoutY="395.0" mnemonicParsing="false" onAction="#goToLogin" prefHeight="25.0" prefWidth="55.0" style="-fx-background-color: transparent;" text="Login" textFill="#0000bc" />
+         <ImageView fitHeight="23.0" fitWidth="21.0" layoutX="44.0" layoutY="287.0" pickOnBounds="true">
+            <image>
+               <Image url="@../../Images/icons8-password-100.png" />
+            </image>
+         </ImageView>
+         <Line endX="-99.99996948242188" endY="379.79998779296875" layoutX="96.0" layoutY="71.0" startX="-99.99996948242188" startY="-82.0" stroke="#9f7c3f" strokeWidth="5.0" />
       </Pane>
    </AnchorPane>
 </AnchorPane>

@@ -10,7 +10,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import library.database.DatabaseHandler;
 import library.users.Member;
 
 import java.net.URL;
@@ -28,7 +27,6 @@ public class ReturnDateController implements Initializable {
     @FXML
     private JFXButton cancelBtn;
 
-    DatabaseHandler handler = DatabaseHandler.getInstance();
     Books book = new Books();
     Member m = new Member();
 

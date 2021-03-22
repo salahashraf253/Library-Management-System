@@ -15,5 +15,18 @@
  -fx-background-repeat: stretch;
  -fx-background-size: 1540 70;
  -fx-background-position: center;
- -fx-background-color: transparent;
+ -fx-background-color: #00000000;
+}
+#loginBtn,#signUpBtn{
+ -fx-background-color:  #00000000;
+ -fx-border-color:  #9F7C3F;
+}
+#signUp_form,#login_form{
+ -fx-background-color:  #EDE9E5;
+ -fx-border-color:  #9F7C3F;
+ -fx-border-width: 6px;
+}
+.text-field{
+ -fx-background-color: #00000000;
+ -fx-border-color: #9F7C3F;
 }

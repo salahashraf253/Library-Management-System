@@ -1,5 +1,3 @@
-
-
 package library.main;
 
 import javafx.fxml.FXML;
@@ -7,15 +5,23 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import library.database.DatabaseHandler;
+import library.database.DatabaseConnection;
+import library.users.User;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
@@ -33,14 +39,17 @@ public class LoginController implements Initializable {
     @FXML
     private Button loginBtn;
     @FXML
-    private Button signUpBtn;
+    private Button gotoSignUpBtn;
 
-    String adminEmail = "a";
-    String adminPassword = "a";
+    private final String adminEmail = "a";
+    private final String adminPassword = "a";
+    String userType;
+    DatabaseConnection connectNow = new DatabaseConnection();
+    Connection connectDB = connectNow.getConnection();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        DatabaseHandler handler = DatabaseHandler.getInstance();
+
     }
 
     public void enterPressedTextField(TextField txt, PasswordField pass, Label lbl) {
@@ -70,24 +79,6 @@ public class LoginController implements Initializable {
         });
     }
 
- /*   private void loginVarification(){
-        DatabaseHandler handler = DatabaseHandler.getInstance();
-        String qu="SELECT FROM MEMBER WHERE email = userEmail and pass = userPassword";
-        handler.execAction(qu);
-        if(handler.execAction(qu)){
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setHeaderText(null);
-            alert.setContentText("id");
-            alert.showAndWait();
-        }
-        else{
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setContentText("Failed");
-            alert.showAndWait();
-        }
-    }*/
-
     @FXML
     public void login() {
         String userEmail = email.getText();
@@ -97,16 +88,64 @@ public class LoginController implements Initializable {
                 email_lbl.setVisible(true);
             if (userPassword.isEmpty())
                 password_lbl.setVisible(true);
-        } else {
+        }
+        else if (userEmail.equals(adminEmail) && userPassword.equals(adminPassword)){
+            loadWindow("/library/main/AdminDashboard.fxml", "AdminDashBoard", true);
+            closeWindow(login_pane);
+        }
+        else {
             email_lbl.setVisible(false);
             password_lbl.setVisible(false);
+            validateLogin();
+            try {
+                String getUserId = "SELECT user_id FROM user_account WHERE email =?";
+                PreparedStatement ps = connectDB.prepareStatement(getUserId);
+                ps.setString(1,userEmail);
+                ResultSet rst = ps.executeQuery();
+                while (rst.next()) {
+                    User.currentId = rst.getInt("user_id");
+                    System.out.println(User.currentId); // To be deleted
+                }
+                connectDB.close();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
 
-            if (userEmail.equals(adminEmail) && userPassword.equals(adminPassword))
-                loadWindow("/library/main/AdminDashboard.fxml", "AdminDashBoard", true);
-            else
-                loadWindow("/library/main/Dashboard.fxml", "DashBoard", true);
-
-            closeWindow(login_pane);
+    public void validateLogin(){
+        String verifyLogin = "SELECT count(1) FROM user_account WHERE email = '" + email.getText() + "' AND password = '" + password.getText() + "'";
+        String getUserType = "SELECT user_type FROM user_account WHERE email = '" + email.getText()+ "'";
+        try {
+            Statement stmt = connectDB.createStatement();
+            ResultSet rs = stmt.executeQuery(verifyLogin);
+            while (rs.next()){
+                if (rs.getInt(1) == 1){
+                    try {
+                        Statement statement = connectDB.createStatement();
+                        ResultSet rst = statement.executeQuery(getUserType);
+                        while (rst.next()){
+                            userType = rst.getString("user_type");
+                        }
+                    }catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    if (userType.equals("admin"))
+                        loadWindow("/library/main/AdminDashboard.fxml", "DashBoard", true);
+                    else if (userType.equals("user"))
+                        loadWindow("/library/main/Dashboard.fxml", "DashBoard", true);
+                    closeWindow(login_pane);
+                }
+                else {
+                    email_lbl.setText("*Incorrect Email");
+                    email_lbl.setVisible(true);
+                    password_lbl.setText("*Incorrect Password");
+                    password_lbl.setVisible(true);
+                }
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+            ex.getCause();
         }
     }
 
@@ -134,5 +173,4 @@ public class LoginController implements Initializable {
         Stage stage = (Stage) pane.getScene().getWindow();
         stage.close();
     }
-
 }

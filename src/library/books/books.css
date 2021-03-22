@@ -1,0 +1,7 @@
+.button{
+    -fx-background-color: #bdbdbd;
+}
+#addBookPane{
+    -fx-border-color: #bdbdbd;
+    -fx-border-width: 2px;
+}

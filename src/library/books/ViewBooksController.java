@@ -1,8 +1,5 @@
 package library.books;
 
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleFloatProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,51 +8,49 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import library.database.DatabaseHandler;
+import library.database.DatabaseConnection;
 
+import java.io.InputStream;
 import java.net.URL;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class ViewBooksController implements Initializable {
-
     @FXML
     private AnchorPane viewBooksPane;
     @FXML
     private TableView booksTable;
     @FXML
-    private TableColumn<Book, Image> photoCol;
+    private TableColumn<Books, Image> photoCol;
     @FXML
-    private TableColumn<Book, String> titleCol;
+    private TableColumn<Books, String> titleCol;
     @FXML
-    private TableColumn<Book, String> authorCol;
+    private TableColumn<Books, String> idCol;
     @FXML
-    private TableColumn<Book, String> publisherCol;
+    private TableColumn<Books, String> authorCol;
     @FXML
-    private TableColumn<Book, String> categoryCol;
+    private TableColumn<Books, String> publisherCol;
     @FXML
-    private TableColumn<Book, Float> priceCol;
+    private TableColumn<Books, String> categoryCol;
     @FXML
-    private TableColumn<Book, Boolean> statusCol;
+    private TableColumn<Books, Float> priceCol;
+    @FXML
+    private TableColumn<Books, Boolean> statusCol;
 
-
-    ObservableList<Book> list = FXCollections.observableArrayList();
+    ObservableList<Books> list = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-       DatabaseHandler handler = DatabaseHandler.getInstance();
         initCol();
         loadData();
-
     }
 
     private void initCol() {
-        photoCol.setCellValueFactory(new PropertyValueFactory<>("bookPhoto"));
+        photoCol.setCellValueFactory(new PropertyValueFactory<>("bookCover"));
         titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
+        idCol.setCellValueFactory(new PropertyValueFactory<>("bookId"));
         authorCol.setCellValueFactory(new PropertyValueFactory<>("author"));
         publisherCol.setCellValueFactory(new PropertyValueFactory<>("publisher"));
         categoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
@@ -63,76 +58,48 @@ public class ViewBooksController implements Initializable {
         statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
     }
     private void loadData() {
-        DatabaseHandler databaseHandler = DatabaseHandler.getInstance();
-        String qu = "SELECT *  FROM Book";
-        ResultSet rs = databaseHandler.execQuery(qu);
+        String availability;
+        DatabaseConnection connectNow = new DatabaseConnection();
+        Connection connectDB = connectNow.getConnection();
+        String qu = "SELECT *  FROM books";
+        Statement stmt = null;
         try {
-            while (rs.next()){
-                //String photo = rs.getString("bookPhoto");
-                String titleX = rs.getString("title");
-                String authorX = rs.getString("author");
-                String publisherX = rs.getString("publisher");
-                String categoryX = rs.getString("category");
-                Float priceX = rs.getFloat("price");
-                Boolean isAvail = rs.getBoolean("status");
-
-                list.add(new Book(titleX,authorX,publisherX,categoryX,priceX,isAvail));
+            stmt = connectDB.createStatement();
+            ResultSet rs = stmt.executeQuery(qu);
+            try {
+                while (rs.next()){
+                    String title = rs.getString("book_title");
+                    int bookId= rs.getInt("book_id");
+                    String author = rs.getString("author");
+                    String publisher = rs.getString("publisher");
+                    String category = rs.getString("category");
+                    Float price = rs.getFloat("price");
+                    Boolean isAvail = rs.getBoolean("is_available");
+                    if (isAvail==true)
+                        availability = "Available";
+                    else
+                        availability= "Unavailable";
+                    Blob cover = rs.getBlob("cover");
+                    ImageView bookCover = null;
+                    try {
+                        InputStream inputStream = cover.getBinaryStream();
+                        Image image = new Image(inputStream);
+                        bookCover = new ImageView();
+                        bookCover.setImage(image);
+                        bookCover.setFitWidth(70);
+                        bookCover.setFitHeight(90);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                    list.add(new Books(bookCover,title,bookId,author,publisher,category,price,availability));
+                }
+            }catch (SQLException ex){
+               ex.printStackTrace();
             }
-        }catch (SQLException ex){
-            Logger.getLogger(AddBookController.class.getName()).log(Level.SEVERE,null,ex);
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
         }
 
         booksTable.getItems().setAll(list);
     }
-
-
-    class Book {
-       // private Image bookPhoto;
-        private SimpleStringProperty title;
-        private SimpleStringProperty author;
-        private SimpleStringProperty publisher;
-        private SimpleStringProperty category;
-        private SimpleFloatProperty price;
-        private SimpleBooleanProperty status;
-
-        Book( String title, String author, String publisher, String category, Float price, Boolean status) {
-            //this.bookPhoto = new Image(String.valueOf(bookPhoto));
-            this.title = new SimpleStringProperty(title);
-            this.author = new SimpleStringProperty(author);
-            this.publisher = new SimpleStringProperty(publisher);
-            this.category = new SimpleStringProperty(category);
-            this.price = new SimpleFloatProperty(price);
-            this.status = new SimpleBooleanProperty(status);
-
-        }
-
-      /*  public Image getBookPhoto() {
-            return bookPhoto;
-        }*/
-
-        public String getTitle() {
-            return title.get();
-        }
-
-        public String getAuthor() {
-            return author.get();
-        }
-
-        public String getPublisher() {
-            return publisher.get();
-        }
-
-        public String getCategory() {
-            return category.get();
-        }
-
-        public Float getPrice() {
-            return price.get();
-        }
-
-        public Boolean getStatus() {
-            return status.get();
-        }
-    }
-
 }
