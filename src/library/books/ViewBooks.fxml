@@ -1,21 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="viewBooksPane" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.books.ViewBooksController">
+<AnchorPane fx:id="viewBooksPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@books.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.books.ViewBooksController">
    <children>
-      <TableView fx:id="booksTable" prefHeight="700.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="title_pane" prefHeight="32.0" prefWidth="1192.8" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <JFXButton fx:id="view_books_back_btn" layoutX="8.0" onAction="#back" prefHeight="26.0" prefWidth="75.0" text="Back" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="2.0">
+               <graphic>
+                  <ImageView fitHeight="19.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Images/Previous-icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic></JFXButton>
+            <JFXButton fx:id="view_books_refresh_btn" layoutX="1096.0" layoutY="1.0" onAction="#refresh" text="Refresh" textAlignment="CENTER" AnchorPane.bottomAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Images/refresh.png" />
+                     </image>
+                  </ImageView>
+               </graphic></JFXButton>
+            <Label alignment="CENTER" layoutX="669.0" layoutY="6.0" text="Books List" textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <TableView fx:id="booksTable" layoutY="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
          <columns>
-            <TableColumn fx:id="photoCol" prefWidth="75.0" text="Cover" />
-            <TableColumn fx:id="titleCol" minWidth="9.600006103515625" prefWidth="223.1999969482422" text="Book Title" />
-            <TableColumn fx:id="idCol" minWidth="0.0" prefWidth="120.79998779296875" text="Book Id " />
-            <TableColumn fx:id="authorCol" minWidth="0.0" prefWidth="209.5999755859375" text="Author Name" />
-            <TableColumn fx:id="publisherCol" prefWidth="153.60003662109375" text="Publisher" />
-            <TableColumn fx:id="categoryCol" prefWidth="148.0" text="Category" />
-            <TableColumn fx:id="priceCol" prefWidth="84.0" text="Price" />
-            <TableColumn fx:id="statusCol" prefWidth="84.800048828125" text="Status" />
+            <TableColumn fx:id="photoCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="75.0" text="Cover" />
+            <TableColumn fx:id="titleCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="354.4000244140625" text="Book Title" />
+            <TableColumn fx:id="idCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="121.5999755859375" text="Book Id " />
+            <TableColumn fx:id="authorCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="192.79998779296875" text="Author Name" />
+            <TableColumn fx:id="publisherCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="189.60003662109375" text="Publisher" />
+            <TableColumn fx:id="categoryCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="177.60009765625" text="Category" />
+            <TableColumn fx:id="priceCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="92.800048828125" text="Price" />
+            <TableColumn fx:id="statusCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="101.60009765625" text="Status" />
+            <TableColumn fx:id="rentCol" prefWidth="104.800048828125" text="Rent Book" />
          </columns>
       </TableView>
    </children>

@@ -10,11 +10,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import library.database.DatabaseConnection;
 
+import javax.swing.*;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ResourceBundle;
 
 public class ViewMembersController implements Initializable {
@@ -37,11 +35,9 @@ public class ViewMembersController implements Initializable {
 
     ObservableList<Member> list = FXCollections.observableArrayList();
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initCol();
-        loadData();
     }
 
     private void initCol() {
@@ -52,16 +48,30 @@ public class ViewMembersController implements Initializable {
         mobileCol.setCellValueFactory(new PropertyValueFactory<>("mobile"));
         emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
     }
-    private void loadData() {
+    public void loadData(String btnId, String searchTxt) {
+        list.clear();
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDB = connectNow.getConnection();
-        String qu = "SELECT *  FROM user_account";
+        String viewMembers = "SELECT *  FROM user_account";
+        String searchMember = "SELECT * FROM user_account WHERE user_type='user' AND (first_name LIKE ? OR last_name LIKE ?)";
         Statement stmt = null;
         try {
+            PreparedStatement pst = connectDB.prepareStatement(searchMember);
+            pst.setString(1,"%"+searchTxt+"%");
+            pst.setString(2,"%"+searchTxt+"%");
             stmt = connectDB.createStatement();
-            ResultSet rs = stmt.executeQuery(qu);
+            ResultSet rs=null;
+            if(btnId.equals("view_members_btn")){
+                rs = stmt.executeQuery(viewMembers);
+            }else if(btnId.equals("searchMemberBtn")){
+                rs= pst.executeQuery();
+            }else {
+                JOptionPane.showMessageDialog(null,"No Member Found");
+            }
             try {
-                while (rs.next()){
+                while (true){
+                    assert rs != null;
+                    if (!rs.next()) break;
                     int id =rs.getInt("user_id");
                     String firstName = rs.getString("first_name");
                     String lastName = rs.getString("last_name");
@@ -78,6 +88,13 @@ public class ViewMembersController implements Initializable {
         }
 
         membersTable.getItems().setAll(list);
+    }
+    public void back() {
+        viewMembersPane.setVisible(false);
+    }
+
+    public void refresh() {
+        loadData("view_members_btn",null);
     }
 /*
     public static class Members extends Member {

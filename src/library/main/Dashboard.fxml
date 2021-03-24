@@ -1,14 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1300.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.main.DashboardController">
+<AnchorPane fx:id="root" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1300.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.main.DashboardController">
+<BorderPane fx:id="border_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
    <top>
       <AnchorPane fx:id="titlePane" prefHeight="70.0" prefWidth="1540.0" BorderPane.alignment="CENTER">
          <children>
@@ -31,131 +46,79 @@
          <tabs>
             <Tab fx:id="homeTab" text="       Home        ">
                <content>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
-                     <content>
-                        <HBox prefHeight="166.0" prefWidth="279.0" style="-fx-border-color: #00000f;">
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <center>
+                        <AnchorPane fx:id="home_root_pane">
                            <children>
-                              <ImageView fitHeight="135.0" fitWidth="96.0" pickOnBounds="true">
-                                 <HBox.margin>
-                                    <Insets left="10.0" right="10.0" top="10.0" />
-                                 </HBox.margin>
-                                 <image>
-                                    <Image url="@../../Images/art_bookcover.png" />
-                                 </image>
-                              </ImageView>
-                              <VBox prefHeight="112.0" prefWidth="150.0">
-                                 <children>
-                                    <Label text="Book Name">
-                                       <VBox.margin>
-                                          <Insets bottom="5.0" top="20.0" />
-                                       </VBox.margin>
-                                    </Label>
-                                    <Label layoutX="10.0" layoutY="10.0" text="Author Name">
-                                       <VBox.margin>
-                                          <Insets bottom="5.0" />
-                                       </VBox.margin>
-                                    </Label>
-                                    <Label layoutX="10.0" layoutY="27.0" text="Category">
-                                       <VBox.margin>
-                                          <Insets bottom="5.0" />
-                                       </VBox.margin>
-                                    </Label>
-                                    <Label layoutX="10.0" layoutY="44.0" text="Price" textFill="#c60606">
-                                       <VBox.margin>
-                                          <Insets bottom="5.0" />
-                                       </VBox.margin>
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                              <ScrollPane fx:id="homePane" fitToHeight="true" fitToWidth="true" prefHeight="469.6" prefWidth="1193.6" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" BorderPane.alignment="CENTER">
+                                 <content>
+                                    <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="177.0" prefWidth="279.0" style="-fx-border-color: #00000f;">
                                        <children>
-                                          <JFXButton mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: #bdbdbd;" text="Buy" textAlignment="CENTER">
+                                          <ImageView fitHeight="151.0" fitWidth="99.0" pickOnBounds="true">
                                              <HBox.margin>
                                                 <Insets left="10.0" right="10.0" top="10.0" />
                                              </HBox.margin>
-                                          </JFXButton>
-                                          <JFXButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: #bdbdbd;" text="Rent">
-                                             <HBox.margin>
-                                                <Insets top="10.0" />
-                                             </HBox.margin>
-                                          </JFXButton>
+                                             <image>
+                                                <Image url="@../../Images/art_bookcover.png" />
+                                             </image>
+                                          </ImageView>
+                                          <VBox prefHeight="112.0" prefWidth="150.0">
+                                             <children>
+                                                <Label fx:id="title" text="Book Title">
+                                                   <VBox.margin>
+                                                      <Insets bottom="5.0" top="20.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <Label fx:id="author" layoutX="10.0" layoutY="10.0" text="Author Name">
+                                                   <VBox.margin>
+                                                      <Insets bottom="5.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <Label fx:id="publisher" layoutX="10.0" layoutY="30.0" text="Publisher">
+                                                   <VBox.margin>
+                                                      <Insets bottom="5.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <Label fx:id="category" layoutX="10.0" layoutY="27.0" text="Category">
+                                                   <VBox.margin>
+                                                      <Insets bottom="5.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <Label fx:id="price" layoutX="10.0" layoutY="44.0" text="Price" textFill="#c60606">
+                                                   <VBox.margin>
+                                                      <Insets bottom="5.0" />
+                                                   </VBox.margin>
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <HBox prefHeight="100.0" prefWidth="200.0">
+                                                   <children>
+                                                      <JFXButton fx:id="buyBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: #bdbdbd;" text="Buy" textAlignment="CENTER">
+                                                         <HBox.margin>
+                                                            <Insets left="5.0" right="10.0" top="5.0" />
+                                                         </HBox.margin>
+                                                      </JFXButton>
+                                                      <JFXButton id="rentBtn" fx:id="rentBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#rent" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: #bdbdbd;" stylesheets="@main.css" text="Rent">
+                                                         <HBox.margin>
+                                                            <Insets top="5.0" />
+                                                         </HBox.margin>
+                                                      </JFXButton>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
                                        </children>
                                     </HBox>
-                                 </children>
-                              </VBox>
+                                 </content>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </ScrollPane>
+                                 <fx:include fx:id="viewBooks" source="../books/ViewBooks.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                 <fx:include fx:id="viewMembers" source="../users/ViewMembers.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children>
-                        </HBox>
-                     </content></ScrollPane>
-               </content>
-               <content>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0">
-                     <center>
-                        <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                           <content>
-                              <HBox prefHeight="177.0" prefWidth="279.0" style="-fx-border-color: #00000f;">
-                                 <children>
-                                    <ImageView fitHeight="151.0" fitWidth="99.0" pickOnBounds="true">
-                                       <HBox.margin>
-                                          <Insets left="10.0" right="10.0" top="10.0" />
-                                       </HBox.margin>
-                                       <image>
-                                          <Image url="@../../Images/art_bookcover.png" />
-                                       </image>
-                                    </ImageView>
-                                    <VBox prefHeight="112.0" prefWidth="150.0">
-                                       <children>
-                                          <Label fx:id="title" text="Book Title">
-                                             <VBox.margin>
-                                                <Insets bottom="5.0" top="20.0" />
-                                             </VBox.margin>
-                                          </Label>
-                                          <Label fx:id="author" layoutX="10.0" layoutY="10.0" text="Author Name">
-                                             <VBox.margin>
-                                                <Insets bottom="5.0" />
-                                             </VBox.margin>
-                                          </Label>
-                                          <Label fx:id="publisher" layoutX="10.0" layoutY="30.0" text="Publisher">
-                                             <VBox.margin>
-                                                <Insets bottom="5.0" />
-                                             </VBox.margin>
-                                          </Label>
-                                          <Label fx:id="category" layoutX="10.0" layoutY="27.0" text="Category">
-                                             <VBox.margin>
-                                                <Insets bottom="5.0" />
-                                             </VBox.margin>
-                                          </Label>
-                                          <Label fx:id="price" layoutX="10.0" layoutY="44.0" text="Price" textFill="#c60606">
-                                             <VBox.margin>
-                                                <Insets bottom="5.0" />
-                                             </VBox.margin>
-                                             <font>
-                                                <Font size="14.0" />
-                                             </font>
-                                          </Label>
-                                          <HBox prefHeight="100.0" prefWidth="200.0">
-                                             <children>
-                                                <JFXButton fx:id="buyBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: #bdbdbd;" text="Buy" textAlignment="CENTER">
-                                                   <HBox.margin>
-                                                      <Insets left="5.0" right="10.0" top="5.0" />
-                                                   </HBox.margin>
-                                                </JFXButton>
-                                                <JFXButton id="rentBtn" fx:id="rentBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#rent" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: #bdbdbd;" stylesheets="@main.css" text="Rent">
-                                                   <HBox.margin>
-                                                      <Insets top="5.0" />
-                                                   </HBox.margin>
-                                                </JFXButton>
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                              </HBox>
-                           </content>
-                           <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </padding>
-                        </ScrollPane>
+                        </AnchorPane>
                      </center>
                      <top>
                         <SplitPane dividerPositions="0.5" prefHeight="60.0" prefWidth="1194.0" BorderPane.alignment="CENTER">
@@ -168,7 +131,7 @@
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <JFXButton fx:id="searchBookBtn" layoutX="468.0" layoutY="12.0" prefHeight="34.0" prefWidth="79.0" style="-fx-background-color: #bdbdbd;" text="Search" onAction="#searchBook"/>
+                                    <JFXButton fx:id="searchBookBtn" layoutX="468.0" layoutY="12.0" onAction="#searchBook" prefHeight="34.0" prefWidth="79.0" style="-fx-background-color: #bdbdbd;" text="Search" />
                                  </children>
                               </AnchorPane>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
@@ -179,7 +142,7 @@
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <JFXButton fx:id="searchMemberBtn" layoutX="469.0" layoutY="13.0" prefHeight="34.0" prefWidth="79.0" style="-fx-background-color: #bdbdbd;" text="Search" onAction="#searchMember"/>
+                                    <JFXButton fx:id="searchMemberBtn" layoutX="469.0" layoutY="13.0" onAction="#searchMember" prefHeight="34.0" prefWidth="79.0" style="-fx-background-color: #bdbdbd;" text="Search" />
                                  </children>
                               </AnchorPane>
                            </items>
@@ -502,7 +465,7 @@
                   <Insets bottom="5.0" top="10.0" />
                </VBox.margin>
             </Label>
-            <JFXButton fx:id="viewMembersBtn" contentDisplay="TOP" mnemonicParsing="false" onAction="#viewMembers" prefHeight="230.0" prefWidth="100.0" style="-fx-background-color: #bdbdbd;" text="View Members" textAlignment="CENTER">
+            <JFXButton fx:id="view_members_btn" contentDisplay="TOP" mnemonicParsing="false" onAction="#viewMembers" prefHeight="230.0" prefWidth="100.0" style="-fx-background-color: #bdbdbd;" text="View Members" textAlignment="CENTER">
                <graphic>
                   <ImageView fitHeight="35.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -546,3 +509,4 @@
    </right>
 
 </BorderPane>
+</AnchorPane>

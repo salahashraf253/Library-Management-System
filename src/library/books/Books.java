@@ -1,16 +1,21 @@
 package library.books;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.beans.property.SimpleFloatProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import library.database.DatabaseConnection;
 import library.users.Member;
+import library.users.User;
 
-import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
 
@@ -68,25 +73,34 @@ public class Books {
     }*/
     private ImageView bookCover;
     private SimpleStringProperty title;
-    private SimpleIntegerProperty bookId;
+    private SimpleStringProperty bookId;
     private SimpleStringProperty author;
     private SimpleStringProperty publisher;
     private SimpleStringProperty category;
     private SimpleFloatProperty price;
     private SimpleStringProperty status;
+    private JFXButton rentBookBtn;
 
-    public Books(){}
+    AnchorPane anchorPane = new AnchorPane();
+    Label lbl = new Label("Enter Return Date");
+    DatePicker datePicker = new DatePicker();
+    JFXButton submit = new JFXButton("Submit");
+    JFXButton cancel = new JFXButton("Cancel");
+    Tooltip tooltip = new Tooltip();
 
-    public Books(ImageView bookCover, String title, int bookId, String author, String publisher, String category, Float price, String status) {
+    Member member = new Member();
+
+    public Books(ImageView bookCover, String title, String bookId, String author, String publisher, String category, Float price, String status) {
         this.bookCover = bookCover;
         this.title = new SimpleStringProperty(title);
-        this.bookId = new SimpleIntegerProperty(bookId);
+        this.bookId = new SimpleStringProperty(bookId);
         this.author = new SimpleStringProperty(author);
         this.publisher = new SimpleStringProperty(publisher);
         this.category = new SimpleStringProperty(category);
         this.price = new SimpleFloatProperty(price);
         this.status = new SimpleStringProperty(status);
-
+        this.rentBookBtn = new JFXButton("Rent Book");
+        this.rentBookBtn.setOnAction(e -> {rentBook();});
     }
 
     public String getTitle() {
@@ -97,7 +111,7 @@ public class Books {
         return bookCover;
     }
 
-    public int getBookId() {
+    public String getBookId() {
         return bookId.get();
     }
 
@@ -121,43 +135,106 @@ public class Books {
         return status.get();
     }
 
-    public Boolean getBookAvailability(String bookId) {
+    public void setRentBookBtn(JFXButton rentBookBtn) {
+        this.rentBookBtn = rentBookBtn;
+    }
+
+    public JFXButton getRentBookBtn() {
+        return rentBookBtn;
+    }
+
+    public Boolean checkBookAvailability(String bookId) {
         boolean bookStatus = false;
         String getStatus = "SELECT is_available FROM books WHERE book_id=?";
         try {
             PreparedStatement pst = connectDB.prepareStatement(getStatus);
             pst.setString(1,bookId);
-            Statement stmt = connectDB.createStatement();
-            ResultSet rs = stmt.executeQuery(getStatus);
-            bookStatus = rs.getBoolean("is_available");
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                bookStatus = rs.getBoolean("is_available");
+            }
         } catch (SQLException throwable) {
             throwable.printStackTrace();
         }
-        if(bookStatus==true)
-            return true;
-        else
-            return false;
+        return bookStatus;
     }
 
-    public  void  addRentedBook(Books B, Member m, LocalDate rd, LocalDate cd){
-
-       String QU="Insert INTO";
-
+    public  void  addRentedBook(LocalDate returnDate){
+        int memberId = User.currentId;
+        LocalDate rentDate = LocalDate.now();
+        String rentedBookId = bookId.getValue();
+        try {
+            Statement stmt = connectDB.createStatement();
+            Statement st = connectDB.createStatement();
+            String bookRented = "INSERT INTO rent_book(rented_book_id,member_id,rent_date,delivery_date) VALUES("+
+                    "'" + rentedBookId + "'," +
+                    "'" + memberId + "'," +
+                    "'" + rentDate + "'," +
+                    "'" + returnDate + "')";
+            String updateBookStatus = "UPDATE books SET is_available = false WHERE book_id ='"+ rentedBookId +"'";
+            stmt.executeUpdate(bookRented);
+            st.executeUpdate(updateBookStatus);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public void rentBook (Member m, Books b) throws IOException {
-            if (b.getBookAvailability("0")) {
-                Parent root = FXMLLoader.load(getClass().getResource("ReturnDate.fxml"));
+    public void dateChooser(){
+        Stage stage;
+        anchorPane.setPrefWidth(270);
+        anchorPane.setPrefHeight(150);
+        anchorPane.getChildren().addAll(lbl,datePicker,cancel,submit);
+        anchorPane.setVisible(true);
+        lbl.setLayoutX(80);
+        lbl.setLayoutY(10);
+        datePicker.setLayoutX(48);
+        datePicker.setLayoutY(40);
+        submit.setLayoutX(152);
+        submit.setLayoutY(104);
+        submit.setTooltip(tooltip);
+        cancel.setLayoutX(47);
+        cancel.setLayoutY(104);
+        cancel.setTooltip(tooltip);
+        tooltip.setStyle("-fx-background-color: #bdbdbd;");
+        submit.setOnAction(event -> {
+            if (datePicker!=null) {
+                LocalDate returnDate = datePicker.getValue();
+                if (returnDate != null) {
+                    addRentedBook(returnDate);
+                    close(anchorPane);
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText(null);
+                    alert.setContentText("Return Date cannot be Empty");
+                    alert.showAndWait();
+                }
             }
-            else {
+        });
+        cancel.setOnAction(event -> {
+            close(anchorPane);
+        });
+        stage = new Stage(StageStyle.UNDECORATED);
+        stage.setScene(new Scene(anchorPane));
+        stage.show();
+    }
+
+    public void rentBook () {
+        if (checkBookAvailability(bookId.getValue()) && member.getMemberStatus()) {
+            dateChooser();
+        } else {
+            if (!checkBookAvailability(bookId.getValue())) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText(null);
                 alert.setContentText("this book is Unavailable");
                 alert.showAndWait();
+            } else if (!member.getMemberStatus()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setContentText("Sorry You Cannot Rent This Book");
+                alert.showAndWait();
             }
-
+        }
     }
-
 
     public void setIsAvail(Boolean isAvail) {
         this.status = status;
@@ -169,9 +246,13 @@ public class Books {
 
     public void setBookAvailability(boolean b) {
     }
-
+    public void close(AnchorPane anchorPane){
+        Stage stage = (Stage) anchorPane.getScene().getWindow();
+        stage.close();
+    }
+/*
     public void search(String title){
-        String searchBooks = "SELECT book_title  FROM books WHERE book_title like ?";
+        String searchBooks = "SELECT * FROM books WHERE book_title like ?";
         try {
             PreparedStatement pst = connectDB.prepareStatement(searchBooks);
             pst.setString(1,"%"+title+"%");
@@ -184,5 +265,6 @@ public class Books {
         }
 
     }
+*/
     }
 

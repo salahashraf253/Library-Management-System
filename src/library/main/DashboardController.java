@@ -3,6 +3,7 @@ package library.main;
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -13,18 +14,28 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import library.books.Books;
+import library.books.ViewBooksController;
 import library.users.Member;
+import library.users.ViewMembersController;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class DashboardController {
-
+public class DashboardController implements Initializable {
     @FXML
-    private BorderPane root;
+    protected ViewBooksController viewBooksController;
+    @FXML
+    protected ViewMembersController viewMembersController;
+    @FXML
+    private BorderPane border_pane;
     @FXML
     private AnchorPane titlePane;
+    @FXML
+    private AnchorPane home_root_pane;
+    @FXML
+    private AnchorPane home_pane;
     @FXML
     private JFXButton logoutBtn;
     @FXML
@@ -32,11 +43,17 @@ public class DashboardController {
     @FXML
     private Tab homeTab;
     @FXML
+    private AnchorPane viewBooks;
+    @FXML
+    private AnchorPane viewMembers;
+    @FXML
     private TextField searchBookTxt;
     @FXML
     private JFXButton searchBookBtn;
     @FXML
     private TextField searchMemberTxt;
+    @FXML
+    private JFXButton searchMemberBtn;
     @FXML
     private Label title;
     @FXML
@@ -51,19 +68,22 @@ public class DashboardController {
     private JFXButton buyBtn;
     @FXML
     private JFXButton rentBtn;
+    @FXML
+    private JFXButton viewBooksBtn;
+    @FXML
+    private JFXButton view_members_btn;
 
-    Books book = new Books();
     Member member = new Member();
 
     @FXML
     void logout(){
-        closeWindow(root);
+        closeWindow(border_pane);
         loadWindowDecorated("/library/main/Login.fxml", "Login",false);
     }
     @FXML
     void rent() throws IOException {
         if(member.getMemberStatus()) {
-            book.rentBook(member,book);
+
         } else {
             JOptionPane.showMessageDialog(null,"You're Blocked. You can't rent any Book");
         }
@@ -71,20 +91,28 @@ public class DashboardController {
     @FXML
     public void searchBook(){
         String title = searchBookTxt.getText();
-        book.search(title);
+        String btnId = searchBookBtn.getId();
+        viewBooksController.loadData(btnId,title);
+        viewBooks.setVisible(true);
     }
     @FXML
     public void searchMember(){
         String name = searchMemberTxt.getText();
-        member.search(name);
+        String btnId = searchMemberBtn.getId();
+        viewMembersController.loadData(btnId,name);
+        viewMembers.setVisible(true);
     }
     @FXML
     private void viewMembers() {
-        loadWindowDecorated("/library/users/ViewMembers.fxml","All Members",false);
+        String btnId = view_members_btn.getId();
+        viewMembersController.loadData(btnId,null);
+        viewMembers.setVisible(true);
     }
     @FXML
     private void viewBooks() {
-        loadWindowDecorated("/library/books/ViewBooks.fxml" ,"All Books",false);
+        String btnId = viewBooksBtn.getId();
+        viewBooksController.loadData(btnId,null);
+        viewBooks.setVisible(true);
     }
     @FXML
     private void settings() {
@@ -124,5 +152,16 @@ public class DashboardController {
 
     public JFXButton getRentBtn() {
         return rentBtn;
+    }
+
+    /*@FXML
+    public String clickedObject(){
+        String clickedButton =null;
+        return clickedButton;
+    }*/
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        viewBooks.setVisible(false);
+        viewMembers.setVisible(false);
     }
 }

@@ -106,7 +106,6 @@ public class LoginController implements Initializable {
                     User.currentId = rst.getInt("user_id");
                     System.out.println(User.currentId); // To be deleted
                 }
-                connectDB.close();
             }catch (Exception e){
                 e.printStackTrace();
             }

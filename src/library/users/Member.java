@@ -40,10 +40,10 @@ public class Member extends User {
     }
 
     public Boolean getMemberStatus(){
-        String status = "SELECT is_blocked FROM Member where id=?";
+        String status = "SELECT is_blocked FROM user_account where user_id=?";
         try {
             PreparedStatement pst = connectDB.prepareStatement(status);
-           pst.setString(1, String.valueOf(currentId));
+           pst.setInt(1,currentId);
            ResultSet rs = pst.executeQuery();
            if (rs.next()){
               memberStatus = rs.getBoolean("is_blocked");
@@ -64,7 +64,7 @@ public class Member extends User {
 
 
     public void search(String name) {
-        String searchMember = "SELECT user_id FROM user_account WHERE first_name LIKE ? OR last_name LIKE ?";
+        String searchMember = "SELECT user_id FROM user_account WHERE user_type='user' AND (first_name LIKE ? OR last_name LIKE ?)";
         try {
             PreparedStatement stmt = connectDB.prepareStatement(searchMember);
             stmt.setString(1,"%"+name+"%");

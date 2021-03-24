@@ -1,19 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="viewMembersPane" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.users.ViewMembersController">
+<AnchorPane fx:id="viewMembersPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@users.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.users.ViewMembersController">
    <children>
-      <TableView fx:id="membersTable" layoutX="-4.0" prefHeight="600.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+       <AnchorPane fx:id="title_pane" prefHeight="32.0" prefWidth="1192.8" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+           <children>
+               <JFXButton fx:id="view_members_back_btn" layoutX="8.0" onAction="#back" prefHeight="26.0" prefWidth="75.0" text="Back" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="2.0">
+                   <graphic>
+                       <ImageView fitHeight="19.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                               <Image url="@../../Images/Previous-icon.png" />
+                           </image>
+                       </ImageView>
+                   </graphic></JFXButton>
+               <JFXButton fx:id="view_members_refresh_btn" layoutX="1096.0" layoutY="1.0" onAction="#refresh" text="Refresh" textAlignment="CENTER" AnchorPane.bottomAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0">
+                   <graphic>
+                       <ImageView fitHeight="20.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                               <Image url="@../../Images/refresh.png" />
+                           </image>
+                       </ImageView>
+                   </graphic></JFXButton>
+               <Label layoutX="554.0" layoutY="6.0" text="Members List">
+                   <font>
+                       <Font size="14.0" />
+                   </font>
+               </Label>
+           </children>
+       </AnchorPane>
+      <TableView fx:id="membersTable" layoutX="-4.0" prefHeight="600.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
         <columns>
-            <TableColumn fx:id="idCol" prefWidth="78.39999079704285" text="Member Id" />
-          <TableColumn fx:id="firstNameCol" prefWidth="180.8000030517578" text="First Name" />
-          <TableColumn fx:id="lastNameCol" minWidth="9.600006103515625" prefWidth="171.19998168945312" text="Last Name" />
-          <TableColumn fx:id="addressCol" minWidth="0.0" prefWidth="214.39996337890625" text="Address" />
-          <TableColumn fx:id="mobileCol" prefWidth="132.79998779296875" text="Mobile" />
-          <TableColumn fx:id="emailCol" prefWidth="219.199951171875" text="Email" />
+            <TableColumn fx:id="idCol" prefWidth="114.39999085664749" text="Member Id" />
+          <TableColumn fx:id="firstNameCol" prefWidth="211.2000274658203" text="First Name" />
+          <TableColumn fx:id="lastNameCol" minWidth="9.600006103515625" prefWidth="184.0" text="Last Name" />
+          <TableColumn fx:id="addressCol" minWidth="0.0" prefWidth="291.199951171875" text="Address" />
+          <TableColumn fx:id="mobileCol" prefWidth="133.5999755859375" text="Mobile" />
+          <TableColumn fx:id="emailCol" prefWidth="256.80010986328125" text="Email" />
         </columns>
       </TableView>
    </children>
