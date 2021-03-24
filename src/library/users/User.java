@@ -1,6 +1,5 @@
 package library.users;
 
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import library.books.Books;
@@ -8,14 +7,6 @@ import library.books.Books;
 import java.lang.reflect.Member;
 
 abstract public class User {
-  /*  int Id ;
-    String firstName;
-    String lastName;
-    String address;
-    int phone;
-    String email;
-    String password;
-    boolean isBlocked;*/
     protected SimpleIntegerProperty id;
     protected SimpleStringProperty firstName;
     protected SimpleStringProperty lastName;
@@ -23,9 +14,15 @@ abstract public class User {
     protected SimpleStringProperty address;
     protected SimpleStringProperty email;
     protected SimpleStringProperty password;
-    protected SimpleBooleanProperty isBlocked;
+    protected SimpleStringProperty isBlocked;
+
     protected String type;
     public static int currentId;
+    public static String currentUserType;
+
+    public void setId(int id) {
+        this.id.set(id);
+    }
 
     public int getId() {
         return id.get();
@@ -55,7 +52,7 @@ abstract public class User {
         return password.get();
     }
 
-    public boolean isIsBlocked() {
+    public String isIsBlocked() {
         return isBlocked.get();
     }
 
@@ -63,9 +60,7 @@ abstract public class User {
         return type;
     }
 
-
     abstract void rent(Member m, Books B,String period);
-    public abstract void search(String user);
 
 
 }

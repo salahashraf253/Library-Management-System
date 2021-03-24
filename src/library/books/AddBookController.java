@@ -102,12 +102,20 @@ public class AddBookController implements Initializable {
                     ""+true+""+")";
         try {
             FileInputStream fileInputStream =new FileInputStream(selectedFile);
-            PreparedStatement pst = connectDB.prepareStatement(qu);
-            pst.setBlob(1,fileInputStream,fileInputStream.available());
-            pst.executeUpdate();
+            if (fileInputStream!=null) {
+                PreparedStatement pst = connectDB.prepareStatement(qu);
+                pst.setBlob(1, fileInputStream, fileInputStream.available());
+                pst.executeUpdate();
+            }else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setContentText("You Must Upload Book Cover Photo");
+                alert.showAndWait();
+            }
         } catch (FileNotFoundException | SQLException e) {
             e.printStackTrace();
         }
+
         cancel();
     }
     @FXML
@@ -115,20 +123,7 @@ public class AddBookController implements Initializable {
         Stage stage = (Stage) addBookPane.getScene().getWindow();
         stage.close();
     }
-    /*private void checkdata()
-    {
-        String qu = "SELECT title FROM BOOK";
-        ResultSet rs = handler.execQuery(qu);
-        try {
-            while (rs.next()) {
-                String titleX = rs.getString("title");
-                System.out.println(titleX);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(AddBookController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-*/
+
 }
 
 

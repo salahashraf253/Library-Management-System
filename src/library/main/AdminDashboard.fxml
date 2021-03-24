@@ -22,7 +22,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1300.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.main.AdminDashboardController">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1300.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.main.AdminDashboardController">
+  <BorderPane fx:id="border_pane" prefHeight="650.0" prefWidth="1300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
    <top>
       <AnchorPane fx:id="titlePane" prefHeight="70.0" prefWidth="1540.0" stylesheets="@main.css" BorderPane.alignment="CENTER">
          <children>
@@ -115,90 +116,95 @@
             <ColorAdjust />
          </effect>
          <Tab fx:id="adminHomeTab" style="-fx-background-color: #9F7C3F;" text="       Home        ">
-            <BorderPane prefHeight="200.0" prefWidth="200.0">
-               <center>
-                  <ScrollPane>
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
-                     <HBox prefHeight="177.0" prefWidth="279.0" style="-fx-border-color: #00000f;">
-                        <ImageView fitHeight="150.0" fitWidth="102.0" pickOnBounds="true">
-                           <HBox.margin>
-                              <Insets left="10.0" right="10.0" top="10.0" />
-                           </HBox.margin>
-                           <Image url="@../../Images/art_bookcover.png" />
-                        </ImageView>
-                        <VBox prefHeight="112.0" prefWidth="150.0">
-                           <HBox.margin>
-                              <Insets left="5.0" top="5.0" />
-                           </HBox.margin>
-                           <Label fx:id="title" text="Book Name">
-                              <VBox.margin>
-                                 <Insets bottom="5.0" top="15.0" />
-                              </VBox.margin>
-                           </Label>
-                           <Label fx:id="author" layoutX="10.0" layoutY="10.0" text="Author Name">
-                              <VBox.margin>
-                                 <Insets bottom="5.0" />
-                              </VBox.margin>
-                           </Label>
-                           <Label fx:id="publisher" layoutX="10.0" layoutY="52.0" text="Publisher">
-                              <VBox.margin>
-                                 <Insets bottom="5.0" />
-                              </VBox.margin>
-                           </Label>
-                           <Label fx:id="category" layoutX="10.0" layoutY="27.0" text="Category">
-                              <VBox.margin>
-                                 <Insets bottom="5.0" />
-                              </VBox.margin>
-                           </Label>
-                           <Label fx:id="price" layoutX="10.0" layoutY="44.0" text="Price" textFill="#c60606">
-                              <VBox.margin>
-                                 <Insets bottom="5.0" />
-                              </VBox.margin>
+               <BorderPane prefHeight="200.0" prefWidth="200.0">
+                  <center>
+                     <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                        <ScrollPane prefHeight="549.6" prefWidth="1372.8" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                           <HBox prefHeight="177.0" prefWidth="279.0" style="-fx-border-color: #00000f;">
+                              <ImageView fitHeight="150.0" fitWidth="102.0" pickOnBounds="true">
+                                 <HBox.margin>
+                                    <Insets left="10.0" right="10.0" top="10.0" />
+                                 </HBox.margin>
+                                 <Image url="@../../Images/art_bookcover.png" />
+                              </ImageView>
+                              <VBox prefHeight="112.0" prefWidth="150.0">
+                                 <HBox.margin>
+                                    <Insets left="5.0" top="5.0" />
+                                 </HBox.margin>
+                                 <Label fx:id="title" text="Book Name">
+                                    <VBox.margin>
+                                       <Insets bottom="5.0" top="15.0" />
+                                    </VBox.margin>
+                                 </Label>
+                                 <Label fx:id="author" layoutX="10.0" layoutY="10.0" text="Author Name">
+                                    <VBox.margin>
+                                       <Insets bottom="5.0" />
+                                    </VBox.margin>
+                                 </Label>
+                                 <Label fx:id="publisher" layoutX="10.0" layoutY="52.0" text="Publisher">
+                                    <VBox.margin>
+                                       <Insets bottom="5.0" />
+                                    </VBox.margin>
+                                 </Label>
+                                 <Label fx:id="category" layoutX="10.0" layoutY="27.0" text="Category">
+                                    <VBox.margin>
+                                       <Insets bottom="5.0" />
+                                    </VBox.margin>
+                                 </Label>
+                                 <Label fx:id="price" layoutX="10.0" layoutY="44.0" text="Price" textFill="#c60606">
+                                    <VBox.margin>
+                                       <Insets bottom="5.0" />
+                                    </VBox.margin>
+                                    <font>
+                                       <Font size="14.0" />
+                                    </font>
+                                 </Label>
+                                 <HBox prefHeight="100.0" prefWidth="200.0">
+                                    <JFXButton fx:id="editBookBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: #bdbdbd;" text="Edit" textAlignment="CENTER">
+                                       <HBox.margin>
+                                          <Insets left="5.0" right="10.0" top="5.0" />
+                                       </HBox.margin>
+                                    </JFXButton>
+                                    <JFXButton fx:id="removeBooKBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: #bdbdbd;" text="Remove">
+                                       <HBox.margin>
+                                          <Insets top="5.0" />
+                                       </HBox.margin>
+                                    </JFXButton>
+                                 </HBox>
+                              </VBox>
+                           </HBox>
+                        </ScrollPane>
+                        <fx:include fx:id="adminViewBooks" source="../books/AdminViewBooks.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <fx:include fx:id="adminViewMembers" source="../users/AdminViewMembers.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </AnchorPane>
+                  </center>
+                  <top>
+                     <SplitPane dividerPositions="0.5" prefHeight="60.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                           <TextField fx:id="searchBookTxt" layoutX="116.0" layoutY="11.0" prefHeight="36.0" prefWidth="342.0" promptText="Enter Book Titel" style="-fx-background-color: transparent; -fx-border-color: #bdbdbd;" />
+                           <Label layoutX="28.0" layoutY="19.0" text="Search Books">
                               <font>
                                  <Font size="14.0" />
                               </font>
                            </Label>
-                           <HBox prefHeight="100.0" prefWidth="200.0">
-                              <JFXButton fx:id="editBookBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: #bdbdbd;" text="Edit" textAlignment="CENTER">
-                                 <HBox.margin>
-                                    <Insets left="5.0" right="10.0" top="5.0" />
-                                 </HBox.margin>
-                              </JFXButton>
-                              <JFXButton fx:id="removeBooKBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: #bdbdbd;" text="Remove">
-                                 <HBox.margin>
-                                    <Insets top="5.0" />
-                                 </HBox.margin>
-                              </JFXButton>
-                           </HBox>
-                        </VBox>
-                     </HBox>
-                  </ScrollPane>
-               </center>
-               <top>
-                  <SplitPane dividerPositions="0.5" prefHeight="60.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                        <TextField fx:id="searchBookTxt" layoutX="116.0" layoutY="11.0" prefHeight="36.0" prefWidth="342.0" promptText="Enter Book Titel" style="-fx-background-color: transparent; -fx-border-color: #bdbdbd;" />
-                        <Label layoutX="28.0" layoutY="19.0" text="Search Books">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <JFXButton fx:id="searchBookBtn" layoutX="468.0" layoutY="12.0" prefHeight="34.0" prefWidth="79.0" style="-fx-background-color: #bdbdbd;" text="Search" />
-                     </AnchorPane>
-                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                        <TextField fx:id="searchMemberTxt" layoutX="132.0" layoutY="10.0" prefHeight="38.0" prefWidth="327.0" promptText="Enter Member Email" style="-fx-background-color: transparent; -fx-border-color: #bdbdbd;" />
-                        <Label layoutX="25.0" layoutY="20.0" text="Search Member">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <JFXButton fx:id="searchMemberBtn" layoutX="469.0" layoutY="13.0" prefHeight="34.0" prefWidth="79.0" style="-fx-background-color: #bdbdbd;" text="Search" />
-                     </AnchorPane>
-                  </SplitPane>
-               </top>
-            </BorderPane>
+                           <JFXButton fx:id="searchBookBtn" layoutX="468.0" layoutY="12.0" prefHeight="34.0" prefWidth="79.0" style="-fx-background-color: #bdbdbd;" text="Search" onAction="#searchBook" />
+                        </AnchorPane>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                           <TextField fx:id="searchMemberTxt" layoutX="132.0" layoutY="10.0" prefHeight="38.0" prefWidth="327.0" promptText="Enter Member Email" style="-fx-background-color: transparent; -fx-border-color: #bdbdbd;" />
+                           <Label layoutX="25.0" layoutY="20.0" text="Search Member">
+                              <font>
+                                 <Font size="14.0" />
+                              </font>
+                           </Label>
+                           <JFXButton fx:id="searchMemberBtn" layoutX="469.0" layoutY="13.0" prefHeight="34.0" prefWidth="79.0" style="-fx-background-color: #bdbdbd;" text="Search" onAction="#searchMember"/>
+                        </AnchorPane>
+                     </SplitPane>
+                  </top>
+               </BorderPane>
+
          </Tab>
          <Tab fx:id="adminCategoriesTab" style="-fx-background-color: #9F7C3F;" text="        Categories        ">
             <GridPane>
@@ -383,4 +389,5 @@
          </Tab>
       </TabPane>
    </center>
-</BorderPane>
+  </BorderPane>
+</AnchorPane>

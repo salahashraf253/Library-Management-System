@@ -12,22 +12,30 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import library.books.AdminViewBooksController;
+import library.users.AdminViewMembersController;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AdminDashboardController implements Initializable{
-
     @FXML
-    private BorderPane root;
+    private AdminViewBooksController adminViewBooksController;
+    @FXML
+    private AdminViewMembersController adminViewMembersController;
+    @FXML
+    private AnchorPane root;
     @FXML
     private AnchorPane titlePane;
     @FXML
     private Tab adminHomeTab;
+    @FXML
+    private AnchorPane adminViewBooks;
+    @FXML
+    private AnchorPane adminViewMembers;
     @FXML
     private Tab adminCategoriesTab;
     @FXML
@@ -81,7 +89,8 @@ public class AdminDashboardController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        adminViewBooks.setVisible(false);
+        adminViewMembers.setVisible(false);
     }
 
     @FXML
@@ -89,7 +98,20 @@ public class AdminDashboardController implements Initializable{
         closeWindow(root);
         loadWindowDecorated("/library/main/Login.fxml", "Login");
     }
-
+    @FXML
+    public void searchBook(){
+        String title = searchBookTxt.getText();
+        String btnId = searchBookBtn.getId();
+        adminViewBooksController.loadData(btnId,title);
+        adminViewBooks.setVisible(true);
+    }
+    @FXML
+    public void searchMember(){
+        String name = searchMemberTxt.getText();
+        String btnId = searchMemberBtn.getId();
+        adminViewMembersController.loadData(btnId,name);
+        adminViewMembers.setVisible(true);
+    }
     @FXML
     private void addAdmin(){
         loadWindow("/library/users/AddAdmin.fxml", "Add New Admin");
@@ -104,11 +126,15 @@ public class AdminDashboardController implements Initializable{
     }
     @FXML
     private void viewMembers() {
-        loadWindowDecorated("/library/users/ViewMembers.fxml", "All Members");
+        String btnId = viewMembersBtn.getId();
+        adminViewMembersController.loadData(btnId,null);
+        adminViewMembers.setVisible(true);
     }
     @FXML
     private void viewBooks() {
-        loadWindowDecorated("/library/books/ViewBooks.fxml" , "All Books");
+        String btnId = viewBooksBtn.getId();
+        adminViewBooksController.loadData(btnId,null);
+        adminViewBooks.setVisible(true);
     }
     @FXML
     private void settings() {
@@ -139,7 +165,7 @@ public class AdminDashboardController implements Initializable{
             e.printStackTrace();
         }
     }
-    void closeWindow(BorderPane pane){
+    void closeWindow(AnchorPane pane){
         Stage stage = (Stage) pane.getScene().getWindow();
         stage.close();
     }

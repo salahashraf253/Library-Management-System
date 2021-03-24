@@ -1,22 +1,24 @@
 package library.users;
 
-import javafx.beans.property.SimpleBooleanProperty;
+import com.jfoenix.controls.JFXButton;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-import library.books.AddBookController;
+import javafx.scene.control.Alert;
 import library.books.Books;
 import library.database.DatabaseConnection;
 
+import javax.swing.*;
 import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Member extends User {
+    private JFXButton removeMemberBtn;
+    private JFXButton orderBookBtn;
+    private JFXButton blockMemberBtn;
     boolean memberStatus;
     DatabaseConnection connectNow = new DatabaseConnection();
     Connection connectDB = connectNow.getConnection();
 
-    public Member(int id, String firstName, String lastName, String address, int phone, String email, String password, boolean isBlocked) {
+    public Member(int id, String firstName, String lastName, String address, int phone, String email, String memberStatus) {
         super();
         this.id = new SimpleIntegerProperty(id);
         this.firstName = new SimpleStringProperty(firstName);
@@ -24,8 +26,21 @@ public class Member extends User {
         this.address = new SimpleStringProperty(address);
         this.email = new SimpleStringProperty(email);
         this.mobile = new SimpleIntegerProperty(phone);
-        this.password = new SimpleStringProperty(password);
-        this.isBlocked= new SimpleBooleanProperty(isBlocked);
+        this.isBlocked= new SimpleStringProperty(memberStatus);
+        this.removeMemberBtn = new JFXButton("Remove Member");
+        this.removeMemberBtn.setOnAction(e -> {removeMember(id);});
+        this.orderBookBtn = new JFXButton("Order Book");
+        this.orderBookBtn.setOnAction(e -> {});
+        this.blockMemberBtn = new JFXButton("Block Member");
+        if (memberStatus.equals("Blocked")){
+            this.blockMemberBtn.setText("Unblock Member");
+            this.blockMemberBtn.setOnAction(e -> {unblockMember(id);});
+        }
+        else {
+            this.blockMemberBtn.setOnAction(e -> {
+                blockMember(id);
+            });
+        }
     }
     public Member(int id, String firstName, String lastName, String address, int mobile, String email) {
         this.id = new SimpleIntegerProperty(id);
@@ -37,6 +52,25 @@ public class Member extends User {
 
     }
     public Member() {
+    }
+
+    public void setRemoveMemberBtn(JFXButton removeMemberBtn) {
+        this.removeMemberBtn = removeMemberBtn;
+    }
+    public void setOrderBookBtn(JFXButton orderBookBtn) {
+        this.orderBookBtn = orderBookBtn;
+    }
+    public void setBlockMemberBtn(JFXButton blockMemberBtn) {
+        this.blockMemberBtn = blockMemberBtn;
+    }
+    public JFXButton getRemoveMemberBtn() {
+        return removeMemberBtn;
+    }
+    public JFXButton getOrderBookBtn() {
+        return orderBookBtn;
+    }
+    public JFXButton getBlockMemberBtn() {
+        return blockMemberBtn;
     }
 
     public Boolean getMemberStatus(){
@@ -57,30 +91,65 @@ public class Member extends User {
             return false;
     }
 
-    void add_book(Books B ,Member m){
-        // add book from data base;
-
-    }
-
-
-    public void search(String name) {
-        String searchMember = "SELECT user_id FROM user_account WHERE user_type='user' AND (first_name LIKE ? OR last_name LIKE ?)";
+    public void removeMember(int memberId){
+        String checkRentFlag = "SELECT renting_book FROM user_account WHERE user_id = '" + memberId +"'";
         try {
-            PreparedStatement stmt = connectDB.prepareStatement(searchMember);
-            stmt.setString(1,"%"+name+"%");
-            stmt.setString(2,"%"+name+"%");
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                String userId = rs.getString("user_id");
-                System.out.println(userId);
+            Statement statement = connectDB.createStatement();
+            ResultSet rs = statement.executeQuery(checkRentFlag);
+            if (rs.next()){
+                boolean rentingBook = rs.getBoolean("renting_book");
+                if (rentingBook){
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText(null);
+                    alert.setContentText("User is renting a book right now! Please wait until returning it");
+                    alert.showAndWait();
+                }else {
+                    try {
+                        String deleteMember ="DELETE FROM User_account WHERE user_id=?";
+                        PreparedStatement stmt= connectDB.prepareStatement(deleteMember);
+                        stmt.setInt(1,memberId);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
             }
-        } catch (SQLException throwable) {
-            throwable.printStackTrace();
-            Logger.getLogger(AddBookController.class.getName()).log(Level.SEVERE, null, throwable);
-        }
 
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
+    public void blockMember(int memberId){
+        String block = "UPDATE user_account SET is_blocked = TRUE  WHERE user_id=?";
+        JOptionPane.showConfirmDialog(null,"Are you sure to Block this member","BlocK Member",JOptionPane.OK_CANCEL_OPTION);
+        int check =0 ;
+        if(check == JOptionPane.OK_OPTION) {
+            try {
+                PreparedStatement pst = connectDB.prepareStatement(block);
+                pst.setInt(1, memberId);
+                pst.executeUpdate();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else {
+            JOptionPane.showMessageDialog(null,"That's better!");
+        }
+    }
+
+    public void unblockMember(int memberId){
+        String block = "UPDATE user_account SET is_blocked = FALSE  WHERE user_id=?";
+        JOptionPane.showConfirmDialog(null,"Are you sure to Unblock this member","Unblock Member",JOptionPane.OK_CANCEL_OPTION);
+        int check =0 ;
+        if(check == JOptionPane.OK_OPTION) {
+            try {
+                PreparedStatement pst = connectDB.prepareStatement(block);
+                pst.setInt(1, memberId);
+                pst.executeUpdate();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else {}
+    }
 
     @Override
     void rent(java.lang.reflect.Member m, Books B, String period) {

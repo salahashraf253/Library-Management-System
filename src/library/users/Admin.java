@@ -1,6 +1,5 @@
 package library.users;
 
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import library.books.Books;
@@ -15,7 +14,7 @@ public class Admin extends User{
     Connection connectDB = connectNow.getConnection();
 
 
-    public Admin(int id, String firstName, String lastName, String address, int phone, String email, String password, boolean isBlocked) {
+    public Admin(int id, String firstName, String lastName, String address, int phone, String email, String password, String isBlocked) {
         super();
         this.id = new SimpleIntegerProperty(id);
         this.firstName = new SimpleStringProperty(firstName);
@@ -24,7 +23,7 @@ public class Admin extends User{
         this.email = new SimpleStringProperty(email);
         this.mobile = new SimpleIntegerProperty(phone);
         this.password = new SimpleStringProperty(password);
-        this.isBlocked= new SimpleBooleanProperty(isBlocked);
+        this.isBlocked= new SimpleStringProperty(isBlocked);
     }
     public Admin(int id, String firstName, String lastName, String address, int mobile, String email) {
         this.id = new SimpleIntegerProperty(id);
@@ -44,8 +43,4 @@ public class Admin extends User{
 
     }
 
-    @Override
-    public void search(String admin) {
-
-    }
 }

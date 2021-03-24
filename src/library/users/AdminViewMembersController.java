@@ -1,5 +1,6 @@
 package library.users;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,7 +16,7 @@ import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
 
-public class ViewMembersController implements Initializable {
+public class AdminViewMembersController implements Initializable {
     @FXML
     private AnchorPane viewMembersPane;
     @FXML
@@ -32,6 +33,12 @@ public class ViewMembersController implements Initializable {
     private TableColumn<Member, String> mobileCol;
     @FXML
     private TableColumn<Member, String> emailCol;
+    @FXML
+    private TableColumn<Member, JFXButton> removeCol;
+    @FXML
+    private TableColumn<Member, JFXButton> orderCol;
+    @FXML
+    private TableColumn<Member, JFXButton> blockCol;
 
     ObservableList<Member> list = FXCollections.observableArrayList();
 
@@ -47,8 +54,12 @@ public class ViewMembersController implements Initializable {
         addressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
         mobileCol.setCellValueFactory(new PropertyValueFactory<>("mobile"));
         emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
+        removeCol.setCellValueFactory(new PropertyValueFactory<>("removeMemberBtn"));
+        orderCol.setCellValueFactory(new PropertyValueFactory<>("orderBookBtn"));
+        blockCol.setCellValueFactory(new PropertyValueFactory<>("blockMemberBtn"));
     }
     public void loadData(String btnId, String searchTxt) {
+        String memberStatus = null;
         list.clear();
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDB = connectNow.getConnection();
@@ -61,7 +72,7 @@ public class ViewMembersController implements Initializable {
             pst.setString(2,"%"+searchTxt+"%");
             stmt = connectDB.createStatement();
             ResultSet rs=null;
-            if(btnId.equals("view_members_btn")){
+            if(btnId.equals("viewMembersBtn")){
                 rs = stmt.executeQuery(viewMembers);
             }else if(btnId.equals("searchMemberBtn")){
                 rs= pst.executeQuery();
@@ -78,7 +89,12 @@ public class ViewMembersController implements Initializable {
                     String address = rs.getString("address");
                     int mobile = rs.getInt("mobile");
                     String email = rs.getString("email");
-                    list.add(new Member(id,firstName,lastName,address,mobile,email));
+                    Boolean isBlocked = rs.getBoolean("is_blocked");
+                    if (isBlocked)
+                        memberStatus = "Blocked";
+                    else
+                        memberStatus= "Not Blocked";
+                    list.add(new Member(id,firstName,lastName,address,mobile,email,memberStatus));
                 }
             }catch (SQLException ex){
                 ex.printStackTrace();
@@ -94,6 +110,6 @@ public class ViewMembersController implements Initializable {
     }
 
     public void refresh() {
-        loadData("view_members_btn",null);
+        loadData("viewMembersBtn",null);
     }
 }

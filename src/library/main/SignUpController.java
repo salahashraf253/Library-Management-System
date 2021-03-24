@@ -246,12 +246,13 @@ public class SignUpController implements Initializable {
                         closeWindow(signUp_pane);
                         }
                     try {
-                        String getUserId = "SELECT user_id FROM user_account WHERE email =?";
+                        String getUserId = "SELECT user_id,user_type FROM user_account WHERE email =?";
                         PreparedStatement ps = connectDB.prepareStatement(getUserId);
                         ps.setString(1,userEmail);
                         Statement statement =connectDB.createStatement();
                         ResultSet rst = statement.executeQuery(getUserId);
                         User.currentId = rst.getInt("user_id");
+                        User.currentUserType = rst.getString("user_type");
                     }catch (Exception e){
                         e.printStackTrace();
                     }
@@ -308,37 +309,4 @@ public class SignUpController implements Initializable {
     }
 
     */
-    /*public boolean checkUserEmail(String userEmail)
-    {
-        DatabaseHandler handler ;
-        PreparedStatement ps;
-        ResultSet rs;
-        boolean checkUser = false;
-        String query = "SELECT * FROM MEMBER WHERE email =?";
-
-        try {
-            ps = DatabaseHandler.getInstance().getConnection().prepareStatement(query);
-            ps.setString(1, userEmail);
-
-            rs = ps.executeQuery();
-
-            if(rs.next())
-            {
-                checkUser = true;
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText(null);
-                alert.setContentText("Failed");
-                alert.showAndWait();
-
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(SignUpController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return checkUser;
-
-        }
-*/
-
-
-
 }

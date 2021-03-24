@@ -40,10 +40,8 @@ public class LoginController implements Initializable {
     private Button loginBtn;
     @FXML
     private Button gotoSignUpBtn;
+    public String userType;
 
-    private final String adminEmail = "a";
-    private final String adminPassword = "a";
-    String userType;
     DatabaseConnection connectNow = new DatabaseConnection();
     Connection connectDB = connectNow.getConnection();
 
@@ -73,10 +71,7 @@ public class LoginController implements Initializable {
     @FXML
     public void enterPressedPassword() {
         password.setOnKeyPressed(ke -> {
-            if (ke.getCode().equals(KeyCode.ENTER)) {
-                login();
-            }
-        });
+            if (ke.getCode().equals(KeyCode.ENTER)) {login();}});
     }
 
     @FXML
@@ -89,22 +84,20 @@ public class LoginController implements Initializable {
             if (userPassword.isEmpty())
                 password_lbl.setVisible(true);
         }
-        else if (userEmail.equals(adminEmail) && userPassword.equals(adminPassword)){
-            loadWindow("/library/main/AdminDashboard.fxml", "AdminDashBoard", true);
-            closeWindow(login_pane);
-        }
         else {
             email_lbl.setVisible(false);
             password_lbl.setVisible(false);
             validateLogin();
             try {
-                String getUserId = "SELECT user_id FROM user_account WHERE email =?";
+                String getUserId = "SELECT user_id,user_type FROM user_account WHERE email =?";
                 PreparedStatement ps = connectDB.prepareStatement(getUserId);
                 ps.setString(1,userEmail);
                 ResultSet rst = ps.executeQuery();
                 while (rst.next()) {
                     User.currentId = rst.getInt("user_id");
-                    System.out.println(User.currentId); // To be deleted
+                    User.currentUserType = rst.getString("user_type");
+                    System.out.println(User.currentId);
+                    System.out.println(User.currentUserType);// To be deleted
                 }
             }catch (Exception e){
                 e.printStackTrace();

@@ -22,55 +22,7 @@ import java.time.LocalDate;
 public class Books {
     DatabaseConnection connectNow = new DatabaseConnection();
     Connection connectDB = connectNow.getConnection();
-   /* String id;
-    String title;
-    String author;
-    String publisher;
-    Boolean isAvail;
 
-    public Books(String id, String title, String author, String publisher, Boolean isAvail) {
-        this.id = id;
-        this.title = title;
-        this.author = author;
-        this.publisher = publisher;
-        this.isAvail = isAvail;
-    }
-
-    public Books() {
-
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public String getPublisher() {
-        return publisher;
-    }
-
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
-    }*/
     private ImageView bookCover;
     private SimpleStringProperty title;
     private SimpleStringProperty bookId;
@@ -80,16 +32,18 @@ public class Books {
     private SimpleFloatProperty price;
     private SimpleStringProperty status;
     private JFXButton rentBookBtn;
+    private JFXButton removeBookBtn;
+    private JFXButton orderBookBtn;
 
-    AnchorPane anchorPane = new AnchorPane();
-    Label lbl = new Label("Enter Return Date");
-    DatePicker datePicker = new DatePicker();
-    JFXButton submit = new JFXButton("Submit");
-    JFXButton cancel = new JFXButton("Cancel");
-    Tooltip tooltip = new Tooltip();
+    private AnchorPane anchorPane = new AnchorPane();
+    private Label lbl = new Label("Enter Return Date");
+    private DatePicker datePicker = new DatePicker();
+    private JFXButton submit = new JFXButton("Submit");
+    private JFXButton cancel = new JFXButton("Cancel");
+    private Tooltip tooltip = new Tooltip();
 
     Member member = new Member();
-
+    public Books(){}
     public Books(ImageView bookCover, String title, String bookId, String author, String publisher, String category, Float price, String status) {
         this.bookCover = bookCover;
         this.title = new SimpleStringProperty(title);
@@ -101,32 +55,30 @@ public class Books {
         this.status = new SimpleStringProperty(status);
         this.rentBookBtn = new JFXButton("Rent Book");
         this.rentBookBtn.setOnAction(e -> {rentBook();});
+        this.removeBookBtn = new JFXButton("Remove Book");
+        this.removeBookBtn.setOnAction(e -> {removeBook(bookId);});
+        this.orderBookBtn = new JFXButton("Order Book");
+        this.orderBookBtn.setOnAction(e -> {rentBook();});
     }
 
     public String getTitle() {
         return title.get();
     }
-
     public ImageView getBookCover() {
         return bookCover;
     }
-
     public String getBookId() {
         return bookId.get();
     }
-
     public String getAuthor() {
         return author.get();
     }
-
     public String getPublisher() {
         return publisher.get();
     }
-
     public String getCategory() {
         return category.get();
     }
-
     public Float getPrice() {
         return price.get();
     }
@@ -134,13 +86,26 @@ public class Books {
     public String getStatus() {
         return status.get();
     }
-
+    public JFXButton getRentBookBtn() {
+        return rentBookBtn;
+    }
     public void setRentBookBtn(JFXButton rentBookBtn) {
         this.rentBookBtn = rentBookBtn;
     }
-
-    public JFXButton getRentBookBtn() {
-        return rentBookBtn;
+    public JFXButton getRemoveBookBtn() {
+        return removeBookBtn;
+    }
+    public void setRemoveBookBtn(JFXButton removeBookBtn) {
+        this.removeBookBtn = removeBookBtn;
+    }
+    public JFXButton getOrderBookBtn() {
+        return orderBookBtn;
+    }
+    public void setOrderBookBtn(JFXButton orderBookBtn) {
+        this.orderBookBtn = orderBookBtn;
+    }
+    public void setIsAvail(Boolean isAvail) {
+        this.status = status;
     }
 
     public Boolean checkBookAvailability(String bookId) {
@@ -166,14 +131,17 @@ public class Books {
         try {
             Statement stmt = connectDB.createStatement();
             Statement st = connectDB.createStatement();
+            Statement s = connectDB.createStatement();
             String bookRented = "INSERT INTO rent_book(rented_book_id,member_id,rent_date,delivery_date) VALUES("+
                     "'" + rentedBookId + "'," +
                     "'" + memberId + "'," +
                     "'" + rentDate + "'," +
                     "'" + returnDate + "')";
             String updateBookStatus = "UPDATE books SET is_available = false WHERE book_id ='"+ rentedBookId +"'";
+            String updateMemberRentFlag = "UPDATE user_account SET renting_book = TRUE WHERE user_id ='"+ User.currentId +"'";
             stmt.executeUpdate(bookRented);
             st.executeUpdate(updateBookStatus);
+            s.executeUpdate(updateMemberRentFlag);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -236,35 +204,56 @@ public class Books {
         }
     }
 
-    public void setIsAvail(Boolean isAvail) {
-        this.status = status;
+    public void showRentedBooks(String memberId, String bookId) {
     }
 
-    public void showRentedBooks(Member m, Books b) {
+    public void returnBook(String rentedBookId) {
+        int memberId = User.currentId;
+        try {
+            Statement stmt = connectDB.createStatement();
+            Statement st = connectDB.createStatement();
+            String bookRented = "DELETE FROM rent_book WHERE (rented_book_id,member_id) IN("+
+                    "'" + rentedBookId + "'," +
+                    "'" + memberId + "')";
+            String updateBookStatus = "UPDATE books SET is_available = true WHERE book_id ='"+ rentedBookId +"'";
+            stmt.executeUpdate(bookRented);
+            st.executeUpdate(updateBookStatus);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+    public void removeBook(String bookId){
+        String checkRentedBook = "SELECT member_id FROM rent_book WHERE rented_book_id = '" + bookId +"'";
+        try {
+            Statement statement = connectDB.createStatement();
+            ResultSet rs = statement.executeQuery(checkRentedBook);
+            if (rs.next()){
+                int memberId = rs.getInt("member_id");
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText(null);
+                    alert.setContentText("User " + memberId + " is renting a book right now! Please wait until returning it");
+                    alert.showAndWait();
+                }else {
+                    try {
+                        String deleteMember ="DELETE FROM books WHERE book_id=?";
+                        PreparedStatement stmt= connectDB.prepareStatement(deleteMember);
+                        stmt.setString(1,bookId);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void setBookAvailability(boolean b) {
     }
+
     public void close(AnchorPane anchorPane){
         Stage stage = (Stage) anchorPane.getScene().getWindow();
         stage.close();
     }
-/*
-    public void search(String title){
-        String searchBooks = "SELECT * FROM books WHERE book_title like ?";
-        try {
-            PreparedStatement pst = connectDB.prepareStatement(searchBooks);
-            pst.setString(1,"%"+title+"%");
-            ResultSet rs = pst.executeQuery();
-            while (rs.next()) {
-                System.out.println(rs.getString("book_title"));
-            }
-        } catch (SQLException throwable) {
-            throwable.printStackTrace();
-        }
-
-    }
-*/
     }
 

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="viewRentedBooksPane" style="-fx-border-color: #bdbdbd;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.books.ViewRentedBooksController">
+        <children>
+            <Label layoutX="5.0" layoutY="5.0" style="-fx-border-color: #bdbdbd;" text="Rented Books">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+            <JFXButton fx:id="view_books_refresh_btn" layoutX="1096.0" layoutY="1.0" onAction="#loadData" stylesheets="@books.css" text="Refresh" textAlignment="CENTER" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0">
+                <graphic>
+                    <ImageView fitHeight="20.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@../../Images/refresh.png" />
+                        </image>
+                    </ImageView>
+                </graphic></JFXButton>
+            <TableView fx:id="rented_books_table" layoutY="29.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
+                <columns>
+                    <TableColumn fx:id="book_cover_col" prefWidth="75.0" text="Book Cover" />
+                    <TableColumn fx:id="title_col" prefWidth="180.20000457763672" text="Book Title" />
+                    <TableColumn fx:id="book_id_col" prefWidth="82.39996337890625" text="Book ISBN" />
+                    <TableColumn fx:id="rent_date_col" prefWidth="92.80010986328125" text="Rent Date" />
+                    <TableColumn fx:id="return_date_col" prefWidth="95.2000732421875" text="Return Date" />
+                    <TableColumn fx:id="return_book_col" minWidth="95.4000244140625" prefWidth="95.4000244140625" text="Return Book" />
+                </columns>
+            </TableView>
+        </children>
+</AnchorPane>
