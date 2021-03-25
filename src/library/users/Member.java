@@ -4,7 +4,6 @@ import com.jfoenix.controls.JFXButton;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.Alert;
-import library.books.Books;
 import library.database.DatabaseConnection;
 
 import javax.swing.*;
@@ -14,7 +13,7 @@ public class Member extends User {
     private JFXButton removeMemberBtn;
     private JFXButton orderBookBtn;
     private JFXButton blockMemberBtn;
-    boolean memberStatus;
+
     DatabaseConnection connectNow = new DatabaseConnection();
     Connection connectDB = connectNow.getConnection();
 
@@ -28,7 +27,7 @@ public class Member extends User {
         this.mobile = new SimpleIntegerProperty(phone);
         this.isBlocked= new SimpleStringProperty(memberStatus);
         this.removeMemberBtn = new JFXButton("Remove Member");
-        this.removeMemberBtn.setOnAction(e -> {removeMember(id);});
+        this.removeMemberBtn.setOnAction(e -> {removeUser(id);});
         this.orderBookBtn = new JFXButton("Order Book");
         this.orderBookBtn.setOnAction(e -> {});
         this.blockMemberBtn = new JFXButton("Block Member");
@@ -74,7 +73,8 @@ public class Member extends User {
     }
 
     public Boolean getMemberStatus(){
-        String status = "SELECT is_blocked FROM user_account where user_id=?";
+        String status = "SELECT is_blocked FROM user_account where user_type='user',user_id=?";
+        boolean memberStatus = false;
         try {
             PreparedStatement pst = connectDB.prepareStatement(status);
            pst.setInt(1,currentId);
@@ -85,13 +85,13 @@ public class Member extends User {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        if(memberStatus==true)
+        if(memberStatus)
             return true;
         else
             return false;
     }
 
-    public void removeMember(int memberId){
+    public void removeUser(int memberId){
         String checkRentFlag = "SELECT renting_book FROM user_account WHERE user_id = '" + memberId +"'";
         try {
             Statement statement = connectDB.createStatement();
@@ -151,8 +151,5 @@ public class Member extends User {
         }else {}
     }
 
-    @Override
-    void rent(java.lang.reflect.Member m, Books B, String period) {
-    }
 }
 

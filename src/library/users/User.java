@@ -2,9 +2,6 @@ package library.users;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-import library.books.Books;
-
-import java.lang.reflect.Member;
 
 abstract public class User {
     protected SimpleIntegerProperty id;
@@ -16,7 +13,6 @@ abstract public class User {
     protected SimpleStringProperty password;
     protected SimpleStringProperty isBlocked;
 
-    protected String type;
     public static int currentId;
     public static String currentUserType;
 
@@ -56,11 +52,5 @@ abstract public class User {
         return isBlocked.get();
     }
 
-    public String getType() {
-        return type;
-    }
-
-    abstract void rent(Member m, Books B,String period);
-
-
+    public abstract void removeUser(int userId);
 }

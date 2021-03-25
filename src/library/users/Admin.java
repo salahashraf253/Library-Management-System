@@ -2,11 +2,13 @@ package library.users;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-import library.books.Books;
+import javafx.scene.control.Alert;
 import library.database.DatabaseConnection;
 
-import java.lang.reflect.Member;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class Admin extends User{
     DatabaseConnection connectNow = new DatabaseConnection();
@@ -36,10 +38,31 @@ public class Admin extends User{
     public Admin() {
     }
 
+    public void removeUser(int adminId){
+        String checkRentFlag = "SELECT renting_book FROM user_account WHERE user_id = '" + adminId +"'";
+        try {
+            Statement statement = connectDB.createStatement();
+            ResultSet rs = statement.executeQuery(checkRentFlag);
+            if (rs.next()){
+                boolean rentingBook = rs.getBoolean("renting_book");
+                if (rentingBook){
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText(null);
+                    alert.setContentText("Admin is renting a book right now! Please wait until returning it");
+                    alert.showAndWait();
+                }else {
+                    try {
+                        String deleteMember ="DELETE FROM User_account WHERE user_id=?";
+                        PreparedStatement stmt= connectDB.prepareStatement(deleteMember);
+                        stmt.setInt(1,adminId);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            }
 
-    @Override
-    void rent(Member m, Books B, String period) {
-
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
-
 }
