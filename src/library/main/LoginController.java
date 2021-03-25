@@ -46,9 +46,7 @@ public class LoginController implements Initializable {
     Connection connectDB = connectNow.getConnection();
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-    }
+    public void initialize(URL url, ResourceBundle resourceBundle) {}
 
     public void enterPressedTextField(TextField txt, PasswordField pass, Label lbl) {
         txt.setOnKeyPressed(ke -> {
@@ -83,8 +81,7 @@ public class LoginController implements Initializable {
                 email_lbl.setVisible(true);
             if (userPassword.isEmpty())
                 password_lbl.setVisible(true);
-        }
-        else {
+        } else {
             email_lbl.setVisible(false);
             password_lbl.setVisible(false);
             validateLogin();
@@ -156,7 +153,6 @@ public class LoginController implements Initializable {
             stage.setMaximized(max);
             stage.show();
         } catch (IOException e) {
-            //Logger.getLogger(AddAdminController.class.getName().log(Level.SEVERE, null, ex));
             e.printStackTrace();
         }
     }

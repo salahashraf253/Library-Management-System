@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="viewRequestsPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.books.RentBookRequestsController">
+    <children>
+        <Label layoutX="5.0" layoutY="5.0" style="-fx-border-color: #bdbdbd;" text="Rent Books Requests">
+            <font>
+                <Font size="14.0" />
+            </font></Label>
+        <JFXButton fx:id="books_requests_refresh_btn" layoutX="1096.0" layoutY="1.0" onAction="#loadData" stylesheets="@books.css" text="Refresh" textAlignment="CENTER" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0">
+            <graphic>
+                <ImageView fitHeight="20.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../Images/refresh.png" />
+                    </image>
+                </ImageView>
+            </graphic></JFXButton>
+        <TableView fx:id="rented_books_table" layoutY="29.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
+            <columns>
+                <TableColumn fx:id="book_cover_col" prefWidth="75.0" text="Book Cover" />
+                <TableColumn fx:id="title_col" prefWidth="373.5999984741211" text="Book Title" />
+                <TableColumn fx:id="book_id_col" prefWidth="130.40008544921875" text="Book ISBN" />
+                <TableColumn fx:id="member_id_col" minWidth="0.0" prefWidth="124.79998779296875" text="Member ID" />
+                <TableColumn fx:id="rent_date_col" prefWidth="113.0" text="Rent Date" />
+                <TableColumn fx:id="return_date_col" prefWidth="113.60003662109375" text="Return Date" />
+                <TableColumn fx:id="approve_col" minWidth="37.59991455078125" prefWidth="95.0" text="Approve" />
+                <TableColumn fx:id="decline_col" minWidth="39.20001220703125" prefWidth="95.0" text="Decline" />
+            </columns>
+        </TableView>
+    </children>
+</AnchorPane>

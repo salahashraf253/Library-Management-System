@@ -62,7 +62,7 @@ public class ViewRentedBooksController implements Initializable {
         list.clear();
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDB = connectNow.getConnection();
-        String viewRentedBooks = "SELECT *  FROM rent_book WHERE member_id= '"+ User.currentId+"'";
+        String viewRentedBooks = "SELECT *  FROM rent_book WHERE (member_id,request_status) VALUES ('"+ User.currentId+"',"+ true +")";
         String getBooks = "SELECT book_title,cover FROM books WHERE book_id=?";
         String title= null;
         Blob cover = null;
@@ -116,7 +116,7 @@ public class ViewRentedBooksController implements Initializable {
                         e.printStackTrace();
                     }
 
-                    list.add(new BookOrderList(bookCover,title,bookId,rentDate,returnDate));
+                    list.add(new BookOrderList(bookCover, title, bookId,User.currentId,rentDate,returnDate,null,null));
                 }
             }catch (SQLException ex){
                 ex.printStackTrace();

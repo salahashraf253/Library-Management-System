@@ -9,7 +9,6 @@ import java.lang.reflect.Member;
 import java.sql.Connection;
 
 public class Admin extends User{
-    boolean adminStatus;
     DatabaseConnection connectNow = new DatabaseConnection();
     Connection connectDB = connectNow.getConnection();
 

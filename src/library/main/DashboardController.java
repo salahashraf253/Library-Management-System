@@ -75,6 +75,10 @@ public class DashboardController implements Initializable {
 
     Member member = new Member();
 
+    public JFXButton getRentBtn() {
+        return rentBtn;
+    }
+
     @FXML
     void logout(){
         closeWindow(border_pane);
@@ -150,15 +154,6 @@ public class DashboardController implements Initializable {
         stage.close();
     }
 
-    public JFXButton getRentBtn() {
-        return rentBtn;
-    }
-
-    /*@FXML
-    public String clickedObject(){
-        String clickedButton =null;
-        return clickedButton;
-    }*/
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         viewBooks.setVisible(false);

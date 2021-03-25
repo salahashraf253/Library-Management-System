@@ -15,6 +15,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import library.books.AdminViewBooksController;
+import library.books.LoanedBooksController;
+import library.books.RentBookRequestsController;
 import library.users.AdminViewMembersController;
 
 import java.io.IOException;
@@ -26,6 +28,10 @@ public class AdminDashboardController implements Initializable{
     private AdminViewBooksController adminViewBooksController;
     @FXML
     private AdminViewMembersController adminViewMembersController;
+    @FXML
+    private RentBookRequestsController rentBookRequestsController;
+    @FXML
+    private LoanedBooksController loanedBooksController;
     @FXML
     private AnchorPane root;
     @FXML

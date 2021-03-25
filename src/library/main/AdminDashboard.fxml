@@ -190,7 +190,7 @@
                                  <Font size="14.0" />
                               </font>
                            </Label>
-                           <JFXButton fx:id="searchBookBtn" layoutX="468.0" layoutY="12.0" prefHeight="34.0" prefWidth="79.0" style="-fx-background-color: #bdbdbd;" text="Search" onAction="#searchBook" />
+                           <JFXButton fx:id="searchBookBtn" layoutX="468.0" layoutY="12.0" onAction="#searchBook" prefHeight="34.0" prefWidth="79.0" style="-fx-background-color: #bdbdbd;" text="Search" />
                         </AnchorPane>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                            <TextField fx:id="searchMemberTxt" layoutX="132.0" layoutY="10.0" prefHeight="38.0" prefWidth="327.0" promptText="Enter Member Email" style="-fx-background-color: transparent; -fx-border-color: #bdbdbd;" />
@@ -199,7 +199,7 @@
                                  <Font size="14.0" />
                               </font>
                            </Label>
-                           <JFXButton fx:id="searchMemberBtn" layoutX="469.0" layoutY="13.0" prefHeight="34.0" prefWidth="79.0" style="-fx-background-color: #bdbdbd;" text="Search" onAction="#searchMember"/>
+                           <JFXButton fx:id="searchMemberBtn" layoutX="469.0" layoutY="13.0" onAction="#searchMember" prefHeight="34.0" prefWidth="79.0" style="-fx-background-color: #bdbdbd;" text="Search" />
                         </AnchorPane>
                      </SplitPane>
                   </top>
@@ -387,6 +387,24 @@
                </AnchorPane>
             </AnchorPane>
          </Tab>
+            <Tab text="Client Requests">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <fx:include source="../books/RentBookRequests.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Loaned Books">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <fx:include source="../books/LoanedBooks.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
       </TabPane>
    </center>
   </BorderPane>
