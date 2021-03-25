@@ -1,5 +1,6 @@
-package library.users;
+package library.main;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -8,36 +9,47 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import library.database.DatabaseConnection;
+import library.users.Admin;
 
-import javax.swing.*;
 import java.net.URL;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 
-public class ViewMembersController implements Initializable {
+public class AdminSettingsController implements Initializable {
     @FXML
-    private AnchorPane viewMembersPane;
+    private AnchorPane settingsPane;
     @FXML
-    private TableView membersTable;
+    private TableView adminsTable;
     @FXML
-    private TableColumn<Member, String> idCol;
+    private JFXButton close_btn;
     @FXML
-    private TableColumn<Member, String> firstNameCol;
+    private TableColumn<Admin, String> idCol;
     @FXML
-    private TableColumn<Member, String> lastNameCol;
+    private TableColumn<Admin, String> firstNameCol;
     @FXML
-    private TableColumn<Member, String> addressCol;
+    private TableColumn<Admin, String> lastNameCol;
     @FXML
-    private TableColumn<Member, String> mobileCol;
+    private TableColumn<Admin, String> addressCol;
     @FXML
-    private TableColumn<Member, String> emailCol;
+    private TableColumn<Admin, String> mobileCol;
+    @FXML
+    private TableColumn<Admin, String> emailCol;
+    @FXML
+    private TableColumn<Admin, JFXButton> removeCol;
+    @FXML
+    private TableColumn<Admin, JFXButton> blockCol;
 
-    ObservableList<Member> list = FXCollections.observableArrayList();
+    ObservableList<Admin> list = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initCol();
+        loadData();
     }
 
     private void initCol() {
@@ -47,27 +59,19 @@ public class ViewMembersController implements Initializable {
         addressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
         mobileCol.setCellValueFactory(new PropertyValueFactory<>("mobile"));
         emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
+        removeCol.setCellValueFactory(new PropertyValueFactory<>("removeAdminBtn"));
+        blockCol.setCellValueFactory(new PropertyValueFactory<>("blockAdminBtn"));
     }
-    public void loadData(String btnId, String searchTxt) {
+    public void loadData() {
+        String adminStatus = null;
         list.clear();
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDB = connectNow.getConnection();
-        String viewMembers = "SELECT *  FROM user_account WHERE user_type='user'";
-        String searchMember = "SELECT * FROM user_account WHERE user_type='user' AND (first_name LIKE ? OR last_name LIKE ?)";
-        Statement stmt = null;
+        String viewAdmins = "SELECT *  FROM user_account WHERE user_type='admin'";
+
         try {
-            PreparedStatement pst = connectDB.prepareStatement(searchMember);
-            pst.setString(1,"%"+searchTxt+"%");
-            pst.setString(2,"%"+searchTxt+"%");
-            stmt = connectDB.createStatement();
-            ResultSet rs=null;
-            if(btnId.equals("view_members_btn")){
-                rs = stmt.executeQuery(viewMembers);
-            }else if(btnId.equals("searchMemberBtn")){
-                rs= pst.executeQuery();
-            }else {
-                JOptionPane.showMessageDialog(null,"No Member Found");
-            }
+            Statement stmt = connectDB.createStatement();
+            ResultSet rs=stmt.executeQuery(viewAdmins);
             try {
                 while (true){
                     assert rs != null;
@@ -78,7 +82,12 @@ public class ViewMembersController implements Initializable {
                     String address = rs.getString("address");
                     int mobile = rs.getInt("mobile");
                     String email = rs.getString("email");
-                    list.add(new Member(id,firstName,lastName,address,mobile,email));
+                    Boolean isBlocked = rs.getBoolean("is_blocked");
+                    if (isBlocked)
+                        adminStatus = "Blocked";
+                    else
+                        adminStatus= "Not Blocked";
+                    list.add(new Admin(id,firstName,lastName,address,mobile,email,null,adminStatus));
                 }
             }catch (SQLException ex){
                 ex.printStackTrace();
@@ -86,14 +95,15 @@ public class ViewMembersController implements Initializable {
         } catch (SQLException throwable) {
             throwable.printStackTrace();
         }
-
-        membersTable.getItems().setAll(list);
+        adminsTable.getItems().setAll(list);
     }
-    public void back() {
-        viewMembersPane.setVisible(false);
-    }
-
     public void refresh() {
-        loadData("view_members_btn",null);
+        loadData();
+    }
+    @FXML
+    protected void close(){
+        Stage stage = (Stage) settingsPane.getScene().getWindow();
+        stage.close();
     }
 }
+

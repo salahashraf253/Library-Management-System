@@ -16,9 +16,7 @@ import library.database.DatabaseConnection;
 import java.io.InputStream;
 import java.net.URL;
 import java.sql.*;
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ResourceBundle;
 
 public class RentBookRequestsController implements Initializable {
@@ -27,13 +25,15 @@ public class RentBookRequestsController implements Initializable {
     @FXML
     private JFXButton books_requests_refresh_btn;
     @FXML
-    private TableView rented_books_table;
+    private TableView rent_book_requests_table;
     @FXML
     private TableColumn<BookOrderList, Image> book_cover_col;
     @FXML
     private TableColumn<BookOrderList, String> title_col;
     @FXML
     private TableColumn<BookOrderList, String> book_id_col;
+    @FXML
+    private TableColumn<BookOrderList, String> member_id_col;
     @FXML
     private TableColumn<BookOrderList, LocalDate> rent_date_col;
     @FXML
@@ -55,6 +55,7 @@ public class RentBookRequestsController implements Initializable {
         book_cover_col.setCellValueFactory(new PropertyValueFactory<>("bookCover"));
         title_col.setCellValueFactory(new PropertyValueFactory<>("title"));
         book_id_col.setCellValueFactory(new PropertyValueFactory<>("bookId"));
+        member_id_col.setCellValueFactory(new PropertyValueFactory<>("memberId"));
         rent_date_col.setCellValueFactory(new PropertyValueFactory<>("rentDate"));
         return_date_col.setCellValueFactory(new PropertyValueFactory<>("returnDate"));
         approve_col.setCellValueFactory(new PropertyValueFactory<>("approveBtn"));
@@ -72,29 +73,23 @@ public class RentBookRequestsController implements Initializable {
         try {
             Statement stmt = connectDB.createStatement();
             ResultSet rs = stmt.executeQuery(viewRentedBooks);
-
             while (true){
                 assert rs != null;
                 if (!rs.next()) break;
                 String bookId= rs.getString("rented_book_id");
                 int memberId = rs.getInt("member_id");
-                Date rent_Date = rs.getDate("rent_date");
-                Date return_Date = rs.getDate("return_date");
-                //Getting the default zone id
-                ZoneId defaultZoneId = ZoneId.systemDefault();
-                //Converting the date to Instant
-                Instant instant = rent_Date.toInstant();
-                Instant instant1 =return_Date.toInstant();
+                String rent_Date = rs.getString("rent_date");
+                String return_Date = rs.getString("delivery_date");
                 //Converting the Date to LocalDate
-                LocalDate rentDate = instant.atZone(defaultZoneId).toLocalDate();
-                LocalDate returnDate = instant1.atZone(defaultZoneId).toLocalDate();
+                LocalDate rentDate = LocalDate.parse(rent_Date);
+                LocalDate returnDate = LocalDate.parse(return_Date);
                 try {
                     PreparedStatement pst = connectDB.prepareStatement(getBooks);
                     pst.setString(1,bookId);
                     ResultSet rst = pst.executeQuery();
                     if (rst.next()){
-                        title = rs.getString("book_title");
-                        cover = rs.getBlob("cover");
+                        title = rst.getString("book_title");
+                        cover = rst.getBlob("cover");
 
                         if (cover==null){
                             Image image = new Image("Images/null_book.png");
@@ -124,7 +119,6 @@ public class RentBookRequestsController implements Initializable {
         }catch (SQLException ex){
             ex.printStackTrace();
         }
-
-        rented_books_table.getItems().setAll(list);
+        rent_book_requests_table.getItems().setAll(list);
     }
 }

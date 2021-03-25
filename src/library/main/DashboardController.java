@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
@@ -15,6 +14,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import library.books.ViewBooksController;
+import library.books.ViewRentedBooksController;
 import library.users.Member;
 import library.users.ViewMembersController;
 
@@ -28,6 +28,8 @@ public class DashboardController implements Initializable {
     protected ViewBooksController viewBooksController;
     @FXML
     protected ViewMembersController viewMembersController;
+    @FXML
+    protected ViewRentedBooksController viewRentedBooksController;
     @FXML
     private BorderPane border_pane;
     @FXML
@@ -55,29 +57,11 @@ public class DashboardController implements Initializable {
     @FXML
     private JFXButton searchMemberBtn;
     @FXML
-    private Label title;
-    @FXML
-    private Label author;
-    @FXML
-    private Label publisher;
-    @FXML
-    private Label category;
-    @FXML
-    private Label price;
-    @FXML
-    private JFXButton buyBtn;
-    @FXML
-    private JFXButton rentBtn;
-    @FXML
     private JFXButton viewBooksBtn;
     @FXML
     private JFXButton view_members_btn;
 
     Member member = new Member();
-
-    public JFXButton getRentBtn() {
-        return rentBtn;
-    }
 
     @FXML
     void logout(){
@@ -120,7 +104,7 @@ public class DashboardController implements Initializable {
     }
     @FXML
     private void settings() {
-        loadWindow("/library/main/Settings.fxml","Settings",false);
+        loadWindow("/library/main/AdminSettings.fxml","Settings",false);
     }
 
     void loadWindow(String loc, String title,Boolean max){
@@ -158,5 +142,6 @@ public class DashboardController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         viewBooks.setVisible(false);
         viewMembers.setVisible(false);
+        viewRentedBooksController.loadData();
     }
 }

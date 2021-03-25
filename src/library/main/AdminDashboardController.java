@@ -144,7 +144,7 @@ public class AdminDashboardController implements Initializable{
     }
     @FXML
     private void settings() {
-        loadWindow("/library/main/Settings.fxml", "Settings");
+        loadWindow("/library/main/AdminSettings.fxml", "Settings");
     }
 
     void loadWindow(String loc, String title){

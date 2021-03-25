@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="viewRequestsPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.books.RentBookRequestsController">
+<AnchorPane fx:id="viewRequestsPane" stylesheets="@books.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.books.RentBookRequestsController">
     <children>
         <Label layoutX="5.0" layoutY="5.0" style="-fx-border-color: #bdbdbd;" text="Rent Books Requests">
             <font>
@@ -23,7 +23,7 @@
                     </image>
                 </ImageView>
             </graphic></JFXButton>
-        <TableView fx:id="rented_books_table" layoutY="29.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
+        <TableView fx:id="rent_book_requests_table" layoutY="29.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
             <columns>
                 <TableColumn fx:id="book_cover_col" prefWidth="75.0" text="Book Cover" />
                 <TableColumn fx:id="title_col" prefWidth="373.5999984741211" text="Book Title" />

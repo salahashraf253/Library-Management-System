@@ -45,7 +45,6 @@
                 <TableColumn fx:id="mobileCol" prefWidth="132.800048828125" text="Mobile" />
                 <TableColumn fx:id="emailCol" prefWidth="234.4000244140625" text="Email" />
                 <TableColumn fx:id="removeCol" prefWidth="124.0" text="Remove Member" />
-                <TableColumn fx:id="orderCol" prefWidth="79.2000732421875" text="Order Book" />
             <TableColumn fx:id="blockCol" prefWidth="119.2000732421875" text="Block Member" />
             </columns>
         </TableView>

@@ -212,9 +212,7 @@ public class Books {
         try {
             Statement stmt = connectDB.createStatement();
             Statement st = connectDB.createStatement();
-            String bookRented = "DELETE FROM rent_book WHERE (rented_book_id,member_id) IN("+
-                    "'" + rentedBookId + "'," +
-                    "'" + memberId + "')";
+            String bookRented = "DELETE FROM rent_book WHERE rented_book_id='" + rentedBookId + "' AND member_id='"+ memberId +"'";
             String updateBookStatus = "UPDATE books SET is_available = true WHERE book_id ='"+ rentedBookId +"'";
             stmt.executeUpdate(bookRented);
             st.executeUpdate(updateBookStatus);

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="settingsPane" prefHeight="600.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.main.AdminSettingsController">
+   <children>
+      <AnchorPane fx:id="title_pane" prefHeight="32.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <JFXButton fx:id="close_btn" contentDisplay="CENTER" layoutX="4.0" layoutY="4.0" onAction="#close" prefHeight="32.0" prefWidth="29.0" text=" " AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="1.0">
+               <graphic>
+                  <ImageView fitHeight="22.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Images/Red_Exit.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="view_admins_refresh_btn" layoutX="1096.0" layoutY="1.0" onAction="#refresh" text="Refresh" textAlignment="CENTER" AnchorPane.bottomAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Images/refresh.png" />
+                     </image>
+                  </ImageView>
+               </graphic></JFXButton>
+            <Label layoutX="651.0" layoutY="6.0" text="Admins List">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <TableView fx:id="adminsTable" layoutX="-4.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
+         <columns>
+            <TableColumn fx:id="idCol" prefWidth="70.39999085664749" text="Admin Id" />
+            <TableColumn fx:id="firstNameCol" prefWidth="168.0" text="First Name" />
+            <TableColumn fx:id="lastNameCol" minWidth="9.600006103515625" prefWidth="216.8000030517578" text="Last Name" />
+            <TableColumn fx:id="addressCol" minWidth="0.0" prefWidth="264.800048828125" text="Address" />
+            <TableColumn fx:id="mobileCol" prefWidth="132.800048828125" text="Mobile" />
+            <TableColumn fx:id="emailCol" prefWidth="234.4000244140625" text="Email" />
+            <TableColumn fx:id="removeCol" prefWidth="124.0" text="Remove Admin" />
+            <TableColumn fx:id="blockCol" prefWidth="119.2000732421875" text="Block Admin" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>

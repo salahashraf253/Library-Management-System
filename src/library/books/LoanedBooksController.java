@@ -16,10 +16,8 @@ import library.database.DatabaseConnection;
 import java.io.InputStream;
 import java.net.URL;
 import java.sql.*;
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.Period;
-import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.ResourceBundle;
 
 public class LoanedBooksController implements Initializable {
@@ -28,7 +26,7 @@ public class LoanedBooksController implements Initializable {
     @FXML
     private JFXButton loaned_books_refresh_btn;
     @FXML
-    private TableView rented_books_table;
+    private TableView loaned_books_table;
     @FXML
     private TableColumn<BookOrderList, Image> book_cover_col;
     @FXML
@@ -71,7 +69,7 @@ public class LoanedBooksController implements Initializable {
         String viewRentedBooks = "SELECT *  FROM rent_book";
         String getBooks = "SELECT book_title,cover FROM books WHERE book_id=?";
         String title= null;
-        Blob cover = null;
+        Blob cover;
         ImageView bookCover = null;
         try {
             Statement stmt = connectDB.createStatement();
@@ -82,27 +80,23 @@ public class LoanedBooksController implements Initializable {
                 if (!rs.next()) break;
                 String bookId= rs.getString("rented_book_id");
                 int memberId = rs.getInt("member_id");
-                Date rent_Date = rs.getDate("rent_date");
-                Date return_Date = rs.getDate("return_date");
-                //Getting the default zone id
-                ZoneId defaultZoneId = ZoneId.systemDefault();
-                //Converting the date to Instant
-                Instant instant = rent_Date.toInstant();
-                Instant instant1 =return_Date.toInstant();
-                //Converting the Date to LocalDate
-                LocalDate rentDate = instant.atZone(defaultZoneId).toLocalDate();
-                LocalDate returnDate = instant1.atZone(defaultZoneId).toLocalDate();
-                Period rentTimePeriod = Period.between(returnDate,rentDate);
-                String rentTime = rentTimePeriod.toString();
-                Period remainingTimePeriod = Period.between(returnDate,LocalDate.now());
-                String remainingTime = remainingTimePeriod.toString();
+                String rent_Date = rs.getString("rent_date");
+                String return_Date = rs.getString("delivery_date");
+                //Converting the Date String retrieved form Database to LocalDate
+                LocalDate rentDate = LocalDate.parse(rent_Date);
+                LocalDate returnDate = LocalDate.parse(return_Date);
+                //Calculation of rentTime & remainingTime for every loaned
+                long rentTimePeriod = ChronoUnit.DAYS.between(rentDate,returnDate);
+                String rentTime = rentTimePeriod+" (Days)";
+                long remainingTimePeriod = ChronoUnit.DAYS.between(LocalDate.now(),returnDate);
+                String remainingTime = remainingTimePeriod+" (Days)";
                 try {
                     PreparedStatement pst = connectDB.prepareStatement(getBooks);
                     pst.setString(1,bookId);
                     ResultSet rst = pst.executeQuery();
                     if (rst.next()){
-                        title = rs.getString("book_title");
-                        cover = rs.getBlob("cover");
+                        title = rst.getString("book_title");
+                        cover = rst.getBlob("cover");
 
                         if (cover==null){
                             Image image = new Image("Images/null_book.png");
@@ -132,7 +126,7 @@ public class LoanedBooksController implements Initializable {
         }catch (SQLException ex){
             ex.printStackTrace();
         }
+        loaned_books_table.getItems().setAll(list);
 
-        rented_books_table.getItems().setAll(list);
     }
 }

@@ -36,8 +36,6 @@ public class AdminViewMembersController implements Initializable {
     @FXML
     private TableColumn<Member, JFXButton> removeCol;
     @FXML
-    private TableColumn<Member, JFXButton> orderCol;
-    @FXML
     private TableColumn<Member, JFXButton> blockCol;
 
     ObservableList<Member> list = FXCollections.observableArrayList();
@@ -55,7 +53,6 @@ public class AdminViewMembersController implements Initializable {
         mobileCol.setCellValueFactory(new PropertyValueFactory<>("mobile"));
         emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
         removeCol.setCellValueFactory(new PropertyValueFactory<>("removeMemberBtn"));
-        orderCol.setCellValueFactory(new PropertyValueFactory<>("orderBookBtn"));
         blockCol.setCellValueFactory(new PropertyValueFactory<>("blockMemberBtn"));
     }
     public void loadData(String btnId, String searchTxt) {

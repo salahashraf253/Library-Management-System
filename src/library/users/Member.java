@@ -6,12 +6,10 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.Alert;
 import library.database.DatabaseConnection;
 
-import javax.swing.*;
 import java.sql.*;
 
 public class Member extends User {
     private JFXButton removeMemberBtn;
-    private JFXButton orderBookBtn;
     private JFXButton blockMemberBtn;
 
     DatabaseConnection connectNow = new DatabaseConnection();
@@ -28,16 +26,14 @@ public class Member extends User {
         this.isBlocked= new SimpleStringProperty(memberStatus);
         this.removeMemberBtn = new JFXButton("Remove Member");
         this.removeMemberBtn.setOnAction(e -> {removeUser(id);});
-        this.orderBookBtn = new JFXButton("Order Book");
-        this.orderBookBtn.setOnAction(e -> {});
         this.blockMemberBtn = new JFXButton("Block Member");
         if (memberStatus.equals("Blocked")){
             this.blockMemberBtn.setText("Unblock Member");
-            this.blockMemberBtn.setOnAction(e -> {unblockMember(id);});
+            this.blockMemberBtn.setOnAction(e -> {unblockUser(id);});
         }
         else {
             this.blockMemberBtn.setOnAction(e -> {
-                blockMember(id);
+                blockUser(id);
             });
         }
     }
@@ -48,7 +44,6 @@ public class Member extends User {
         this.address = new SimpleStringProperty(address);
         this.email = new SimpleStringProperty(email);
         this.mobile = new SimpleIntegerProperty(mobile);
-
     }
     public Member() {
     }
@@ -56,24 +51,18 @@ public class Member extends User {
     public void setRemoveMemberBtn(JFXButton removeMemberBtn) {
         this.removeMemberBtn = removeMemberBtn;
     }
-    public void setOrderBookBtn(JFXButton orderBookBtn) {
-        this.orderBookBtn = orderBookBtn;
-    }
     public void setBlockMemberBtn(JFXButton blockMemberBtn) {
         this.blockMemberBtn = blockMemberBtn;
     }
     public JFXButton getRemoveMemberBtn() {
         return removeMemberBtn;
     }
-    public JFXButton getOrderBookBtn() {
-        return orderBookBtn;
-    }
     public JFXButton getBlockMemberBtn() {
         return blockMemberBtn;
     }
 
     public Boolean getMemberStatus(){
-        String status = "SELECT is_blocked FROM user_account where user_type='user',user_id=?";
+        String status = "SELECT is_blocked FROM user_account where user_type='user'AND user_id =?";
         boolean memberStatus = false;
         try {
             PreparedStatement pst = connectDB.prepareStatement(status);
@@ -85,12 +74,13 @@ public class Member extends User {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        if(memberStatus)
+        if(memberStatus==false)
             return true;
         else
             return false;
     }
 
+    @Override
     public void removeUser(int memberId){
         String checkRentFlag = "SELECT renting_book FROM user_account WHERE user_id = '" + memberId +"'";
         try {
@@ -117,38 +107,6 @@ public class Member extends User {
         }catch (Exception e){
             e.printStackTrace();
         }
-    }
-
-    public void blockMember(int memberId){
-        String block = "UPDATE user_account SET is_blocked = TRUE  WHERE user_id=?";
-        JOptionPane.showConfirmDialog(null,"Are you sure to Block this member","BlocK Member",JOptionPane.OK_CANCEL_OPTION);
-        int check =0 ;
-        if(check == JOptionPane.OK_OPTION) {
-            try {
-                PreparedStatement pst = connectDB.prepareStatement(block);
-                pst.setInt(1, memberId);
-                pst.executeUpdate();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }else {
-            JOptionPane.showMessageDialog(null,"That's better!");
-        }
-    }
-
-    public void unblockMember(int memberId){
-        String block = "UPDATE user_account SET is_blocked = FALSE  WHERE user_id=?";
-        JOptionPane.showConfirmDialog(null,"Are you sure to Unblock this member","Unblock Member",JOptionPane.OK_CANCEL_OPTION);
-        int check =0 ;
-        if(check == JOptionPane.OK_OPTION) {
-            try {
-                PreparedStatement pst = connectDB.prepareStatement(block);
-                pst.setInt(1, memberId);
-                pst.executeUpdate();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }else {}
     }
 
 }

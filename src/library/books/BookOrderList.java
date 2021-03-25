@@ -94,19 +94,40 @@ public class BookOrderList implements Initializable {
     public int getMemberId() {
         return memberId.get();
     }
-    public SimpleStringProperty getRentTime() {
-        return rentTime;
+    public SimpleIntegerProperty memberIdProperty() {
+        return memberId;
     }
-    public SimpleStringProperty getRemainingTime() {
-        return remainingTime;
+    public JFXButton getApproveBtn() {
+        return approveBtn;
+    }
+    public JFXButton getDeclineBtn() {
+        return declineBtn;
+    }
+    public void setApproveBtn(JFXButton approveBtn) {
+        this.approveBtn = approveBtn;
+    }
+    public void setDeclineBtn(JFXButton declineBtn) {
+        this.declineBtn = declineBtn;
     }
     public void setRentTime(String rentTime) {
         this.rentTime.set(rentTime);
     }
     public void setRemainingTime(String remainingTime) { this.remainingTime.set(remainingTime);}
+    public String getRentTime() {
+        return rentTime.get();
+    }
+    public SimpleStringProperty rentTimeProperty() {
+        return rentTime;
+    }
+    public String getRemainingTime() {
+        return remainingTime.get();
+    }
+    public SimpleStringProperty remainingTimeProperty() {
+        return remainingTime;
+    }
 
     public void approveRequest(String bookId, int memberId){
-        String approve = "UPDATE rent_book SET request_status = TRUE WHERE (book_id,member_id) IN ('"+bookId+"','"+memberId+"')";
+        String approve = "UPDATE rent_book SET request_status = TRUE WHERE rented_book_id='"+bookId+"'AND member_id = '"+memberId+"'";
         try {
             Statement stmt = connectDB.createStatement();
             stmt.executeUpdate(approve);
@@ -116,7 +137,7 @@ public class BookOrderList implements Initializable {
         }
     }
     public void declineRequest(String bookId, int memberId){
-        String decline = "UPDATE rent_book SET request_status = FALSE WHERE (book_id,member_id) IN ('"+bookId+"','"+memberId+"')";
+        String decline = "UPDATE rent_book SET request_status = FALSE WHERE rented_book_id='"+bookId+"'AND member_id = '"+memberId+"'";
         try {
             Statement stmt = connectDB.createStatement();
             stmt.executeUpdate(decline);

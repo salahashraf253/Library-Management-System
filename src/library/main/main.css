@@ -3,6 +3,9 @@
   -fx-background-color: #9F7C3F ;
 
  }
+ .button{
+  -fx-background-color: #BDBDBD;
+ }
 .tab{
  -fx-background-color: #9F7C3F;
  -fx-background-size: 500px,30px;
@@ -29,4 +32,13 @@
 .text-field{
  -fx-background-color: #00000000;
  -fx-border-color: #9F7C3F;
+}
+#settingsPane{
+ -fx-border-color: #9F7C3F;
+}
+#view_admins_refresh_btn{
+ -fx-background-color: #bdbdbd;
+}
+#close_btn{
+ -fx-background-color: #00000000;
 }

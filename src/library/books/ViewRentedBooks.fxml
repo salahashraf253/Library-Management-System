@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="viewRentedBooksPane" style="-fx-border-color: #bdbdbd;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.books.ViewRentedBooksController">
+<AnchorPane fx:id="viewRentedBooksPane" style="-fx-border-color: #bdbdbd;" stylesheets="@books.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.books.ViewRentedBooksController">
         <children>
             <Label layoutX="5.0" layoutY="5.0" style="-fx-border-color: #bdbdbd;" text="Rented Books">
          <font>
@@ -30,6 +27,7 @@
                     <TableColumn fx:id="book_id_col" prefWidth="82.39996337890625" text="Book ISBN" />
                     <TableColumn fx:id="rent_date_col" prefWidth="92.80010986328125" text="Rent Date" />
                     <TableColumn fx:id="return_date_col" prefWidth="95.2000732421875" text="Return Date" />
+                    <TableColumn fx:id="remaining_time_col" minWidth="75.4000244140625" prefWidth="130.0" text="Remaining Time" />
                     <TableColumn fx:id="return_book_col" minWidth="95.4000244140625" prefWidth="95.4000244140625" text="Return Book" />
                 </columns>
             </TableView>

@@ -1,5 +1,6 @@
 package library.users;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.Alert;
@@ -14,6 +15,21 @@ public class Admin extends User{
     DatabaseConnection connectNow = new DatabaseConnection();
     Connection connectDB = connectNow.getConnection();
 
+    private JFXButton removeAdminBtn;
+    private JFXButton blockAdminBtn;
+
+    public JFXButton getRemoveAdminBtn() {
+        return removeAdminBtn;
+    }
+    public JFXButton getBlockAdminBtn() {
+        return blockAdminBtn;
+    }
+    public void setRemoveAdminBtn(JFXButton removeAdminBtn) {
+        this.removeAdminBtn = removeAdminBtn;
+    }
+    public void setBlockAdminBtn(JFXButton blockAdminBtn) {
+        this.blockAdminBtn = blockAdminBtn;
+    }
 
     public Admin(int id, String firstName, String lastName, String address, int phone, String email, String password, String isBlocked) {
         super();
@@ -25,15 +41,18 @@ public class Admin extends User{
         this.mobile = new SimpleIntegerProperty(phone);
         this.password = new SimpleStringProperty(password);
         this.isBlocked= new SimpleStringProperty(isBlocked);
-    }
-    public Admin(int id, String firstName, String lastName, String address, int mobile, String email) {
-        this.id = new SimpleIntegerProperty(id);
-        this.firstName = new SimpleStringProperty(firstName);
-        this.lastName = new SimpleStringProperty(lastName);
-        this.address = new SimpleStringProperty(address);
-        this.email = new SimpleStringProperty(email);
-        this.mobile = new SimpleIntegerProperty(mobile);
-
+        this.removeAdminBtn = new JFXButton("Remove Member");
+        this.removeAdminBtn.setOnAction(e -> {removeUser(id);});
+        this.blockAdminBtn = new JFXButton("Block Member");
+        if (isBlocked.equals("Blocked")){
+            this.blockAdminBtn.setText("Unblock Member");
+            this.blockAdminBtn.setOnAction(e -> {unblockUser(id);});
+        }
+        else {
+            this.blockAdminBtn.setOnAction(e -> {
+                blockUser(id);
+            });
+        }
     }
     public Admin() {
     }
@@ -60,9 +79,9 @@ public class Admin extends User{
                     }
                 }
             }
-
         }catch (Exception e){
             e.printStackTrace();
         }
     }
+
 }
