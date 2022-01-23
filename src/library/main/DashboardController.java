@@ -16,6 +16,7 @@ import javafx.stage.StageStyle;
 import library.books.ViewBooksController;
 import library.books.ViewRentedBooksController;
 import library.users.Member;
+import library.users.UpdateMemberAccountController;
 import library.users.ViewMembersController;
 
 import javax.swing.*;
@@ -30,6 +31,8 @@ public class DashboardController implements Initializable {
     protected ViewMembersController viewMembersController;
     @FXML
     protected ViewRentedBooksController viewRentedBooksController;
+    @FXML
+    private UpdateMemberAccountController updateMemberAccountController;
     @FXML
     private BorderPane border_pane;
     @FXML

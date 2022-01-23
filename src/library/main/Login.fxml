@@ -11,12 +11,12 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="login_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.main.LoginController">
-   <ImageView fitHeight="600.0" fitWidth="900.0" layoutX="-6.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<AnchorPane fx:id="login_pane" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.main.LoginController">
+   <ImageView fitHeight="600.0" fitWidth="900.0" nodeOrientation="INHERIT" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <Image url="@../../Images/various-book-books.jpg" />
    </ImageView>
    <AnchorPane fx:id="login_form" layoutX="279.0" layoutY="144.0" prefHeight="311.0" prefWidth="354.0" AnchorPane.bottomAnchor="144.8" AnchorPane.leftAnchor="279.0" AnchorPane.rightAnchor="266.6" AnchorPane.topAnchor="144.0">
-      <Pane layoutX="12.0" layoutY="8.0" prefHeight="66.0" prefWidth="329.0">
+      <Pane layoutX="12.0" layoutY="8.0" prefHeight="66.0" prefWidth="329.0" AnchorPane.bottomAnchor="230.79999999999998" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="12.799999999999955" AnchorPane.topAnchor="8.0">
          <Label layoutX="83.0" layoutY="14.0" prefHeight="38.0" prefWidth="268.0" text="Library Assistant">
             <font>
                <Font name="Copperplate Gothic Bold" size="24.0" />
@@ -26,7 +26,7 @@
             <Image url="@../../Images/book.jpg" />
          </ImageView>
       </Pane>
-      <Pane layoutX="11.0" layoutY="74.0" prefHeight="220.0" prefWidth="329.0">
+      <Pane layoutX="11.0" layoutY="74.0" prefHeight="220.0" prefWidth="329.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="18.799999999999955" AnchorPane.topAnchor="80.0">
          <TextField fx:id="email" layoutX="42.0" layoutY="42.0" onKeyReleased="#enterPressedEmail" prefHeight="32.0" prefWidth="245.0" promptText="Email">
             <padding>
                <Insets left="24.0" />
