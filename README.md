@@ -35,3 +35,25 @@ access to information which they are not allowed to access.</li>
  <li>GUI with JavaFX library</li>
  <li>DataBase (MySQL)</li>
  </ul>
+ <h2>Screen Shots </h2>
+ <h3>Login Page</h3>
+ <img src="https://github.com/AhmdSobhy/LibraryAssistant/blob/master/ScreenShots/loginPage.jpeg">
+  <h3>Sign Up Page</h3>
+ <img src="https://github.com/AhmdSobhy/LibraryAssistant/blob/master/ScreenShots/SignUp page.jpeg">
+ 
+   <h3>view Admins Page</h3>
+ <img src="https://github.com/AhmdSobhy/LibraryAssistant/blob/master/ScreenShots/view Admins Page.jpeg">
+ 
+   <h3>Add new Book Page</h3>
+ <img src="https://github.com/AhmdSobhy/LibraryAssistant/blob/master/ScreenShots/Add new Book page.jpeg">
+ 
+  
+   <h3>Add new admin page</h3>
+ <img src="https://github.com/AhmdSobhy/LibraryAssistant/blob/master/ScreenShots/Add new admin page.jpeg">
+ 
+   <h3>view Books Page</h3>
+ <img src="https://github.com/AhmdSobhy/LibraryAssistant/blob/master/ScreenShots/view Books Page.jpeg">
+ 
+
+ 
+ 
