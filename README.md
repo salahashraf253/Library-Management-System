@@ -37,22 +37,22 @@ access to information which they are not allowed to access.</li>
  </ul>
  <h2>Screen Shots </h2>
  <h3>Login Page</h3>
- <img src="https://github.com/AhmdSobhy/LibraryAssistant/blob/master/ScreenShots/Login Page..jpeg">
+ <img src="https://github.com/AhmdSobhy/LibraryAssistant/blob/master/ScreenShots/Login Page.png">
   <h3>Sign Up Page</h3>
- <img src="https://github.com/AhmdSobhy/LibraryAssistant/blob/master/ScreenShots/SignUp page.jpeg">
+ <img src="https://github.com/AhmdSobhy/LibraryAssistant/blob/master/ScreenShots/SignUp page.png">
  
    <h3>Add new Book Page</h3>
- <img src="https://github.com/AhmdSobhy/LibraryAssistant/blob/master/ScreenShots/Add Book PAge.jpeg">
+ <img src="https://github.com/AhmdSobhy/LibraryAssistant/blob/master/ScreenShots/Add Book PAge.png">
  
    <h3>view Admins Page</h3>
- <img src="https://github.com/AhmdSobhy/LibraryAssistant/blob/master/ScreenShots/view Admins Page.jpeg">
+ <img src="https://github.com/AhmdSobhy/LibraryAssistant/blob/master/ScreenShots/view Admins Page.png">
   
   
    <h3>View members Page</h3>
- <img src="https://github.com/AhmdSobhy/LibraryAssistant/blob/master/ScreenShots/view members page.jpeg">
+ <img src="https://github.com/AhmdSobhy/LibraryAssistant/blob/master/ScreenShots/view members page.png">
  
    <h3>view Books Page</h3>
- <img src="https://github.com/AhmdSobhy/LibraryAssistant/blob/master/ScreenShots/view books page.jpeg">
+ <img src="https://github.com/AhmdSobhy/LibraryAssistant/blob/master/ScreenShots/view books page.png">
  
 
  
