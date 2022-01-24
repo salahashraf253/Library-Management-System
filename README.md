@@ -3,7 +3,7 @@
 ## Description
 <p>
  The library, contains tens of thousands of books and members which must be organized in
-order to prevent chaos. Write JAVA program that allow performance of the actions needed
+order to prevent chaos.<br>This program that allow performance of the actions needed
 in order to manage the library in a simple and comfortable way. The actions will include
 addition/removal of books, addition/removal of members, member and book searches, and
 much more.
